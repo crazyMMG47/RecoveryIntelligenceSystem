@@ -1,0 +1,33 @@
+CASE ID: CASE_003
+
+Patient: Daniel Lee
+Age: 30
+Sex: Male
+Insurance: Kaiser Permanente
+
+Clinical Question:
+Should the patient undergo revision surgery, continue rehabilitation, or be denied further treatment coverage?
+
+History:
+- First ACL reconstruction (Kaiser - San Diego, 2.5 years ago)
+- Second ACL reconstruction (Kaiser - San Jose, 8 months ago)
+- Reports inconsistent rehabilitation experiences between the two locations
+
+Chief Complaint:
+Persistent right knee instability and pain after the second ACL surgery
+
+Current Symptoms:
+- Pain 5/10 during activity
+- Instability during pivoting
+- Reduced confidence in knee function
+
+Exam Findings:
+- Mild laxity
+- Quadriceps weakness
+- Limited neuromuscular control
+
+Patient Perspective:
+Patient expresses frustration with inconsistent care across locations and is seeking a definitive solution to regain function and stability.
+
+Assessment:
+Chronic instability following revision ACL reconstruction is likely influenced by inconsistent rehabilitation protocols and incomplete recovery.
