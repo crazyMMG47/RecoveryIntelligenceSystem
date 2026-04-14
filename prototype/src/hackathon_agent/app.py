@@ -1,3 +1,5 @@
+# API Layer
+# frontend/backend interface 
 from fastapi import FastAPI
 
 from .demo_data import DEMO_CASE
