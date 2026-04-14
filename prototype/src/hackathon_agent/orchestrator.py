@@ -46,21 +46,32 @@ class Orchestrator:
 
     @classmethod
     def from_env(cls) -> "Orchestrator":
-        """
-        Optionally swap in the Gemini-backed clinical agent
-        if USE_GEMINI_CLINICAL_AGENT=true.
-        """
         use_gemini_clinical = os.getenv("USE_GEMINI_CLINICAL_AGENT", "").lower() == "true"
+        use_gemini_insurance = os.getenv("USE_GEMINI_INSURANCE_AGENT", "").lower() == "true"
 
         if use_gemini_clinical:
             from .clinical_llm_agent import ClinicalLLMAgent
             from .gemini_llm import GeminiStructuredLLM
-
             clinical_agent = ClinicalLLMAgent(GeminiStructuredLLM())
         else:
             clinical_agent = ClinicalAgent()
 
-        return cls(clinical_agent=clinical_agent)
+        if use_gemini_insurance:
+            from .gemini_llm import GeminiStructuredLLM
+            from .insurance_llm_agent import InsuranceLLMAgent
+            from .policy_retriever import PolicyRetriever
+
+            insurance_agent = InsuranceLLMAgent(
+                llm=GeminiStructuredLLM(),
+                retriever=PolicyRetriever(),
+            )
+        else:
+            insurance_agent = InsuranceAgent()
+
+        return cls(
+            clinical_agent=clinical_agent,
+            insurance_agent=insurance_agent,
+        )
 
     def build_clinical_input(self, user_question: str, case: CaseData) -> ClinicalAgentInput:
         """

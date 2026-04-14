@@ -1,3 +1,7 @@
+# data contracts: inputs/outputs for each agent
+# final response format 
+# enums (confidence, decisions, etc..)
+
 from __future__ import annotations
 
 from enum import Enum

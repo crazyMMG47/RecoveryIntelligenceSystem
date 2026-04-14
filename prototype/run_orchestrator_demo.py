@@ -2,8 +2,8 @@ from __future__ import annotations
 
 import json
 
-from hackathon_agent.demo_data import DEMO_CASE
-from hackathon_agent.orchestrator import Orchestrator
+from src.hackathon_agent.demo_data import DEMO_CASE
+from src.hackathon_agent.orchestrator import Orchestrator
 
 
 def main() -> None:
