@@ -1,0 +1,3652 @@
+URL: https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/community-providers/scal/2025/hmo-provider-manual-2025-en-scal.pdf
+TITLE: Kaiser Permanente ND&A HMO Provider
+CONTENT:
+1 
+Kaiser Permanente ND&A HMO Provider 
+Manual for Contracted Institutional Providers (REV. 10-24) 
+ 
+ 
+ 
+2025 Kaiser Permanente Southern California 
+Network Development and Administration 
+Contracted Institutional Providers 
+HMO Provider Manual 
+ 
+
+2 
+Kaiser Permanente ND&A HMO Provider 
+Manual for Contracted Institutional Providers (REV. 10-24) 
+ 
+Table of Contents 
+Introduction ................................................................................................ ........................ 6 
+Section I: How This Provider Manual Is Organized ........................................................ 7 
+1.1 YOUR RESPONSIBILITIES .................................................................................... 7 
+1.2 PROVIDER CHANGES THAT MUST BE REPORTED ........................................... 7 
+Section II: Kaiser Permanente Medical Care Program .................................................... 9 
+2.1 HISTORY ................................................................................................ ............... 9 
+2.2 ORGANIZATIONAL STRUCTURE ......................................................................... 9 
+2.3 SOUTHERN CALIFORNIA REGION .................................................................... 10 
+2.4 INTEGRATION ..................................................................................................... 10 
+2.5 PREVENTIVE HEALTH CARE ............................................................................. 10 
+2.6 OTHER PRODUCTS ............................................................................................ 10 
+Section III: Contracting for Medical Services ................................................................. 11 
+Section IV: Key Contacts ................................................................................................ . 12 
+4.1 KEY CONTACTS ................................................................................................ .. 12 
+Section V: Outside Referral Departments ...................................................................... 14 
+Section VI: Member Eligibility and Benefits ................................................................... 16 
+6.1 KAISER PERMANENTE MEMBERSHIP TYPE .................................................... 17 
+6.2 MEMBER IDENTIFICATION CARDS ................................................................... 19 
+6.3 MEDICAL RECORD NUMBER ............................................................................. 20 
+6.4 VERIFICATION OF ELIGIBILITY .......................................................................... 20 
+6.5 AFTER HOUR ELIGIBILITY REQUESTS ............................................................. 21 
+6.6 BENEFIT COVERAGE DETERMINATION ........................................................... 21 
+6.7 BENEFIT EXCLUSIONS AND LIMITATIONS ....................................................... 22 
+Section VII: Member Rights and Responsibilities ......................................................... 22 
+7.1 MEMBER RIGHTS AND RESPONSIBILITIES STATEMENT ............................... 22 
+7.2 NON-COMPLIANCE WITH MEMBER RIGHTS AND RESPONSIBLITIES ........... 29 
+7.3 ACCESS TO CARE DECISIONS .......................................................................... 30 
+7.4 ADVANCE DIRECTIVES ...................................................................................... 31 
+7.5 MEMBER COMPLAINT AND GRIEVANCE PROCESS ........................................ 31 
+
+3 
+Kaiser Permanente ND&A HMO Provider 
+Manual for Contracted Institutional Providers (REV. 10-24) 
+7.6 PROVIDER PARTICIPATION IN MEMBER COMPLAINT RESOLUTION ............ 32 
+7.7 MEMBER COMPLAINT AND GRIEVANCE RESOLUTION PROCEDURE .......... 32 
+7.8 COMPLAINT PROCEDURES............................................................................... 32 
+7.9 GRIEVANCE PROCEDURES .............................................................................. 33 
+7.10 72-HOUR EXPEDITED REVIEW .......................................................................... 33 
+7.11 FRIEDMAN-KNOWLES EXPERIMENTAL TREATMENT ACT ............................. 33 
+7.12 DEMAND FOR ARBITRATION ............................................................................ 34 
+Section VIII: Provider Rights and Responsibilities ........................................................ 34 
+Section IX: Complaint and Member Care Problems ...................................................... 36 
+Section X: Billing and Payment ...................................................................................... 36 
+10.1 BILLING REQUIREMENTS .................................................................................. 36 
+10.2 SUPPORTING DOCUMENTATION ..................................................................... 37 
+10.3 STANDARD BILLING CODES .............................................................................. 38 
+10.4 CLAIM SUBMISSION REQUIREMENTS ............................................................. 39 
+10.5 ELECTRONIC SUBMISSION OF CLAIMS DATA ................................................. 39 
+10.6 PROHIBITED MEMBER BILLING PRACTICES ..................................................... 43 
+10.7 CLAIMS PROCESSING GUIDELINES ................................................................. 43 
+10.8 CLAIMS PAYMENT POLICY ................................................................................ 44 
+10.9 CLAIMS REVIEW AND ADJUSTMENTS; CODING AND BILLING VALIDATION
+ ………………………………………………………………………………………….44 
+10.10 DO NOT BILL EVENTS (DNBE) ........................................................................ 46 
+10.11 COORDINATION OF BENEFITS (COB) ........................................................... 49 
+10.12 MEDI-CAL COST AVOIDANCE……………………………………………………..51 
+10.13 THIRD PARTY LIABILITY (TPL) ........................................................................ 52 
+10.14 COPAYMENTS, COINSURANCE AND DEDUCTIBLES ................................... 53 
+10.15 OVERPAYMENT POLICY ................................................................................. 53 
+10.16 OFFSETS TO PAYMENTS ................................................................................ 54 
+10.17 DIRECT MEMBER BILLING .............................................................................. 54 
+10.18 MEMBER CLAIMS INQUIRIES .......................................................................... 54 
+Section XI: Provider Appeals Process ........................................................................... 55 
+11.1 SUBMITTING DISPUTES .................................................................................... 55 
+11.2 REQUIRED INFORMATION FOR PROVIDER DISPUTE NOTICES ................... 56 
+
+4 
+Kaiser Permanente ND&A HMO Provider 
+Manual for Contracted Institutional Providers (REV. 10-24) 
+11.3 PROVIDER DISPUTE PROCESS TIMELINE ...................................................... 57 
+11.4 INSTRUCTIONS FOR RESOLVING SUBSTANTIALLY SIMILAR PAYMENT 
+DISPUTES ..................................................................................................................... 57 
+Section XII: Credentialing and Recredentialing ............................................................. 58 
+12.1 CREDENTIALING AND RE-CREDENTIALING PROCESS .................................. 58 
+12.2 CONFIDENTIALITY OF CREDENTIALING INFORMATION ................................ 58 
+Section XIII: Utilization Management .............................................................................. 59 
+13.1 UTILIZATION MANAGEMENT PROGRAM .......................................................... 59 
+13.2 REQUEST FOR AUTHORIZATION FOR CONTRACTED PROVIDER SERVICES
+ 59 
+13.3 REQUEST FOR INFORMATION ......................................................................... 60 
+13.4 HOSPITAL ADMISSIONS OTHER THAN EMERGENCY SERVICES .................. 60 
+13.5 ADMISSION TO SKILLED NURSING FACILITY (SNF) ........................................ 60 
+13.6 HOME HEALTH/HOSPICE SERVICES ................................................................ 61 
+13.7 DURABLE MEDICAL EQUIPMENT (DME) .......................................................... 62 
+13.8 NON-EMERGENT MEMBER TRANSPORTATION SERVICES ........................... 62 
+Section XIV: Quality Management Program ................................................................... 63 
+14.1 QUALITY ASSURANCE AND QUALITY IMPROVEMENT PROGRAM ............... 65 
+14.2 MONITORING AND REPORTING REQUIREMENTS .......................................... 66 
+Section XV: Emergency Services ................................................................................... 66 
+15.1 POST STABILIZATION AUTHORIZATIONS ........................................................ 67 
+15.2 POST STABILIZATION ADMISSIONS ................................................................. 67 
+Section XVI: Cultural Diversity ........................................................................................ 69 
+16.1 NON-DISCRIMINATION ...................................................................................... 69 
+16.2 KP’S LANGUAGE ASSISTANCE PROGRAM ...................................................... 70 
+16.3 USING QUALIFIED BILINGUAL STAFF ............................................................... 71 
+16.4 TELEPHONE INTERPRETATION ....................................................................... 71 
+16.5 SIGN LANGUAGE SUPPORT .............................................................................. 72 
+16.6 FAMILY MEMBERS AND FRIENDS AS INTERPRETERS ................................... 73 
+16.7 DOCUMENTATION .............................................................................................. 73 
+16.8 ONSITE SIGHT TRANSLATION SERVICES ....................................................... 73 
+16.9 STAFF TRAINING ................................................................................................ 74 
+
+5 
+Kaiser Permanente ND&A HMO Provider 
+Manual for Contracted Institutional Providers (REV. 10-24) 
+16.10 COMPLIANCE WITH LANGUAGE ASSISTANCE ................................................ 74 
+SECTION XVII: COMPLIANCE ......................................................................................... 74 
+17.1 COMPLIANCE WITH LAW ................................................................................... 74 
+17.2 KP PRINCIPLES OF RESPONSIBILITY AND COMPLIANCE HOTLINE ............. 74 
+17.3 GIFTS AND BUSINESS COURTESIES ............................................................... 75 
+17.4 CONFLICTS OF INTEREST ................................................................................. 75 
+17.5 FRAUD, WASTE AND ABUSE ............................................................................. 75 
+17.6 PROVIDERS INELIGIBLE FOR PARTICIPATION IN GOVERNMENT HEALTH 
+CARE PROGRAMS ........................................................................................................ 76 
+17.7 VISITATION POLICY ........................................................................................... 76 
+17.8 ACCESS AND AVAILABILITY ............................................................................. 76 
+SECTION XVIII: CONFIDENTIALITY OF MEMBER INFORMATION ................................ 77 
+18.1 HIPAA AND PRIVACY RULES ............................................................................. 78 
+18.2 CONFIDENTIALITY OF ALCOHOL AND DRUG ABUSE PATIENT RECORDS.. 79 
+18.3 PROVIDER RESOURCES ................................................................................... 79 
+ APPENDIX 1…………………………………………….……………….……………...79 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+6 
+Kaiser Permanente ND&A HMO Provider 
+Manual for Contracted Institutional Providers (REV. 10-24) 
+ 
+ 
+ 
+Introduction 
+ 
+It is our pleasure to welcome you as a contracted provider with Kaiser Permanente 
+(KP). We want this business relationship to work well for you, your medical support 
+staff, and our Health Plan members. 
+ 
+This Provider Manual was created to help guide your staff in working with KP’s various 
+systems and procedures. It is intended to supplement, and not to replace or 
+supersede, the Agreement between you and KP. Updates to the Provider Manual will 
+be provided on a periodic basis in accordance with the Agreement and in response to 
+changes in operational systems and regulatory requirements. 
+ 
+There are attachments, exhibits and forms appearing throughout this Provider Manual, 
+so please feel free to reproduce them as necessary. The information in this Provider 
+Manual is proprietary and may not be used, circulated, reproduced, copied, or disclosed 
+in any manner whatsoever, except as permitted by your Agreement, or with prior written 
+permission from Health Plan. If there is a conflict between this Provider Manual and your 
+Agreement, the terms of the Agreement will control. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+7 
+Kaiser Permanente ND&A HMO Provider 
+Manual for Contracted Institutional Providers (REV. 10-24) 
+Section I: How This Provider Manual Is Organized 
+ 
+This Provider Manual has been developed to assist you with understanding the 
+administrative processes related to accessing and providing comprehensive, effective 
+and quality medical services to KP members. Kaiser Permanente’s goal is to make this 
+Provider Manual as helpful and easy to use as possible. 
+ 
+The contents of this Provider Manual have been organized according to similar topics 
+and functions. A complete “Table of Contents” is located at the beginning of the Provider 
+Manual and includes the subheadings of topics included within each section. The “Key 
+Contacts” section includes names, departments, and telephone numbers that will assist 
+you in obtaining answers to questions or rendering services under KP procedures. 
+ 
+You may wish to make copies of specific pages or reference tables that are used 
+frequently and place them in the front of the Provider Manual. 
+ 
+1.1 YOUR RESPONSIBILITIES 
+ 
+This Manual, including all updates, shall remain the property of Kaiser Permanente. 
+While you have the Provider Manual, you are responsible for maintaining it and its 
+updates and also for providing copies of the Provider Manual to all subcontractors who 
+provide services to Health Plan members. 
+ 
+1.2 PROVIDER CHANGES THAT MUST BE REPORTED 
+ 
+Please remember to send written notification to KP’s Network Development and 
+Administration department when you have important changes to report. 
+ 
+Relocations: 
+Notify Provider Relations at least ninety (90) days prior to relocation to allow for the 
+transition of Members to other Providers, if necessary. 
+ 
+Adding/Deleting New Practice Site or Location: 
+Notify Provider Relations at least ninety (90) days prior to opening an additional practice 
+site or closing an existing service location. 
+ 
+Changes in Telephone Numbers: 
+Notify Provider Relations at least thirty (30) days prior to the implementation of a 
+change in telephone number. If the initial notification is given verbally, you must send 
+written confirmation of what was verbally conveyed. 
+ 
+Federal Tax ID Number and Name Changes: 
+If your Federal Tax ID Number or name should change, please notify us immediately so 
+that appropriate corrections can be made to KP’s files. 
+
+8 
+Kaiser Permanente ND&A HMO Provider 
+Manual for Contracted Institutional Providers (REV. 10-24) 
+ 
+Mergers and Other Changes in Legal Structure: 
+Please notify us in advance and as early as possible of any planned changes to your 
+legal structure, including pending merger or acquisition in writing. 
+ 
+Contractor Initiated Termination (Voluntary): 
+Your Agreement requires that you give advance written notice if you plan on terminating 
+your contractual relationship with KP. The written notice must be sent in accordance 
+with the terms of your Agreement. 
+ 
+When you give notice of termination, you must immediately advise Provider Relations of 
+any Members who will be in the course of treatment during the termination period. 
+ 
+Provider Relations may contact you to review the termination process, which may 
+include transferring Members and their medical records to other providers designated 
+by KP. 
+ 
+KP will make every effort to notify all affected Members of the change in providers at 
+least sixty (60) days prior to the termination, so that the Members can be given 
+information related to their continuity of care rights, and to assure appropriate transition to 
+ensure that they will have appropriate access to care. KP will implement a transition plan 
+to move the Members to a provider designated by KP, respecting each Member’s legal 
+continuity of care rights, and making every effort to minimize any disruption to medical 
+treatment. You are expected to cooperate and facilitate the transition process. You will 
+remain obligated to care for the affected Members in accordance with the written 
+terms of the Agreement, state and federal law. 
+ 
+Other Required Notices: 
+You are required to give KP notice of a variety of other events, including changes in 
+your insurance, ownership, adverse actions involving your license, participation in 
+Medicare or Medicare certification, and other occurrences that may affect the provision of 
+services under your Agreement. Your Agreement describes the required notices and 
+manner in which notice should be provided. 
+ 
+ 
+Kaiser Permanente – SCAL Region 
+Network Development and Administration 
+393 East Walnut Street 
+Pasadena, CA 91188-8116 
+1-626-405-3240 
+ 
+ 
+ 
+ 
+ 
+
+9 
+Kaiser Permanente ND&A HMO Provider 
+Manual for Contracted Institutional Providers (REV. 10-24) 
+Section II: Kaiser Permanente Medical Care Program 
+ 
+The KP Medical Care Program is a cooperative endeavor among representatives of 
+medicine and management, sharing responsibilities for organizing, financing, and 
+delivering high quality health care services to its members. Three separate entities 
+comprise the KP Medical Care Program: Kaiser Foundation Health Plan, Inc. (KFHP); 
+Kaiser Foundation Hospitals. (KFH); and Southern California Permanente Medical Group 
+(SCPMG). For purposes of this Provider Manual, the terms Kaiser Permanente or KP 
+mean KFHP, KFH, and SCPMG, collectively. 
+ 
+2.1 HISTORY 
+ 
+Kaiser Permanente was founded in the late 1930’s by an innovative physician, Sidney R. 
+Garfield, MD, and an industrialist, Henry J. Kaiser, as a comprehensive affordable 
+alternative to “fee-for-service” medical care. Initially, the health care program was only 
+available to construction, shipyard, and steel mill workers employed by the Kaiser 
+industrial companies during the late 1930’s and 1940’s. The program was opened for 
+enrollment to the general public in 1945. 
+ 
+Today, Kaiser Foundation Health Plan is one of the country’s largest nonprofits, 
+independent, prepaid group practice health maintenance organizations. We are proud of 
+eight decades of providing quality health care services to our members and of the positive 
+regard we’ve earned from our members, peers, and others within the health care 
+industry. 
+ 
+2.2 ORGANIZATIONAL STRUCTURE 
+ 
+Kaiser Permanente’s Southern California Region is comprised of three separate entities 
+that share responsibility for providing medical, hospital and business management 
+services. These groups of entities are referred to in this Provider Manual as Kaiser 
+Permanente. The entities are: 
+ 
+ Kaiser Foundation Health Plan, Inc. (KFHP or Health Plan): Health Plan is a 
+California nonprofit, public benefit corporation that is licensed as a health care service 
+plan under the Knox-Keene Act. Health Plan contracts with Kaiser Foundation 
+Hospitals and Southern California Permanente Medical Group to provide or arrange for 
+the provision of medical services. 
+ Kaiser Foundation Hospitals (KFH): KFH is a California nonprofit public 
+benefit corporation that owns and operates community hospitals and outpatient 
+facilities. KFH provides and arranges for hospital and other facility services, and 
+sponsors charitable, educational, and research activities. 
+ Southern California Permanente Medical Group (SCPMG): is a professional 
+corporation of providers in the Kaiser Permanente Southern California Region. 
+SCPMG provides and arranges for professional medical services. 
+
+10 
+Kaiser Permanente ND&A HMO Provider 
+Manual for Contracted Institutional Providers (REV. 10-24) 
+ 
+2.3 SOUTHERN CALIFORNIA REGION 
+ 
+The Southern California Region is one of Kaiser Permanente’s eight regions within the 
+United States. Covering an area from Bakersfield to San Diego, the Kaiser Permanente 
+Southern California Region spans more than six counties. 
+ 
+2.4 INTEGRATION 
+ 
+Kaiser Permanente is unique. We integrate the elements of health care providers, 
+hospitals, home health, support functions and healthcare coverage into a cohesive 
+healthcare delivery system. Our integrated structure enables us to coordinate care to our 
+Members across the continuum of care settings. 
+ 
+2.5 PREVENTIVE HEALTH CARE 
+ 
+Kaiser Permanente continues to influence the practice of medicine by focusing on 
+keeping the Member healthy and on treating illness and injuries. We encourage Members 
+to seek care on a regular and preventive basis. 
+ 
+2.6 OTHER PRODUCTS 
+ 
+In addition to our core HMO plans, KP also offers the fully insured and self-funded products, 
+administered by Kaiser Permanente Insurance Company (KPIC). Fully insured and Self-
+Funded Exclusive Provider Organization, Point-of-Service, and Preferred Provider 
+Organization (PPO) options are addressed in a separate manual. 
+ 
+2.6.1 Exclusive Provider Organization (EPO) 
+ 
+ Mirrors our HMO product, offered on a fully insured or self-funded basis 
+ EPO Members choose a KP primary care provider (PCP) and receive care at KFH or 
+contracted medical facilities 
+ Except when referred by a SPMG physician or designee (Plan Physician), EPO 
+Members will be covered for non-emergency care only at designated plan medical 
+facilities and from designated plan practitioners 
+ 
+2.6.2 Point of Service (POS) – Two Tier 
+ 
+ Tier 1 is the EPO provider network 
+ Tier 2 is comprised of all other contracted providers 
+
+11 
+Kaiser Permanente ND&A HMO Provider 
+Manual for Contracted Institutional Providers (REV. 10-24) 
+ POS Members incur greater out-of-pocket expenses in the form of higher co­ 
+payments, co-insurance and/or deductibles when they use Tier 2 benefits 
+ The POS-Two Tier product is offered on a fully insured or self-funded basis 
+ 
+2.6.3 Point of Service (POS) – Three Tier 
+ 
+ Tier 1 is the EPO provider network 
+ Tier 2 is comprised of our contracted PPO network providers 
+ Tier 3 includes non-contracted providers 
+ POS Members incur greater out-of-pocket expenses in the form of higher 
+co­payments, co-insurance and/or deductibles when they self-refer to a contracted 
+PPO network provider (Tier 2) 
+ Generally, the out-of-pocket costs will be highest for self-referred services received 
+from non-contracted providers (Tier 3) 
+ The POS-Three Tier product is offered on a fully insured or self-funded basis 
+ 
+2.6.4 Out of Area Preferred Provider Organization (PPO) 
+ 
+ The PPO is offered to Members living outside the KP EPO service area. Members 
+receive care from our PPO provider network, e.g. PHCS. 
+ PPO Members may choose to receive care from a non-network provider; however, 
+their out-of-pocket costs may be higher 
+ There are no requirements for PCP selection 
+ The Out of Area PPO is offered on a fully insured or self-funded basis 
+ 
+ 
+Section III: Contracting for Medical Services 
+ 
+Network Development and Administration Department (ND&A) is responsible for the 
+contracts between KFH and community hospitals, skilled nursing facilities and other facility 
+providers to provide services for our members. ND&A handles the day-to-day operational 
+maintenance of the contracts, including, but not limited to, relocations, additions/deletions of 
+practice site/location, changes in telephone numbers, federal tax ID number and name 
+changes, and mergers and other changes in legal structure. 
+ 
+For more information regarding this section, please contact us at the number listed in 
+the “Key Contacts” section of this Provider Manual. 
+
+12 
+Kaiser Permanente ND&A HMO Provider 
+Manual for Contracted Institutional Providers (REV. 10-24) 
+ 
+Section IV: Key Contacts 
+ 
+INTRODUCTION 
+ 
+At Kaiser Permanente, we believe in clear, open, and frequent communication with our 
+contracted providers. The following are the key departments and individuals available to 
+assist you with questions or clarification of any issues regarding your association with 
+Kaiser Permanente. Please feel free to call them as the need may arise. 
+ 
+For clarification, questions, or comments about your role as a contracted provider for 
+Kaiser Permanente, please contact Network Development and Administration at 1-626-
+405-3240. 
+ 
+4.1 KEY CONTACTS 
+ 
+Southern California Region – Key Contact 
+ 
+Department Area of Interest Contact Information 
+Emergency Prospective 
+Review Program (EPRP) 
+Emergency Notification 1-800-447-3777 
+Available 24 hours 
+a day 
+7 days a week 
+ Outside Utilization 
+Resource Services 
+(OURS) 
+Authorizations for Post Stabilization 
+Management after Emergency 
+Medical Services 
+1-800-225-8883 
+Available 24 hours 
+a day 
+7 days a week 
+California Claims 
+Administration Department 
+Billing Questions Claims Inquiries 1-800-390-3510 
+ 
+Send Claims: 
+Claims Administration 
+Department 
+P.O. Box 7004 
+Downey, CA 90242-7004 
+
+13 
+Kaiser Permanente ND&A HMO Provider 
+Manual for Contracted Institutional Providers (REV. 10-24) 
+ 
+Department Area of Interest Contact Information 
+KP Member Services General Enrollment Questions 
+ 
+Eligibility and Benefit Verification 
+ 
+Co-pay, Deductible and Co- 
+insurance Information 
+ 
+Members presenting without KP 
+identification number 
+ 
+Member grievance and appeals 
+1-800-464-4000 
+(English) 
+ 
+1-800-788-0616 
+(Spanish) 
+ 
+1-800-757-7585 
+(Cantonese & 
+Mandarin) 
+ 
+1-800-777-1370 
+(TTY) 
+ 
+Monday – Friday 7 
+a.m. to 7 p.m. 
+Saturday – Sunday 
+7 a.m. to 3 p.m. 
+Medicare Member 
+Service 
+ 1-800-443-0815 
+Monday – Sunday 
+7 a.m. to 8 p.m. 
+ Outside Referral 
+Department 
+Authorizations/Referrals See Section V 
+Network Development 
+and Administration 
+ 
+(Provider Contract 
+Management and 
+Provider Relations) 
+Contract Interpretation 
+ 
+Updates to provider 
+demographics (such as Tax ID 
+and ownership changes, address 
+changes) 
+ 
+Provide Education and Training 
+Form Request 
+Billing Dispute Issues 
+1-626-405-3240 
+Regional Office 
+Monday – Friday 
+8:30 a.m.to 5 p.m. 
+Medical Transportation 
+Non-Emergent "The 
+Hub" 
+Coordinate / Schedule Non- 
+Emergency Transportation 
+1-877- 227-8799 
+Available 24 hours a day 
+Seven Days a Week 
+ 
+
+14 
+Kaiser Permanente ND&A HMO Provider 
+Manual for Contracted Institutional Providers (REV. 10-24) 
+ 
+Department Area of Interest Contact Information 
+Utilization 
+Management 
+Care Coordination & 
+Discharge 
+Planning 
+Care Coordination 1-800- 464-4000 
+Monday – Friday 
+7 a.m. to 7 p.m. 
+Saturday – Sunday 
+7 a.m. to 3 p.m. 
+72 hour Expedited 
+Appeals 
+Expedited Review 1-888-987-7247 
+Monday – Saturday 
+8:30 a.m.to 5 p.m. 
+Behavioral Health Care 
+ 
+Behavioral Health 
+Utilization 
+Management 
+Behavioral Health Services 1-866- 465-7296 
+7 a.m. – 5:30 p.m. 
+Monday – Sunday 
+ 
+Member Services Interactive Voice Response System (IVR) 
+ 
+KP Member Services IVR can assist you with a variety of questions. Call (888) 576-6789 
+to use this service. Please have the following information available when you call into the 
+system to provide authentication: 
+ 
+ Provider Tax ID or National Provider Identifier (NPI) 
+ Member’s MRN and/or Policy Number 
+ Member’s date of birth 
+ Date of service for claim in question 
+ 
+The IVR can assist you with status of a Member’s accumulator (amount applied toward 
+deductible, if any, or out-of-pocket maximum); claims and payment status; or connect you 
+to a Member Services Contact Center (MCSS) representative. Follow the prompts to 
+access these services. 
+ 
+ 
+Section V: Outside Referral Departments 
+ 
+The Outside Referral Department (ORD) is responsible for processing, distributing 
+documents, and verifying status of authorized referrals. Prior authorization is a prerequisite 
+before payment can be made for any inpatient or outpatient services which would 
+otherwise be covered by a Member’s benefit plan, except for emergency services and 
+other situations expressly allowed by your Agreement or this Provider Manual. 
+
+15 
+Kaiser Permanente ND&A HMO Provider 
+Manual for Contracted Institutional Providers (REV. 10-24) 
+ 
+ 
+If you have not received an authorization document from us and are unsure about the 
+appropriate Referral location, please contact the Outside Referral Department in your 
+Service Area. 
+ 
+Referral Departments may be reached at the following telephone numbers: 
+ 
+Outside Referral Departments Telephone Number 
+Antelope Valley 1-661-729-7108 
+Baldwin Park 1-562-622-3880 
+Downey 1-562-622-3880 
+Coachella and Yucca Valley 1-951-602-4294 
+San Bernardino County Service Area 1-909-609-3262 
+Kern County 1-661-852-3482 
+Los Angeles 1-323-783-4401 
+Orange County 1-714-564-4150 
+Panorama City 1-818-375-2806 
+Riverside 1-951-602-4294 
+San Diego 1-619-589-3360 
+South Bay 1-310-816-5324 
+West Ventura 1-844-424-1869 
+West Los Angeles 1-323-783-4401 
+Woodland Hills 1-844-424-1869 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+16 
+Kaiser Permanente ND&A HMO Provider 
+Manual for Contracted Institutional Providers (REV. 10-24) 
+ 
+ 
+ 
+ 
+Section VI: Member Eligibility and Benefits 
+ 
+INTRODUCTION 
+ 
+This section describes the requirements for verifying Member eligibility and Kaiser 
+Permanente benefit coverage. 
+ 
+You are required to verify eligibility each time a Member presents for services so that 
+services are only provided to someone who is eligible. This ensures that you can be 
+compensated by Kaiser Permanente for services you provide to our Health Plan 
+members. Members are issued identification cards, but the ID Card alone is not a valid 
+verification of eligibility. 
+ 
+You are also responsible for confirming that services provided to a Member are covered 
+benefits. 
+ 
+Both requirements and verification tools are described in more detail in this section. 
+ 
+For specific questions regarding eligibility or a Member’s benefit plan and coverage for 
+services, please call Member Services. The Member Services telephone number is 
+located in the “Key Contacts” section of this Provider Manual. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+17 
+Kaiser Permanente ND&A HMO Provider 
+Manual for Contracted Institutional Providers (REV. 10-24) 
+6.1 KAISER PERMANENTE MEMBERSHIP TYPE 
+ 
+Membership 
+Type Membership Defined Covered Benefits Defined by: 
+Commercial Members* who purchase Health 
+Plan coverage on an individual 
+basis (other than Medicare and 
+Medicaid) 
+ 
+Members who are covered as part of 
+an employer group and are not 
+Medicare- eligible or Medicaid-
+eligible 
+Membership Agreement/ 
+Evidence of Coverage 
+ 
+Membership Agreement 
+Medicare 
+Advantage 
+(Senior 
+Advantage) 
+Individual Medicare beneficiaries 
+who have assigned their Medicare 
+benefits to Kaiser Permanente by 
+enrolling in the Kaiser Permanente 
+Senior Advantage Program (formerly 
+Medicare +Choice) 
+ 
+Employer group retirees or 
+otherwise Medicare-eligible 
+employees who are also Medicare 
+beneficiaries and have assigned 
+their Medicare benefits to Kaiser 
+Permanente by enrolling the 
+Kaiser Permanente Senior 
+Advantage Program 
+Medicare, with additional 
+benefits provided by 
+Kaiser Permanente 
+ 
+ 
+Medicare and Membership 
+Agreement 
+
+18 
+Kaiser Permanente ND&A HMO Provider 
+Manual for Contracted Institutional Providers (REV. 10-24) 
+Regular 
+Medicare 
+(Medicare 
+unassigned) 
+Members (i) entitled to coverage 
+under Part A only or Part B only or 
+Parts A and B of Medicare but (a) 
+are not enrolled under a Medicare 
+Advantage contract between 
+Health Plan (or another Kaiser 
+Payor) and CMS and (b) for whom 
+the Medicare program is the 
+primary payor for Medicare-
+covered services under Medicare 
+reimbursement rules, or (ii) 
+enrolled under a Medicare 
+Advantage contract and are 
+hospice patients receiving care 
+from Provider for services 
+unrelated to the hospice patient’s 
+terminal condition. 
+ 
+Dual Coverage: Two separate 
+plans – the primary Medicare 
+benefits are defined by 
+Medicare; the secondary 
+Health Plan benefits are 
+defined by the Membership 
+Agreement (and the Employer 
+Group if applicable). 
+* In each case, “Member” includes the subscriber and any eligible dependents, in 
+accordance with the terms of the applicable membership agreement. 
+
+19 
+Kaiser Permanente ND&A HMO Provider 
+Manual for Contracted Institutional Providers (REV. 10-24) 
+Membership 
+Type Membership Defined Covered Benefits Defined by: 
+State Programs 
+(Medi-Cal, Healthy 
+Families) 
+Contact Member Services for 
+detailed information specific to 
+your geographic area. 
+Contact Member Services for 
+detailed information specific 
+to your geographic area. 
+Added Choice 
+(POS) 
+Members who are working and 
+part of an employer group 
+Health Plan (HMO) benefits 
+determined by the Membership 
+Agreement. 
+ 
+Allows members to choose 
+from three provider options to 
+obtain health care coverage 
+that best meets their needs. 
+Your Agreement and this 
+Provider Manual apply only to 
+services that are Health Plan 
+covered benefits. 
+ 
+ 
+6.2 MEMBER IDENTIFICATION CARDS 
+ 
+Kaiser Permanente issues a Health Plan Member Identification (ID) card to each 
+Member. The ID card for the appropriate benefit plan/type of coverage is included in 
+the New Member Enrollment Packet sent to members. Members are instructed to 
+present their ID card and Photo Identification each time they access services. 
+ 
+All Kaiser Permanente ID cards include: 
+ 
+ Member name 
+ Medical Record Number (MRN) 
+ Emergency information for non-Kaiser Permanente facilities 
+ 
+ 
+For record-keeping purposes, your business office may wish to photocopy the front and 
+back of a Member’s ID card and place it in the Member’s medical records file. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+20 
+Kaiser Permanente ND&A HMO Provider 
+Manual for Contracted Institutional Providers (REV. 10-24) 
+Sample Health ID Card: 
+ 
+ 
+ 
+ 
+6.3 MEDICAL RECORD NUMBER 
+ 
+A unique Medical Record Number (MRN) is assigned to each Member and is listed on 
+the front of the Member’s identification card. The MRN is used by Kaiser Permanente 
+to identify the Member’s medical record, eligibility, and benefit level. If a Member’s 
+enrollment terminates and the Member re-enrolls at a later date, the Member retains the 
+same MRN although employer or other information may change, including but not limited 
+to their benefit information. The MRN enables medical records/history to be tracked for all 
+periods of enrollment. 
+ 
+Note: The MRN should be used as the “Member ID” when submitting bills or encounter 
+data. Please refer to the “Billing and Payment” section of this Provider Manual for 
+additional information. 
+ 
+ 
+ 
+6.4 VERIFICATION OF ELIGIBILITY 
+ 
+You must verify the Member’s eligibility each time a Member presents for services. After 
+receiving the health plan identification card, Members may lose their eligibility or change 
+health plans. Unless a referral and/or authorization have been received, you must verify 
+the Member’s eligibility before rendering the service prior to the Member presenting for 
+services. 
+ 
+
+21 
+Kaiser Permanente ND&A HMO Provider 
+Manual for Contracted Institutional Providers (REV. 10-24) 
+Please do not assume that because a person has a Kaiser Permanente ID Card 
+that coverage is in effect. Please check a form of photo identification to verify the 
+identity of the Member. Member Services can always be contacted to verify the 
+validity of the ID card/number; otherwise, you provide services at your own 
+financial risk. 
+ 
+Verification of eligibility may be done quickly and easily, 24/7, by going online to our 
+provider portal website at https://healthy.kaiserpermanente.org/community-providers. If the 
+information you need is not available on our provider website, you can contact Member 
+Services: 
+ 
+ 
+ 
+ 
+ 
+6.5 AFTER HOUR ELIGIBILITY REQUESTS 
+ 
+Members who require medical care after normal business hours must have their eligibility 
+verified during the next business day. During the interim, you must request that the 
+Member complete a financial responsibility form that places payment responsibility on 
+the patient in the event that they are later found to be ineligible. Eligibility verification or a 
+financial responsibility form is not required for provision of emergency services; 
+however, Kaiser Permanente will not pay for services provided if the person is not a 
+Health Plan member. 
+ 
+6.6 BENEFIT COVERAGE DETERMINATION 
+ 
+In addition to eligibility, you must determine that the Member has coverage for services 
+prior to providing such services to a Member, usually by an authorization or referral from 
+Kaiser Permanente. The “Utilization Management” and “Billing and Payment” sections of 
+this Provider Manual provide information regarding authorizations and referrals. 
+ 
+ 
+Member Services Contact Center 
+1-800-464-4000 
+Monday – Friday 7 a.m. to 7 p.m. 
+Saturday – Sunday 7 a.m. to 3 p.m. 
+ 
+Medicare Member Services Contact Center 
+1-800-443-0815 
+Monday – Sunday 7 a.m.to 8 p.m. 
+
+22 
+Kaiser Permanente ND&A HMO Provider 
+Manual for Contracted Institutional Providers (REV. 10-24) 
+ 
+ 
+6.7 BENEFIT EXCLUSIONS AND LIMITATIONS 
+ 
+KP benefit plans may be subject to limitations and exclusions. It is important to verify the 
+availability of benefits for services before rendering the service so the Member can be 
+informed of any potential payment responsibility. 
+ 
+Please visit our Provider Portal website at https://healthy.kaiserpermanente.org/community-
+providers. 
+ 
+If services are provided to a Member and the service is not a covered benefit, or the 
+benefit has been exhausted, denied or not authorized, KP will not be obligated to pay 
+for those services, except to the extent required by law. 
+ 
+ 
+ 
+Section VII: Member Rights and Responsibilities 
+ 
+INTRODUCTION 
+ 
+Kaiser Permanente recognizes that its Members have both rights and responsibilities in 
+the management of their health care. 
+ 
+Individuals enrolled in Kaiser Permanente Health Plans have certain rights that are 
+protected during their encounters with Kaiser Permanente representatives who consist of 
+participating providers, contracted providers, and their employees, as well as Kaiser 
+Permanente employees. 
+ 
+By the same token, Members are expected to assume responsibility for their 
+knowledge, attitudes, and behavior related to the health care services they receive while 
+enrolled in a Kaiser Permanente Health Plan. 
+ 
+This section addresses a Member’s rights and responsibilities; in addition to avenues 
+available to remedy any situation the Member feels they have not received appropriate 
+services, care, or treatment. 
+ 
+7.1 MEMBER RIGHTS AND RESPONSIBILITIES STATEMENT 
+ 
+Kaiser Permanente has developed a Member Rights and Responsibilities Statement that 
+addresses a member’s right to participate in their medical care decisions. These 
+decisions range from selecting a primary care provider to being provided with all 
+information needed to making decisions regarding recommended treatment plans. 
+
+23 
+Kaiser Permanente ND&A HMO Provider 
+Manual for Contracted Institutional Providers (REV. 10-24) 
+ 
+This statement also addresses their responsibilities, which include understanding the 
+extent and limitations of their health care benefits, following established procedures for 
+accessing care, recognizing the impact their lifestyle has on their physical conditions, 
+providing accurate information to their caregivers, and following agreed treatment plans. 
+ 
+Kaiser Permanente provides each Member with the Member Rights and Responsibilities 
+Statement upon enrollment in Health Plan. A copy of the statement is included in the Kaiser 
+Permanente Rights and Responsibilities Handbook, the Disclosure Form and Evidence 
+of Coverage booklet, and in new Member materials. Members may call Member 
+Services to obtain additional copies of the above information. 
+ 
+Kaiser Permanente members have the right to: 
+ 
+ Receive information about Kaiser Permanente, our services, our 
+practitioners and providers, and their rights and responsibilities. Kaiser 
+Permanente wants its Members to participate in decisions about their medical 
+care. Members have the right and should expect to receive as much 
+information as they need to help them make decisions. This includes 
+information about: 
+ Kaiser Permanente; 
+ the services we provide, including behavioral health services; 
+ the names and professional status of the individuals who 
+provide Members with service or treatment; 
+ the diagnosis of a medical condition, its recommended 
+treatment, and alternative treatments; 
+ the risks and benefits of recommended tr eatments; 
+ preventive care guidelines; 
+ ethical issues; and 
+ complaint and grievance procedures. 
+ 
+We will make this information as clear and understandable as possible. 
+When needed, we will provide interpreter services at no cost to them. 
+ 
+ Participate in a candid discussion of appropriate or medically necessary 
+treatment options for their condition(s), regardless of cost or benefit coverage. 
+Members have the right to a candid discussion with their Plan Physician about 
+appropriate or medically necessary treatment options for their condition(s), 
+regardless of cost or benefit coverage. Members should ask questions, even if they 
+think they're not important. Members may refuse any recommended treatment if they 
+don't agree with it or if it conflicts with their beliefs. 
+
+24 
+Kaiser Permanente ND&A HMO Provider 
+Manual for Contracted Institutional Providers (REV. 10-24) 
+Kaiser Permanente does not discriminate on the basis of age, race, ethnicity, color, 
+national origin, cultural background, ancestry, language, religion, sex, gender identity, 
+gender expression, sexual orientation, marital status, physical or mental disability or 
+genetic information. 
+ 
+Medical emergencies or other circumstances may limit Member participation in a 
+treatment decision. However, in general, a Member will not receive any medical 
+treatment before they or their representative gives consent. The Member and, when 
+appropriate, their family will be informed about the outcomes of care, treatment, and 
+services that have been provided, including unanticipated outcomes. 
+ 
+ Participate with practitioners and providers in making decisions 
+about their health care. Members have the right to choose an adult 
+representative, known as an agent, to make medical decisions for them if 
+they are unable to do so, and to express their wishes about their future care. 
+Instructions may be expressed in advance directive documents such as an 
+advance health care directive. 
+ 
+For more information about these services and resources, please contact 
+our Member Service Contact Center 24 hours a day, 7 days a week (closed 
+holidays) at 1-800-464-4000 (English), 1-800-788-0616 (Spanish), 1-800-
+757-7585 (Chinese dialects), or TTY: 711. 
+ 
+ Have ethical issues considered. Members have the right to have ethical issues 
+that may arise in connection with their health care considered by their health care 
+team. Kaiser Permanente has a Bioethics/ Ethics Committee at each of our medical 
+centers to assist in making important medical or ethical decisions. 
+ 
+ Receive personal medical records. Members have the right to review and 
+receive copies of their medical records, subject to legal restrictions and any 
+appropriate copying or retrieval charge(s). Members can also designate someone to 
+obtain their records on their behalf. Kaiser Permanente will not release medical 
+information without written consent, except as required or permitted by law. 
+ 
+To review, receive, or release copies of medical records, Members will need 
+to complete and submit an appropriate written authorization or inspection 
+request to our Release of Information/Medical Correspondence at the facility 
+where they get care. Members can reference to their medical facility by 
+visiting kp.org to find addresses and phone numbers for these departments. 
+If they need help getting copies of their medical records, they can call our 
+Member Services Contact Center at 1-800-464-4000 or TTY: 711. 
+ 
+ Receive care with respect and recognition of their dignity. Kaiser Permanente 
+respects cultural, psychosocial, spiritual, and personal values; members beliefs; and 
+
+25 
+Kaiser Permanente ND&A HMO Provider 
+Manual for Contracted Institutional Providers (REV. 10-24) 
+personal preferences. 
+ 
+Kaiser Permanente is committed to providing high-quality care for Members and to 
+building healthy, thriving communities. To help up get to know our Members and 
+provide culturally competent care, we collect race, ethnicity, language preferences 
+(spoken and written) and religion data. This information can help us develop ways to 
+improve care for our Members and communities. This information is kept private and 
+confidential and not used in underwriting, rate setting, or benefit determination. We 
+believe that providing quality health care and want our Members to be satisfied with 
+the health care they receive from Kaiser Permanente. 
+ 
+ 
+ Use interpreter services. When Members come in for an appointment or call for 
+advice, Kaiser Permanente will speak to them in the language they are most 
+comfortable using. For more about interpreter services, please refer to kp.org or call 
+our Member Services Contact Center at 1-800-464-4000 or TIT: 711. 
+ 
+ Be assured of privacy and confidentiality. All Kaiser Permanente employees 
+and physicians, as well as practitioners and providers with whom Kaiser Permanente 
+contracts, are required to keep protected health information (PHI) confidential. PHI is 
+information that includes Members name, Social Security number, or other 
+information that reveals who they are, such as race, ethnicity, and language data. 
+For example, a Member’s medical record is PHI because it includes their name and 
+other identifiers. 
+ 
+Kaiser Permanente has strict policies and procedures regarding the 
+collection, use, and disclosure of Member PHI that includes the following: 
+ 
+o Kaiser Permanente's routine uses and disclosures of PHI 
+o Use of authorizations 
+o Access to PHI 
+o Internal protection of oral, written, and electronic PHI across the organization 
+o Protection of information disclosed to Plan sponsors or employers 
+o Please review the section titled "Privacy Practices" in the "Guidebook" 
+ 
+For more information about your rights regarding PHI as well as our privacy 
+practices, please refer to our Notice of Privacy Practices on our website 
+kp.org or call our Member Services Contact Center at 1-800-464-4000 or 
+TIY: 711. 
+ 
+ Participate in physician selection without interference. Members have the right 
+to select and change their personal physician within the Kaiser Permanente Medical 
+Care Program without interference, subject to physician availability. To learn more 
+about nurse practitioners, physician assistants, and selecting a primary care 
+
+26 
+Kaiser Permanente ND&A HMO Provider 
+Manual for Contracted Institutional Providers (REV. 10-24) 
+practitioner, please call 888-956-1616 and follow the voice prompts. 
+ 
+ Receive a second opinion from an appropriately qualified medical 
+practitioner. If a second opinion is wanted, Members can either ask their Plan 
+physician to help arrange for one or make an appointment with another Plan 
+physician. Kaiser Foundation Health Plan, Inc., will cover a second opinion 
+consultation from a non-Permanente Medical Group physician only if the care has 
+been pre-authorized by a Permanente Medical Group. While it is the Members right 
+to consult with a physician outside the Kaiser Permanente Medical Care Program 
+without prior authorization, they will be responsible for any costs they incur. 
+ 
+ Receive and use Member satisfaction resources including the right to 
+voice complaints or make appeals about Kaiser Permanente or the care 
+we provide. Members have the right to resources such as patient assistance 
+and Member services, and the dispute-resolution process. These services are 
+provided to help answer questions and resolve problems. 
+ 
+A description of the dispute-resolution process is contained in the Evidence 
+of Coverage booklet, Certificate of Insurance, or the Federal Employees 
+Health Benefits Program materials. If a replacement is needed, contact the 
+local Member Services Department or our Member Service Contact Center 
+to request another copy. If health coverage is provided through an 
+employer, a Member can also contact their employer for a current copy. 
+When necessary, Kaiser Permanente will provide interpreter services, 
+including Sign Language, at no cost. 
+ 
+For more information about services and resources, please contact Member 
+Service Contact Center at 1-800-464-4000 (English), 1-800-788-0616 
+(Spanish), 1-800-757-7585 (Chinese dialects), or i-800-777-1370 or TIY: 
+711. 
+ 
+ Make recommendations regarding Kaiser Permanente’s Member 
+rights and responsibilities policies. If there are any comments about 
+these policies, please contact Member Services Contact Center at 1-800-
+464-4000 or TTY: 711. 
+ 
+Kaiser Permanente Members are responsible for: 
+ 
+ Knowing the extent and limitations of their health care benefits. A detailed 
+explanation of benefits is contained in the Evidence of Coverage booklet, Certificate 
+of Insurance, or the Federal Employees Health Benefits Program materials. If a 
+replacement is needed, contact local Member Services office to request another 
+copy. If health coverage is provided through an employer, the Member can also 
+contact their employer for a current copy of the Evidence of Coverage booklet or 
+
+27 
+Kaiser Permanente ND&A HMO Provider 
+Manual for Contracted Institutional Providers (REV. 10-24) 
+Certificate of Insurance. 
+ 
+ Notifying Health Plan if they are hospitalized in a non-Kaiser 
+Permanente hospital. If a Member is hospitalized in any hospital that is not a 
+Plan Hospital, they are responsible for notifying Kaiser Permanente as soon as 
+reasonably possible, so we can monitor their care. Please contact Kaiser 
+Permanente by calling the number on the Kaiser Permanente ID card. 
+ 
+ Identifying themselves. Members are responsible for carrying their KP 
+identification (ID) card and photo identification with them at all times to use when 
+appropriate, and for ensuring that no one else uses their ID card. If someone else 
+used their card, Kaiser Permanente may keep the card and terminate the 
+membership. The Kaiser Permanente ID card is for identification only and does not 
+give rights to services or other benefits unless a Member is an eligible Member of our 
+Health Plan. Anyone who is not a Member will be billed for any services we provide. 
+ 
+ Keeping appointments. Members are responsible for promptly canceling any 
+appointment that they do not need or are unable to keep. 
+ 
+ Providing accurate and complete information (to the extent possible) that 
+Kaiser Permanente and its practitioners and providers need in order to 
+provide care. Members are responsible for providing the most accurate 
+information about their medical condition and history, as they understand it. 
+Members are to report any unexpected changes in their health to their physician or 
+medical practitioner. 
+ 
+ Participating in understanding their health problems and developing 
+mutually agreed upon treatment goals to the degree possible. Members 
+are responsible for telling their physician or medical practitioner if they don't 
+clearly understand their treatment plan or what is expected of them. They are 
+also responsible for telling their physician or medical practitioner if they believe 
+they cannot follow through with their treatment plan. 
+ 
+ Following the plans and instructions for care they have agreed on with their 
+practitioners. Members are responsible for following the plans and instructions that 
+they have agreed to with their physician or medical practitioner. 
+ 
+ Recognizing the effect of their lifestyle on their health. A Member’s health 
+depends not only on care provided by Kaiser Permanente but also on the decisions 
+they make in daily life-poor choices such as smoking or choosing to ignore medical 
+advice or positive choices such as exercising and eating healthy foods. 
+ 
+ Being considerate of others. Members are responsible for treating physicians, 
+health care professionals, and fellow Kaiser Permanente Members with courtesy and 
+
+28 
+Kaiser Permanente ND&A HMO Provider 
+Manual for Contracted Institutional Providers (REV. 10-24) 
+consideration. Members are also responsible for showing respect for the property of 
+others and of Kaiser Permanente. 
+ 
+ Fulfilling financial obligations. Members are responsible for paying on time any 
+money owed to Kaiser Permanente. 
+ 
+ Knowing about and using the Member satisfaction resources available to 
+them, including the dispute resolution process. Providers and their staff are 
+expected to review and abide by the statement. If you have any question 
+regarding its contents, please contact us at the phone number included in the 
+“Key Contacts” section of this Provider Manual. 
+
+29 
+Kaiser Permanente ND&A HMO Provider 
+Manual for Contracted Institutional Providers (REV. 10-24) 
+ 
+7.2 NON-COMPLIANCE WITH MEMBER RIGHTS AND RESPONSIBLITIES 
+ 
+Failure to meet the requirements of Kaiser Permanente’s Rights and Responsibilities 
+Statement may result in action against the Member, provider, or Kaiser Permanente, as 
+appropriate. 
+ 
+Members 
+ 
+In the event a Member feels the Member’s rights have not been upheld, they are 
+instructed in the Member Handbook to discuss the situation with the provider. 
+ 
+If the Member is not comfortable discussing concerns or the Member feels the 
+provider cannot resolve the issue to the Member’s satisfaction, the Member may 
+contact Member Services directly via telephone at 1-800-464-4000 or via the web at 
+www.KP.org to file a complaint against the provider and/or staff. 
+ 
+Resolution of the problem or concern is processed through the Member Complaint and 
+Grievance procedure that is described later in this section. 
+ 
+If you receive a complaint from or on behalf of a Kaiser Permanente Member which, in 
+your reasonable judgment, is not resolved within two working days, please notify Network 
+Development and Administration at the phone number included in the “Key Contacts” 
+section of this Provider Manual. 
+ 
+Providers 
+ 
+If a Member fails to meet his/her obligations as outlined in Kaiser Permanente’s 
+Rights and Responsibilities Statement and you have attempted to resolve the issue, 
+please contact Member Services. The phone number is located in the Key Contacts 
+section of this Provider Manual. 
+ 
+Provider should advise Member Services, if a Member: 
+ 
+ Displays disruptive behavior or is not able to develop a provider/Member 
+relationship, 
+ Unreasonable and persistently refuses to follow provider’s instructions to the extent 
+that the Member’s health is considered jeopardized, 
+ Commits belligerent act or threatens bodily harm to physicians and hospital 
+personnel, 
+ Purposely conceals or misrepresents their medical history or treatment in order to 
+subvert proper treatment planning, 
+ Uses documents with the provider’s signature without proper authorization or 
+forges/falsifies a provider’s name to documents, or 
+
+30 
+Kaiser Permanente ND&A HMO Provider 
+Manual for Contracted Institutional Providers (REV. 10-24) 
+ Allow someone to misrepresent him/herself as a Kaiser Permanente Member. 
+ 
+Kaiser Permanente reserves the right to: 
+ 
+ Conduct informal mediation to resolve a relationship issue, 
+ Move the Member to another hospital or provider, or 
+ Pursue termination of the Member’s coverage with Health Plan, as allowed by the 
+applicable Member “Disclosure Form and Evidence of Coverage.” 
+ 
+ 
+7.3 ACCESS TO CARE DECISIONS 
+ 
+Kaiser Permanente and affiliated hospitals, physicians, and health care professionals 
+make medical decisions based on the appropriateness of care for t h e Member’s 
+medical needs. Kaiser Permanente does not compensate anyone for denying 
+coverage or service, and Kaiser Permanente does not use financial incentives to 
+encourage denials. To maintain and improve the health of Members, all providers should 
+be especially vigilant in identifying any potential underutilization of care or service. 
+ 
+Kaiser Permanente allows open provider-Member communication regarding appropriate 
+treatment alternatives, without penalizing providers for discussing medically necessary 
+or appropriate care for Members. 
+ 
+Kaiser Permanente members have the right to choose treatment or service options 
+regardless of benefit coverage limitations. Providers are encouraged to communicate 
+appropriate treatment options, even when the options are not covered by the Member’s 
+benefit plan. If the provider and the Member decide upon a course of treatment that is 
+not covered under the Member’s Membership Agreement, the Member should be advised 
+to contact Member Services for an explanation of his/her benefits plan. If the Member 
+persists in requesting non-covered services, the Provider’s business office should make 
+payment arrangements with the Member in advance of any treatment provided. 
+ 
+Kaiser Permanente’s Utilization Management program and procedures are: 
+ 
+ Designed to establish whether services are covered under the Member’s benefit plan 
+ based on objective guidelines adopted by Kaiser Permanente, and 
+ used to determine medical necessity and appropriateness of care. 
+ 
+The decision to proceed with treatment rests with the Provider and the Member. 
+ 
+ 
+ 
+ 
+ 
+
+31 
+Kaiser Permanente ND&A HMO Provider 
+Manual for Contracted Institutional Providers (REV. 10-24) 
+7.4 ADVANCE DIRECTIVES 
+ 
+An Advance Directive is a written instruction, such as a living will or durable power of 
+attorney for healthcare, recognized under California State and Federal law. 
+ 
+Kaiser Permanente requires that all contracted providers comply with the Federal Patient 
+Self-Determination Act of 1990, which mandates that a Member must have the 
+opportunity to participate in determining the course of their medical care, even when they 
+are unable to speak for themselves. Federal law applies to emancipated minors but 
+does not apply to all other minors. 
+ 
+To ensure compliance with the law, an Advance Directive should be documented in a 
+prominent place in the medical record. The Provider shall provide written information 
+regarding Advance Directives to all Members admitted to the facility and provide staff and 
+Member education regarding Advance Directives. 
+ 
+If a Member requests to formulate or change an Advance Directive, the attending 
+physician should be notified so that the physician has an opportunity to discuss the 
+decision with the Member. The attending physician will write a progress note in the 
+Member’s medical chart to reflect the formulation or change of an Advance Directive. 
+An Advance Directive may be revoked by the Member at any time, orally or in writing, 
+as long as the Member is capable of doing so. An Advance Directive is automatically 
+invalidated by divorce if the spouse was designated as the surrogate decision-maker. 
+ 
+Members are provided with information regarding Advance Directives in the Disclosure 
+Form and Evidence of Coverage booklet, as well as in new Member materials. Members 
+may also contact Member Services for an informational brochure and appropriate forms. 
+ 
+7.5 MEMBER COMPLAINT AND GRIEVANCE PROCESS 
+ 
+Kaiser Permanente Members are assured a fair and equitable process for addressing 
+their complaints and grievances against contracted providers, provider staff, and Kaiser 
+Permanente employees. Providers may act as a Member’s authorized representative if 
+duly appointed in accordance with the Member’s applicable EOC. This review process is 
+designed to evaluate all aspects of the situation and arrive at a solution that strives to 
+be mutually satisfactory to the Member, the provider and Kaiser Permanente. Members 
+are notified of the processes available for resolving complaints in their EOC. 
+ 
+A Member complaint or grievance may relate to quality of care, access to services, 
+provider or Kaiser Permanente staff attitude, operational policies and procedures, 
+benefits, eligibility, or related issues. 
+ 
+Valid Member complaints and grievances against a provider are included in the 
+providers quality file at Kaiser Permanente and reviewed as part of the re-credentialing 
+
+32 
+Kaiser Permanente ND&A HMO Provider 
+Manual for Contracted Institutional Providers (REV. 10-24) 
+process. Complaints and grievances are tracked and monitored on an on-going basis to 
+identify potential problems with a provider or Kaiser Permanente policies and 
+procedures. 
+ 
+7.6 PROVIDER PARTICIPATION IN MEMBER COMPLAINT RESOLUTION 
+ 
+The established procedures for resolving Member complaints may require the provider’s 
+participation under certain circumstances. Kaiser Permanente will advise the provider 
+of the involvement required or information that must be provided. Complaints about 
+clinical issues will be reviewed by at least one practitioner provided by Kaiser 
+Permanente and practicing in the same or a similar specialty that typically manages the 
+related medical condition, procedure or treatment who was not previously involved in 
+the patient’s care. As a result of this review, you may be asked as part of the 
+investigation to respond by email or by an Investigative Review Form to Member Services 
+with your clinical opinion regarding the Member’s concern or request. For additional 
+information regarding provider appeal process, please refer to the “ Provider Rights 
+and Responsibilities” section of this Provider Manual. 
+ 
+7.7 MEMBER COMPLAINT AND GRIEVANCE RESOLUTION PROCEDURE 
+ 
+One of the rights that Members are apprised of is that they have the right to participate 
+in a candid discussion with the provider of all available options regardless of cost or 
+benefit coverage. Members are told, “You have the right to a candid discussion with 
+your Plan Physician about appropriate or medically necessary treatment options for 
+your condition(s), regardless of cost or benefit coverage. Ask questions, even if you 
+think they seem silly. You should be satisfied with the answers to your questions and 
+concerns before consenting to any treatment. You may refuse any recommended 
+treatment if you do not agree with it or if it conflicts with your beliefs.” If the issue cannot 
+be resolved in this manner, we encourage the Member to contact the Member Services 
+Department at the local Kaiser Permanente facility or the Member Service Contact 
+Center for assistance. 
+ 
+If the Member or provider feels that the issue is urgent in nature, the Member or 
+provider may call the Expedited Review Unit (ERU). More information regarding 
+Expedited Review may be found in the Utilization Management section of this Provider 
+Manual. 
+ 
+7.8 COMPLAINT PROCEDURES 
+ 
+If the problem/issue is not amenable to immediate resolution at the point of service, the 
+Member may submit a written complaint or grievance with the local Member Services 
+Department, or by calling the Member Services Center at (800) 464-4000 or (800) 777- 
+1370 (TTY). Our representatives will advise the Member about our resolution process 
+and ensure that the appropriate parties review the complaint. Members may also submit a 
+
+33 
+Kaiser Permanente ND&A HMO Provider 
+Manual for Contracted Institutional Providers (REV. 10-24) 
+complaint at this link https://healthy.kaiserpermanente.org/southern-
+california/support/submit-a-complaint#/tellus. 
+ 
+ 
+7.9 GRIEVANCE PROCEDURES 
+ 
+If a Member is requesting care or service that is not amenable to immediate resolution 
+at the point of service or the request is monetary in nature, he/she should be advised to 
+contact the Member Service Department at the local Kaiser Permanente facility or to 
+call the Member Service Contact Center to file a formal grievance. A Member may 
+submit a grievance verbally or in writing. The Member’s request will be researched and 
+presented to the appropriate decision-makers, and a decision will be rendered within 
+fourteen (14) to thirty (30) days, depending on the type of request and membership. 
+The Member will receive the resolution in writing, and if denied, will be informed of any 
+applicable appeal rights. 
+ 
+7.10 72-HOUR EXPEDITED REVIEW 
+ 
+Members and providers who believe that the Member’s health status would be seriously 
+jeopardized by submitting an issue through the standard process may request an 
+expedited review. If the issue is accepted for processing through this procedure, upon 
+receipt of all necessary information, Kaiser Permanente must make a determination as 
+expeditiously as required by the Member’s medical condition, not to exceed 72 hours. If 
+the request is denied, the Member will be informed of any applicable appeal rights. If it is 
+determined that there is no serious threat to life or limb, the request will be processed 
+under the standard timeframes, fourteen (14) to thirty (30) days depending on the type 
+of request and membership. 
+ 
+7.11 FRIEDMAN-KNOWLES EXPERIMENTAL TREATMENT ACT 
+ 
+This Act is the California state law that mandates the right to external review by qualified 
+experts when a terminally ill Member has been denied coverage for a drug, device, 
+procedure or other therapy generally considered experimental or investigational, 
+including new technologies. 
+ 
+The request for this review can be requested by the Health Plan physician, a non-Plan 
+physician, or the Member. In any case, Member Services will initiate the process for 
+review, including facilitating the transfer of information to the independent review entity 
+or internally in accordance with designated resolution timeframes. 
+ 
+ 
+ 
+ 
+ 
+
+34 
+Kaiser Permanente ND&A HMO Provider 
+Manual for Contracted Institutional Providers (REV. 10-24) 
+7.12 DEMAND FOR ARBITRATION 
+ 
+A Member may file a demand for arbitration after he/she has received the appeal 
+decision or at any earlier step in the process. For more information on arbitration 
+procedures, advise the Member to contact the local facility Member Services 
+Department. 
+ 
+NOTE: The complaint and appeals information provided may not address the rights and 
+remedies of each category of Member, for example, Medicare, Medi-Cal, as well as 
+Members who are employed and/or retired from the State of California and/or the 
+Federal government may have different rights and remedies. Members in these 
+categories should be directed to contact Member Services for applicable grievance and 
+appeal provisions, or they may refer to their “Disclosure Form and Evidence of 
+Coverage” brochure for more information. 
+ 
+ 
+Section VIII: Provider Rights and Responsibilities 
+ 
+Providers are responsible for the following: 
+ 
+ Provide health care services without discriminating on the basis of health status or 
+any other unlawful category. 
+ Uphold all applicable responsibilities outlined in the Kaiser Permanente Member 
+Rights & Responsibilities Statement in this Provider Manual. 
+ Maintain open communication with a Member to discuss treatment needs and 
+recommended alternatives, without regards to any covered benefit limitations or 
+Kaiser Permanente administrative policies and procedures. Kaiser Permanente 
+encourages open provider/Member communication regarding appropriate treatment 
+alternatives and does not restrict providers from discussing all medical necessary or 
+appropriate care with Members. 
+ Provide all services in a culturally competent manner. 
+ Provide for timely transfer of Member medical records when care is to be 
+transitioned to a new provider, or if your Agreement terminates. 
+ Participate in Kaiser Permanente Utilization Management and Quality Improvement 
+Programs. Kaiser Permanente Quality Improvement and Utilization Management 
+Programs are designed to identify opportunities for improving health care provided 
+to Members. These programs may interact with various functions, including, but not 
+limited to, the complaint or grievance process, disease management, preventive 
+health, or clinical studies. Kaiser Permanente will communicate information about 
+the programs and extent of provider participation through special mailings, and 
+updates to the Provider Manual. 
+ Collect applicable co-payments, deductibles, and coinsurance from Members as 
+required by your Agreement. 
+ Comply with this Provider Manual and the terms of your Agreement. 
+
+35 
+Kaiser Permanente ND&A HMO Provider 
+Manual for Contracted Institutional Providers (REV. 10-24) 
+ Verify eligibility of Members prior to providing covered services. 
+ Cooperate with and participate in the Member complaint and grievance process, as 
+necessary. 
+ Secure authorization or referral from a Medical Group physician prior to providing 
+any non-emergency services except as otherwise provided in your Agreement. 
+ Encourage all practitioners and provider staff to include Members as part of the 
+Member safety team by requesting Members to speak up when they have 
+questions or concerns about the safety of their care. 
+ Discuss adverse outcomes related to errors with the Member and /or family. 
+ Ensure Members’ continuity of care including coordination with systems and 
+personnel throughout the care delivery system. 
+ Foster an environment which encourages all practitioners and provider staff to 
+report errors and near misses. 
+ Pursue improvements in Member safety including incorporating Member safety 
+initiatives into daily activities. 
+ Ensure compliance with Member safety accreditation standards, legislation, and 
+regulations. 
+ Provide orientation of this Provider Manual to all subcontractors and participating 
+practitioners and ensuring that downstream providers adhere to all applicable 
+provisions of the Provider Manual and the Agreement. 
+ Notify Provider Relations in writing of any practice change that may affect access for 
+Members. 
+ Report to the appropriate state agency any abuse, negligence or imminent threat to 
+which the Member might be subject. You may request guidance and assistance 
+from the local KP’s Social Services Department to help provide you with required 
+information that must be imparted to these agencies. 
+ Contact your local county Public Health Department if you treat a Member for a 
+reportable infectious disease. 
+ 
+Providers also have the following rights: 
+ Receive payment in accord with applicable laws and applicable provisions of your 
+Agreement. 
+ File a provider dispute. 
+ Participate in the dispute resolution processes established by Kaiser Permanente in 
+accord with your Agreement and applicable law. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+36 
+Kaiser Permanente ND&A HMO Provider 
+Manual for Contracted Institutional Providers (REV. 10-24) 
+Section IX: Complaint and Member Care Problems 
+ 
+Kaiser Permanente will work with a contracted provider to resolve complaints regarding 
+administrative or contractual issues, or problems encountered while providing health 
+care to Health Plan members. 
+ 
+For Referral Related Issues: For assistance with referral or authorization issues, please 
+contact a Referral Coordinator from the referring Kaiser Permanente facility. The 
+telephone number is listed in the "Key Contacts" section of this Provider Manual. 
+ 
+For Contractual Concerns: For assistance in resolving contractual issues, please contact 
+your Network Development and Administration Representative. The telephone number is 
+listed o r noted in the “Key Contacts” section of this Provider Manual. 
+ 
+For additional information, please refer to the "Member Rights and Responsibilities” 
+section of this Provider Manual. 
+ 
+For Claim Issues: For assistance in resolving claim-related issues, please refer to the 
+“ Billing and Payment” section of this Provider Manual. The telephone number is listed in 
+the "Key Contacts" section of this Provider Manual. 
+ 
+For All Other Issues: If any issue remains unresolved, please contact Provider 
+Relations. The telephone number is listed in the "Key Contacts" section of this Provider 
+Manual. 
+ 
+For assistance in filing a Provider Dispute, please refer to the "Provider Appeals 
+Process" section of this Provider Manual. 
+ 
+Section X: Billing and Payment 
+ 
+INTRODUCTION 
+ 
+The applicable Payor identified in your Agreement is responsible for payment of 
+authorized services and emergency services in accordance with your Agreement and 
+applicable law. It is your responsibility to submit itemized claims for those services 
+provided to Members in a complete and timely manner in accordance with your 
+Agreement, this Provider Manual and applicable law. The terms “bill”, “claim” and 
+“invoice” are used interchangeably in this section and should not be interpreted to differ 
+in meaning. 
+ 
+10.1 BILLING REQUIREMENTS 
+ 
+Providers must submit itemized claims for covered services provided to Members on an 
+
+37 
+Kaiser Permanente ND&A HMO Provider 
+Manual for Contracted Institutional Providers (REV. 10-24) 
+appropriate billing form, as follows: 
+ 
+ We urge you to submit claims electronically in either 837I (Institutional) or 837P 
+(Professional) transaction format, following all HIPAA standards and appropriate 
+coding and regulatory requirements. Details are set forth below. 
+ 
+ Institutional charges must be submitted using preprinted OCR red lined UB-04 (or 
+successor form) claim form with appropriate coding. Entries must be completed 
+in accordance with National Uniform Billing Committee (NUBC) directions and 
+contain all mandatory entries, and as required by federal statutes and regulations. 
+Reference material can be found at WWW.NUBC.ORG. 
+ 
+ Professional charges must be submitted on a preprinted OCR red lined CMS-
+1500 v 0212 form (or successor form) with current ICD-10 diagnostic and CPT-4 
+procedure coding (or successor coding accepted commonly in the industry). Entries 
+must be completed in accordance with National Uniform Claim Committee (NUCC) 
+directions and contain all mandatory entries, and as required by federal statutes 
+and regulations. Reference material can be found at WWW.NUCC.ORG. 
+ 
+All fields that require information regarding the “insured” should be completed based on 
+the Member’s data. The Member’s Kaiser Permanente medical record number (MRN), 
+the authorization number from the authorization document(s) for non-emergency 
+services, and all other required information, must be included in the appropriate fields. 
+(For services following stabilization of an emergency medical condition, refer to the 
+“Emergency Services” section of this Provider Manual, for information regarding how 
+to obtain an authorization for such services. Note that you must obtain an 
+authorization as a condition to payment for all non-emergency services that require 
+authorization.) All other fields on the applicable form should be completed by your 
+billing office for services provided. 
+ 
+You are also required under your Agreement and/or applicable law to submit certain 
+encounter data for covered services provided to Members. Encounter data must be 
+provided in the applicable EDI claim file or billing form. 
+ 
+10.2 SUPPORTING DOCUMENTATION 
+ 
+It is your responsibility to submit all reasonably relevant information that is required for us 
+to determine payor liability. Where appropriate, we may request additional information in 
+writing, which may include: 
+ 
+ Admitting face sheet, 
+ 
+ Discharge summary, 
+ 
+
+38 
+Kaiser Permanente ND&A HMO Provider 
+Manual for Contracted Institutional Providers (REV. 10-24) 
+ Operative report(s), 
+ 
+ Emergency room records with respect to all emergency services, 
+ 
+ Treatment notes as reasonably relevant and necessary to determine payor liability, 
+including a physician report relating to any claim for which a physician is billing a 
+CPT-4 code with a modifier, demonstrating the need for the modifier, and. 
+ 
+ National Drug Code (NDC) for physician administered drugs. Claims for dates of 
+services on or after January 1, 2024, that are submitted without an NDC or an invalid 
+NDC, will be denied. It is the provider’s responsibility to resubmit a corrected claim with the 
+valid NDC. 
+ 
+We are pleased to share features of Online Affiliate that will allow you to electronically 
+submit claim-related information. Specifically, new functionality will allow you to: 
+ 
+ Submit supporting documentation with your claim (once the claim is available in the 
+KP system). 
+ 
+ Respond to requests for information when we request additional information 
+necessary to adjudicate the claim. 
+ 
+ File a dispute/appeal of claim decisions. 
+ 
+To sign on or register for access to Online Affiliate, please visit the following link 
+and navigate to the Online Provider Tools section: 
+https://healthy.kaiserpermanente.org/southern-california/community-providers 
+ 
+10.3 STANDARD BILLING CODES 
+ 
+Standard codes, and any commonly accepted successor codes, including the following, 
+must be used on all billing forms: 
+ 
+ REVENUE CODE: Code used to identify specific accommodation, ancillary 
+service or billing calculation 
+ 
+ CPT–4: Physicians Current Procedural Terminology 
+ 
+ HCPCS: Health Care Procedure Coding System 
+ 
+ ICD-10-CM: Medical Index, for medical diagnostic coding 
+ 
+ DSM-IV-R: Codes for mental health diagnostic coding
+
+39 
+Kaiser Permanente ND&A HMO Provider 
+Manual for Contracted Institutional Providers (REV. 10-24) 
+ 
+10.4 CLAIM SUBMISSION REQUIREMENTS 
+ 
+Kaiser Permanente encourages (and if your Agreement requires) electronic submission of 
+claims. Please see detailed information, below, on how to submit electronically. 
+ 
+However, if electronic claim submission is not possible, paper claims may be sent to the 
+address located on the authorization document(s), or to: 
+ 
+ 
+ 
+10.5 ELECTRONIC SUBMISSION OF CLAIMS DATA 
+ 
+For information about electronic c l a i m s submission, please visit the KP E DI 
+resource guid e at h ttp s://online .f lipp ingboo k.com/view/7041 25376/i/ . 
+ 
+Conta ct the Southern California Kaiser Permanente EDI team by clicking on the 
+following link: https://kpnationalclaims.my.site.com/EDI/s/. 
+ 
+Electronic Data Interchange (EDI) is an automated exchange of information in a 
+standardized format that adheres to all Health Insurance Portability and Accountability 
+Act (HIPAA) requirements. EDI replaces the submission of physical paper claims and 
+allows for faster and more efficient claims process and payment. 
+ 
+Where to Submit Electronic Claims: 
+ 
+Providers must submit their EDI claim via a clearinghouse*. Clearinghouses frequently 
+supply the required PC software to enable direct data entry in the Provider’s office. Each 
+clearinghouse assigns a unique payor identifier for KFHP. 
+ 
+Payer IDs for KP’s direct clearinghouses are listed below: 
+ 
+Clearinghouse KP Payer ID 
+Office Ally 94134 
+SSI SKAISERCA 
+Relay Health 94134 
+Change healthcare 94134 
+ 
+ 
+ 
+Kaiser Foundation Health Plan, Inc. 
+National Claims Administration 
+Post Office Box 7004 
+Downey, CA 90242-7004 
+1-800-390-3510 
+
+
+40 
+Kaiser Permanente ND&A HMO Provider 
+Manual for Contracted Institutional Providers (REV. 10-24) 
+*Clearinghouses have channel partnerships which allow them to route claims to each 
+other. If your current clearinghouse is not listed above, please contact them for guidance 
+on which of the above KP-affiliated clearinghouses they have a channel partnership 
+agreement with, and which payer ID to use. 
+ 
+ 
+EDI Submission Process: 
+ 
+(1) Provider sends claims via EDI: Once claim data is entered into the claims 
+processing system, the data is transmitted to a clearinghouse for X12 HIPAA validation. 
+ 
+(2) Clearinghouse sends claims to KP: The clearinghouse receives claims data, “batches”, 
+and transmits to KP for processing. It is the responsibility of the provider and the 
+clearinghouse to adhere to HIPAA Transaction rules and requirements. 
+ 
+In addition, clearinghouses may: 
+ Furnish required software to enable Direct Data Entry (DDE) in the provider’s 
+office. 
+ Modify inbound claims data to facilitate processing. 
+ Transmit the claims data to KP in a format that is supported by KP. 
+ Transmit electronic claim status reports from KP to providers. 
+ 
+(3) KP receives claims: KP receives/processes claim data and generates an electronic 
+277CA acknowledgement, which is transmitted back to the clearinghouse. This 277CA 
+acknowledgement includes detailed accept/reject information for transmitted claims. 
+Providers are responsible for reviewing and correcting rejected claims. 
+ 
+Electronic Claims Disposition: 
+ 
+Electronic Claim Acknowledgement: KP sends an electronic 277CA claim 
+acknowledgement to the clearinghouse, which is forwarded to the provider as 
+confirmation of all claims received by KP. 
+ 
+NOTE: Providers are encouraged to notify the clearinghouse if they do not receive 
+277CA claim acknowledgements. 
+ 
+277CA Detailed Error Report: The electronic claim acknowledgement reports include 
+reject reports that identify specific errors on rejected claims. Once the claims listed on 
+the reject report are corrected, the provider may re-submit these claims electronically 
+through the clearinghouse. Providers are responsible for reviewing and updating their 
+reject reports from the clearinghouse. 
+ 
+ 
+Supporting Documentation for Electronic Claims: 
+ 
+If submitting claims electronically, the 837 transaction contains data fields to house 
+
+41 
+Kaiser Permanente ND&A HMO Provider 
+Manual for Contracted Institutional Providers (REV. 10-24) 
+supporting documentation through free-text format (the exact system data field ma y 
+vary). 
+ 
+Claim-supporting documentation can be submitted via KP Online Affiliate. Once your claim 
+has been submitted electronically, you may submit supporting documents via Online 
+Affiliate. 
+ 
+Otherwise, if additional information is needed for claim processing, you will receive a 
+request for information (RFI) from Kaiser Permanente, that can be furnished via KP Online 
+Affiliate. 
+ 
+Claim Type Electronic Claim Form Paper Claim Form 
+Professional 837 Loop 2300, 
+REF01=9F REF02= 
+Authorization Number 
+CMS-1500 Box 23 
+Institutional (Facility) 8371 Loop 2300, 
+REF01=9F, 
+REF02=Authorization 
+Number 
+UB-04 BOX 63 
+ 
+ 
+To access KP Online Affiliate portal, visit the following link, choose your region, and 
+navigate to the Online Provider Tools section: https://kp.org/providers 
+ 
+You may also send claim-supporting documentation via mail to: 
+ 
+ 
+ 
+ 
+ 
+KP Online Affiliate 
+Online Provider Tools (KP Online Affiliate) 
+ 
+Kaiser Permanente offers an online provider portal designed to streamline 
+processes for both contracted and non-contracted provider groups. This portal 
+includes several time-saving features, such as: 
+ Accessing patient eligibility, benefits, and demographics 
+ Viewing referrals and authorizations (for contracted providers) 
+ Viewing and downloading Explanation of Payments (EOP) 
+ 
+Kaiser Foundation Health Plan, Inc. 
+National Claims Administration 
+Post Office Box 7004 
+Downey, CA 90242-7004 
+
+
+42 
+Kaiser Permanente ND&A HMO Provider 
+Manual for Contracted Institutional Providers (REV. 10-24) 
+ Checking the status of submitted claims and viewing claim details including 
+service date, billed amount, allowed amount, and claim codes. 
+ Confirming payment information such as check number, payment date, and 
+total amount. 
+ 
+Additionally, you can manage your submitted claims through the portal using the 
+Claims "Take Action" functionality. This feature allows you to: 
+ Respond to KP Request for Information. 
+ Submit a claim inquiry related to 'denied' or 'in progress' claims. 
+ Submit appeals or disputes to request a reconsideration of a payment. 
+ Submit an inquiry related to a check payment, request a copy of a check, or 
+report a change of address for a specific claim. 
+ 
+ 
+Electronic Payment and Remittance Advice Online Enrollment 
+ 
+Kaiser Permanente has partnered with Citi Payment Exchange to provide a portal for 
+enrolling in Electronic Fund Transfer (EFT) and Electronic Remittance Advice (ERA). The 
+reduces turn-around -time for claims payments and removes overhead costs associated 
+with handling paper correspondence. 
+ 
+With this partnership, Kaiser Permanente requests that all vendors utilize the Citi Payment 
+Exchange portal for new enrollment and changes to existing enrollment. The portal is open 
+24 hours a day and 7 days a week. 
+ 
+ Each Kaiser Permanente region requires a separate enrollment. 
+ If you wish to create a new enrollment for EFT/ERA in the Southern California region, 
+ https://b2bportal.citipaymentexchange.citi.com/enroll/SCAL-KFHP-ACH 
+ Activation code MN4WX2 is required at login. 
+ 
+HIPAA Requirements: 
+All electronic claim submissions must adhere to all HIPAA requirements. The following 
+websites (listed in alphabetical order) include additional information on HIPAA and 
+electronic loops and segments. HIPAA Implementation Guides can also be ordered by 
+calling Washington Publishing Company (WPC) at 425-562-2245. 
+ 
+www.hhs.gov www.wedi.org www.wpc-edi.com 
+ 
+ 
+Telehealth: 
+Telehealth is the mode of delivering health care services via information and 
+communication technologies to facilitate the diagnosis, consultation, treatment, education, 
+care management, and self-management of a Member’s health care. Telehealth 
+interactions between Providers and Members are subject to all applicable laws regarding 
+telehealth, including, the confidentiality of health care information and a Member’s rights to 
+
+43 
+Kaiser Permanente ND&A HMO Provider 
+Manual for Contracted Institutional Providers (REV. 10-24) 
+the Member’s medical information. Telehealth includes synchronous interactions, and 
+asynchronous store-and-forward transfers. Telehealth may be conducted using audio and 
+video or audio only. 
+ 
+For purposes of reimbursement for covered services provided via telehealth, it is important 
+to reference your contract and, to the extent applicable, resources on billing and 
+reimbursement for Medicare, Medicaid, and private insurers. Claims for payment must 
+contain the appropriate CPT-4 or HCPCS codes. 
+ 
+Place of Service – 
+02 – Telehealth provided other than in Member’s home. 
+10 – Is used for telehealth services provided to a Member located in their home. 
+ 
+Modifiers – The two most commonly used modifiers are the GT modifier for telehealth 
+service rendered via interactive audio and video telecommunications systems, and the 95 
+modifiers for synchronous telemedicine service rendered via a real-time interactive audio 
+and video communications system. 
+ 
+ 10.6 PROHIBITED MEMBER BILLING PRACTICES 
+ 
+Providers may not bill, charge, collect a deposit from, impose surcharges, or have 
+any recourse against a Member or a person acting on a Member’s behalf for 
+covered services provided under the terms of the Agreement. Balance billing 
+Members for services covered by KFHP is prohibited by California and federal 
+law, as may be applicable, and under your Agreement. 
+Except for Member Cost Share, and as otherwise expressly permitted in your 
+Agreement and under applicable law, Providers must look solely to KP or other 
+responsible payor (e.g., Medicare) for compensation of covered services provided 
+to Members. 
+Fees for missed appointments or “no-show fees,” and fees for late cancellations, may not 
+be charged to and are not payable by KP. Additionally, consistent with applicable law, 
+such fees may not be charged to, collected from, or required of Medicare Members or 
+Medi-Cal Members. Missed appointment fees or “no-show” fees, and late cancellation 
+fees, may be collected from a Commercial Member only if (i) Provider maintains and has 
+provided to the Commercial Member a written policy describing the circumstances under 
+which such fees may be imposed and (ii) the Commercial Member has agreed in writing 
+to be financially responsible for such fees prior to the Commercial Member’s receipt of 
+services. 
+ 
+ 
+10.7 CLAIMS PROCESSING GUIDELINES 
+ 
+Kaiser Permanente will follow the Knox-Keene Act, Medicare or Medi-Cal requirements 
+for claim processing, as applicable. 
+
+44 
+Kaiser Permanente ND&A HMO Provider 
+Manual for Contracted Institutional Providers (REV. 10-24) 
+ 
+ All claims for services provided to Kaiser Permanente Members must be 
+submitted within ninety (90) days (or any longer period specified in your Agreement 
+or required by law) after the date of service or date of discharge if applicable. 
+ To the extent required by law, claims that are denied because they are filed 
+beyond the applicable claims filing deadline shall, upon a provider’s submission of 
+a provider dispute notice as described in the Provider Dispute Resolution 
+Process section of this Provider Manual and the demonstration of good cause for the 
+delay, be accepted and adjudicated in accordance with the applicable claims 
+adjudication process. 
+ 
+10.8 CLAIMS PAYMENT POLICY 
+ 
+ Except for emergency services, the Member’s eligibility and benefits coverage must 
+have been verified prior to the time of service, in accordance with your Agreement and 
+applicable law. 
+ All non-emergency services, including post-stabilization services, must be 
+authorized, and the authorization number must be included on field 63 of the 
+form UB-04 (or successor form). Bills for non-emergency services will be denied for 
+payment if an authorization was not obtained in accordance with the 
+requirements of your Agreement. 
+ Contracted providers will be compensated for covered services based on the 
+compensation arrangement set forth in your Agreement. 
+ 
+ 
+ 
+10.9 CLAIMS REVIEW AND ADJUSTMENTS; CODING AND BILLING VALIDATION 
+ 
+Kaiser Permanente reviews claims (including coding) based on commonly accepted 
+standards of coding and billing and adjusts payment on claims in accordance with your 
+Agreement, the provisions below, and applicable law. 
+ 
+If you believe we have made an incorrect adjustment to a claim that has been paid, 
+please refer to the Provider Dispute Resolution Process section of this Provider Manual 
+for information on how to dispute such adjustment. When submitting the dispute 
+resolution documentation, please clearly state the reason(s) you believe the claim 
+adjustment was incorrect. 
+ 
+10.9.1 Compensation Methodologies 
+ 
+The terms of your Agreement and this Provider Manual govern the amount of payment for 
+services provided under your Agreement. Depending on the terms of your Agreement, KP 
+utilizes various compensation methodologies including, but not limited to, case rates, fee 
+schedules, the Average Wholesale Price from the most recently published IBM 
+Micromedex® Red Book®, and/or Medicare guidelines. Notwithstanding the effective date 
+
+45 
+Kaiser Permanente ND&A HMO Provider 
+Manual for Contracted Institutional Providers (REV. 10-24) 
+of any rate or rate exhibit to the Agreement, and unless provided otherwise in the 
+Agreement, inpatient services for which the episode of care spans multiple days are 
+generally paid in accordance with the rate(s) in effect on the date the episode began (i.e., 
+the admission date or first date of service). This may include application of compensation 
+methodologies such as per diems, percentage of charges, case rates, etc. Outpatient 
+services are generally paid in accordance with the applicable rate in effect on the date of 
+service. Please refer to your Agreement for more detailed information on the 
+compensation methodologies which apply to you. 
+ 
+10.9.2 Code Review and Editing 
+ 
+KP’s claims payment practices for provider services generally follow industry standards, 
+including those specified below, as well as those described in our policy entitled “POL-020 
+Clinical Review Payment Determination Policy,” the link of which is attached hereto as 
+Appendix I. Billed items will be reviewed and/or corrected, and final payment will be 
+based on such reviewed (and, if necessary, corrected) information. 
+ 
+Routinely updated code editing software from national vendors is used for processing all 
+relevant bills in a manner consistent with industry standards, including guidelines from 
+CMS, the National Correct Coding Initiative, the National Library of Medicine, the National 
+Center for Health Statistics, the American Medical Association, and medical and 
+professional associations. Our claims adjudication systems accept and identify all active 
+CPT and HCPCS codes as well as all coding modifiers. Claims for services such as multiple 
+procedures, bilateral procedures, assistant surgeons, co-surgeons, and application of 
+modifiers are adjudicated in accordance with the terms of your Agreement, Medicare 
+guidelines and other commonly accepted standards. We use Medicare’s parameters to 
+define global surgery periods. When applicable, we request supportive documentation for 
+“unlisted” procedure codes and the application of Modifier 26, 59, XE, XP, XS, XU, and/or 
+other modifiers if needed. Billing as a co-surgeon with Modifier 62 or for increased services 
+with Modifier 22 requires submission of a separate operative report. 
+ 
+We do not allow code unbundling for procedures for which all-inclusive codes should 
+be used and we will re-bundle the procedures and pay according to the appropriate all-
+inclusive codes for all such procedures provided to members. KP will not reimburse for 
+any professional component of clinical diagnostic laboratory services, such as automated 
+laboratory tests, billed with a Modifier 26 code, whether performed inside or outside of the 
+hospital setting; provided that (consistent with CMS payment practices), reimbursement 
+for such services, if any, is included in the payment to the appropriate facility responsible 
+for providing the laboratory services. 
+ 
+Notwithstanding the above, unless your Agreement provides otherwise, we apply Medi-Cal 
+coding policies, as published from time to time by the Department of Health Care 
+Services, to claims for services provided to Medi-Cal members, as required by and in 
+accordance with Medi-Cal program requirements. 
+ 
+
+46 
+Kaiser Permanente ND&A HMO Provider 
+Manual for Contracted Institutional Providers (REV. 10-24) 
+10.9.3 Clinical Review 
+ 
+Claims may be reviewed by a physician or other appropriate clinician to ensure that 
+providers comply with commonly accepted standards of coding and billing, that services 
+rendered are appropriate and medically necessary, and that payment is made in 
+accordance with applicable requirements set forth in your Agreement, this Provider Manual, 
+and KP’s claims payment policies. If we do not have enough information to adjudicate a 
+claim, we will mail you a request for specific additional medical records. We may also 
+request itemized bills. 
+ 
+KP’s claims payment policies are available on the Community Provider Portal website, at: 
+https://healthy.kaiserpermanente.org/southern-california/community-providers/claims 
+ 
+KP will review claims for items or services that are considered inclusive of, or an integral 
+part of, another procedure or service and, where, appropriate, deny payment. The 
+standards applied by KP to determine whether billed items or services are payable are 
+described in POL-020, “Clinical Review Payment Determination Policy.” A copy of POL-
+020 is attached hereto as Appendix I. 
+ 
+ 
+10.10 DO NOT BILL EVENTS (DNBE) 
+ 
+Depending on the terms of your Agreement, you may not be compensated for services 
+directly related to any Do Not Bill Event (as defined below) and may be required to 
+waive applicable Copays (as defined in Section X.1.16 below) associated with, and 
+hold Members harmless from, any liability for services directly related to any DNBE. KP 
+expects you to report every DNBE as set forth in Section XIV.1.3 of this Provider 
+Manual and as may be further required by your Agreement. KP may reduce 
+compensation for services directly related to a DNBE when the value of such services 
+can be separately quantified in accordance with the applicable payment methodology. 
+ 
+DNBE shall mean the following: 
+ 
+In any care setting, the following surgical errors identified by CMS in its National 
+Coverage Determination issued June 12, 20091 (SE): 
+ 
+ Wrong surgery or invasive procedure2 on patient 
+ Surgery or invasive procedure on wrong patient 
+ Surgery or invasive procedure on wrong body part; 
+ 
+ Foreign Object Retained After Surgery 
+ Air Embolism 
+ Blood Incompatibility 
+ Stage III and IV Pressure Ulcers 
+ Falls and Trauma 
+o Fractures 
+
+47 
+Kaiser Permanente ND&A HMO Provider 
+Manual for Contracted Institutional Providers (REV. 10-24) 
+o Dislocations 
+o Intracranial Injuries 
+o Crushing Injuries 
+o Burn 
+o Other Injuries 
+ Manifestations of Poor Glycemic Control 
+o Diabetic Ketoacidosis 
+o Nonketotic Hyperosmolar Coma 
+o Hypoglycemic Coma 
+o Secondary Diabetes with Ketoacidosis 
+o Secondary Diabetes with Hyperosmolarity 
+ Catheter-Associated Urinary Tract Infection (UTI) 
+ Vascular Catheter-Associated Infection 
+ Surgical Site Infection, Mediastinitis, Following Coronary Artery Bypass Graft 
+(CABG): 
+ Surgical Site Infection Following Bariatric Surgery for Obesity 
+o Laparoscopic Gastric Bypass 
+o Gastroenterostomy 
+o Laparoscopic Gastric Restrictive Surgery 
+ Surgical Site Infection Following Certain Orthopedic Procedures 
+o Spine 
+o Neck 
+o Shoulder 
+o Elbow 
+ Surgical Site Infection Following Cardiac Implantable Electronic Device (CIED) 
+ Deep Vein Thrombosis (DVT)/Pulmonary Embolism (PE) Following Certain 
+Orthopedic Procedures: 
+o Total Knee Replacement 
+o Hip Replacement 
+ Iatrogenic Pneumothorax with Venous Catheterization 
+ Any new Medicare fee-for-service HAC later added by CMS 
+ Hospital-Acquired Conditions | CMS 
+
+48 
+Kaiser Permanente ND&A HMO Provider 
+Manual for Contracted Institutional Providers (REV. 10-24) 
+ 
+ 
+1 See, CMS Manual System, Department of Health and Human Services, Pub 100-03 Medicare National Coverage 
+Determinations, Centers for Medicare and Medicaid Services, Transmittal 101, June 12, 2009 
+(https://www.cms.gov/transmittals/downloads/R101NCD.pdf ). 
+2 ‘Surgical and other invasive procedures’ is defined by CMS as “operative procedures in which skin or mucous membranes and 
+connective 
+tissue are incised or an instrument is introduced through a natural body orifice. ‘Invasive procedures’ include a “range of 
+procedures from minimally invasive dermatological procedures (biopsy, excision, and deep cryotherapy for malignant lesions) 
+to extensive multi-organ transplantation. They include all procedures described by the codes in the surgery section of the 
+Current Procedural Terminology (CPT) and other invasive procedures such as percutaneous transluminal angioplasty and 
+cardiac catheterization. They include minimally invasive procedures involving biopsies or placement of probes or catheters 
+requiring the entry into a body cavity through needle or trocar.” 
+See, 73 Federal Register 48433, pages 48471-48491 (August 19, 2008) (http://edocket.access.gpo.gov/2008/pdf/E8-17914.pdf ; 
+https://www.cms.gov/HospitalAcqCond/Downloads/HACFactsheet.pdf). 
+ 
+In any care setting, the following HAC if not present on admission for inpatient 
+services or if not present prior to provision of other services (RFO-HAC): 
+ 
+ Removal (if medically indicated) of foreign object retained after surgery Claims 
+for DNBE: 
+ 
+ You must submit claims for services directly related to a DNBE according to 
+the following requirements and in accordance with the other terms of your 
+Agreement and this Provider Manual related to claims. 
+ 
+ UB04 – If you submit a UB-04 Claim (or its successor) for inpatient or 
+outpatient facility services provided to a member wherein a HAC (Including a 
+RFO-HAC) has occurred, you must include the following information: 
+ 
+ DRG. If, under the terms of your Agreement, such services are reimbursed 
+on a DRG basis, you must include the applicable ICD-10 codes, present on 
+admission indicators, and modifiers as set forth in the following table and as 
+otherwise required for the Medicare fee-for-service program. 
+ 
+ Other Payment Methodologies. If, under the terms of your Agreement, such 
+services are reimbursed on a payment methodology other than a DRG and the 
+terms of your Agreement state that you will not be compensated for services 
+directly related to a DNBE, you must split the Claim and submit both a Type of Bill 
+(TOB) ‘110’ (no-pay bill) setting forth all services directly related to the DNBE 
+including the applicable ICD-10 codes, present on admission indicators, and 
+modifiers as set forth in the following table and as otherwise required for the 
+Medicare fee-for-service program, and a TOB ‘11X (with the exception of 110)’ 
+setting forth all covered services not directly related to the DNBE. 
+ 
+
+49 
+Kaiser Permanente ND&A HMO Provider 
+Manual for Contracted Institutional Providers (REV. 10-24) 
+ 
+10.11 COORDINATION OF BENEFITS (COB) 
+ 
+Coordination of Benefits (COB) is a method for determining the order in which benefits are 
+paid and the amounts which are payable when a member is covered under more than one 
+health benefit plan. COB allows benefits from multiple health benefit plans or carriers to be 
+considered cumulatively so the Member receives the maximum benefit from their primary 
+and secondary health benefit plans together. In addition, COB is intended to prevent 
+duplication of benefits when an individual is covered by multiple health benefit plans 
+providing benefits or services for medical or other care and treatment. 
+ 
+Providers are responsible for identifying the primary payor and for billing the appropriate 
+party. If a Member’s Kaiser Permanente plan is not the primary payor, then the claim 
+should be submitted to the primary payor as determined via the process described below. 
+If a Member’s Kaiser Permanente plan is the secondary payor, then the primary payor 
+payment must be specified on the claim, and the appropriate primary payment information 
+and patient responsibility included on the EDI claim submission. If the claim is submitted 
+via paper, an Explanation of Payment (EOP) needs to be submitted as an attachment to 
+the claim. 
+ 
+Providers are required to cooperate with the administration of COB, which may include, 
+without limitation, seeking authorization from the other payor (if authorization is required) 
+and/or responding to requests for medical records. 
+ 
+ 
+ 
+How to Determine the Primary Payor 
+ 
+Primary coverage is determined in accordance with applicable law and the Member’s 
+benefit plan. Common examples include: 
+ 
+ With respect to adults, the plan that covers the person other than as a dependent, 
+for example as an employee, Member, subscriber, policyholder, or retiree, but not 
+as a dependent, is the primary plan. The plan that covers the person as a 
+dependent is the secondary plan. If the adult person is a Medicare beneficiary, then 
+Centers for Medicare & Medicaid Services (CMS) Guidelines apply. CMS Guidelines 
+may be found at: 
+ 
+https://www.cms.gov/Medicare/Coordination-of-Benefits-and- 
+Recovery/Coordination-of-Benefits-and-Recovery-Overview/Overview 
+ 
+ When a dependent child whose parents are married or are living together is covered 
+by both parents, the “birthday rule” applies. The payor for the parent whose birthday 
+falls earlier in the calendar year (month and day) is the primary payor. 
+ A commercial benefit plan is primary to a Medicare Fee For Service or a Medicare 
+Advantage plan when the Medicare beneficiary is covered by a Large Employer 
+
+50 
+Kaiser Permanente ND&A HMO Provider 
+Manual for Contracted Institutional Providers (REV. 10-24) 
+Group Health Plan (EGHP) as a result of current employment status of their own or 
+a family Members’ current employment status when the CMS Working Aged or 
+Disabled Beneficiaries provisions apply. 
+ Medicare Fee For Service or a Medicare Advantage plan is primary for beneficiaries 
+who are covered by a Group Health Plan (GHP) whose subscriber is a retiree of the 
+GHP when the CMS Working Aged or Disabled Beneficiaries provisions apply. 
+ Medicare Fee For Service or a Medicare Advantage plan is primary payer to GHPs 
+for individuals eligible for, or entitled to Medicare benefits based on, End-Stage 
+Renal Disease (ESRD) after the coordination period as stipulated the Medicare 
+Secondary Payer Provisions for ESRD beneficiaries. 
+ In cases of work-related injuries, Workers Compensation is primary unless coverage 
+for the injury has been denied. 
+ In cases of services for injuries sustained in vehicle accidents or other types of 
+accidents, primary payor status is determined on a jurisdictional basis. Submit the 
+claim as if the benefit plan is the primary payor. 
+ 
+Please call or contact the Member Services Contact Center (MSCC) with any 
+questions you may have about COB. 
+ 
+ 
+COB Claims Submission Requirements and Procedures 
+ 
+If a claim is submitted to KP without the appropriate primary payment information and 
+Member responsibility included on the EDI claim submission, or the primary payor’s EOP is 
+not provided when another payor is primary, KP will deny payment of the claim. The 
+Provider needs to first submit a claim to the primary payor. Within 90 Calendar Days (or 
+longer period if required under applicable law or expressly permitted under your 
+Agreement) after the primary payor has paid its benefit, please resubmit to Kaiser 
+Permanente the claim with the primary payor payment information. The claim will be 
+reviewed, and the amount of payment due, if any, will then be determined based on the 
+terms of your Agreement. 
+ 
+Please note that secondary claims can be submitted to Kaiser Permanente via EDI. 
+Specific 837 data elements are used to ensure that benefits are coordinated between 
+Health Plan and other plans. This is known as the “Provider-to-Payer-to-Provider” model. 
+The provider first sends the 837 to the primary payer. The primary payer adjudicates the 
+claim and sends an 835 Payment Advice to the provider. 
+The 835 includes the claim adjustment reason code and/or remark code for the claim. 
+Upon receipt of the 835, the provider sends a second 837 with COB information populated 
+in Loops 2320, 2330A-G, and/or 2430 to the secondary payer. The secondary payer 
+adjudicates the claim and sends an 835 Payment Advice to the provider. 
+Kaiser Permanente recognizes submission of an 837 transaction to a sequential payer 
+
+51 
+Kaiser Permanente ND&A HMO Provider 
+Manual for Contracted Institutional Providers (REV. 10-24) 
+populated with data from the previous payer’s 835. Based on the information provided and 
+the level of policy, the claim will be adjudicated without the paper copy of the Explanation 
+of Benefits from Medicare or the primary carrier. 
+When more than one payer is involved on a claim, data elements for all prior payers must 
+be present (i.e., if a tertiary payer is involved, then all the data elements from the primary 
+and secondary payers must also be present). 
+If data elements from previous payer(s) are omitted, Kaiser Permanente will deny the 
+claim. 
+Contact your clearinghouse for assistance sending COB claims electronically. 
+ 
+ 
+10.12 Medi-Cal Cost Avoidance 
+ 
+You are responsible for identifying the primary payor, seeking authorization from the 
+primary payor (if authorization is required), and billing the appropriate party. See Section 
+VI, “Member Eligibility and Benefits”. 
+In addition, to ensure your continued compliance with Medi-Cal program requirements with 
+respect to services provided to Medi-Cal Members, Providers must adhere to requirements 
+related to cost avoidance for Medi-Cal Members who have other health coverage (OHC). 
+Requirements include, without limitation, the following: 
+ To determine whether a Medi-Cal Member may have OHC prior to delivering 
+services, please access the DHCS Automated Eligibility Verification System at 800-
+427-1295 or the Medi-Cal Online Eligibility Portal available at: https://www.medi-
+cal.ca.gov/Eligibility/Login.aspx 
+ If a Medi-Cal Member has active OHC and the requested service is covered by the 
+OHC, you must instruct the Member to seek the service through the OHC carrier. 
+Regardless of the presence of OHC, however, you must not refuse to provide 
+covered services to Medi-Cal Members as authorized by Kaiser Permanente. 
+In connection with any denied claim for services due to the presence of OHC for Medi-Cal 
+Members, Kaiser Permanente will include OHC information in its payment denial 
+notification. If you believe payment on a claim was adjudicated incorrectly, please refer to 
+Section XI, Provider Appeals Process. 
+ 
+ 
+ 
+ 
+
+52 
+Kaiser Permanente ND&A HMO Provider 
+Manual for Contracted Institutional Providers (REV. 10-24) 
+ 
+10.13 THIRD PARTY LIABILITY (TPL) 
+ 
+Third Party Liability (TPL) 
+ 
+In the state of California, Kaiser Permanente may seek reimbursement from a Member’s 
+settlement or judgement due to injuries or illnesses caused by a third party. In order to 
+prevent duplicate payments for health care costs that are also paid by another responsible 
+party, Providers are required to assist Kaiser Permanente in identifying all potential TPL 
+situations and to provide Kaiser Permanente with information that supports KP’s TPL 
+inquiries. 
+ 
+First and Third-Party Liability Definitions 
+ 
+First Party Liability refers to situations in which the Member’s own auto or other policy 
+covers healthcare costs related to injuries or illnesses due to an accident, regardless of 
+fault. In the event you receive a partial payment from an auto or other carrier that falls 
+under the category of First Party Liability (such as Med Pay, Personal Injury Protection, 
+etc.), please submit your claim and indicate the carrier’s name and amount paid along with 
+the Explanation of Benefits (EOB). 
+ 
+Third Party Liability refers to situations in which a third party’s auto or other policy covers 
+healthcare costs related to injuries or illness caused by or alleged to be caused by a third 
+party. 
+ 
+Both definitions of alternate liability here shall be considered TPL for the purposes of this 
+Section 10.12. 
+ 
+First and Third-Party Liability Guidelines 
+ 
+Providers are required to assist and cooperate with Kaiser Permanente’s efforts to identify 
+these situations by entering the following information on the billing form, if applicable: 
+ Automobile carrier information in appropriate fields, along with payment information 
+ ICD-10 diagnosis data in appropriate fields 
+ Accident-related claim codes (e.g., occurrence codes, condition codes, etc.) 
+Kaiser Permanente retains the right to investigate TPL recoveries through retrospective 
+review of ICD-10 and CPT-4 codes from the billing forms where a possible TPL is 
+indicated. 
+ 
+Workers’ Compensation 
+ 
+If a member indicates that his or her illness or injury occurred while the Member was "on 
+the job," you should do the following: 
+
+53 
+Kaiser Permanente ND&A HMO Provider 
+Manual for Contracted Institutional Providers (REV. 10-24) 
+ Document that the member indicates the illness or injury occurred "on the job" on 
+the claim 
+ Complete applicable fields on the billing form indicating a work-related injury 
+ Submit the claim to the patient’s Workers’ Compensation carrier/plan 
+ 
+If the Member’s Workers' Compensation carrier/plan ultimately denies the claim, you may 
+submit the claim for covered services to Kaiser Permanente in the same manner as you 
+submit other claims for services. You must also include a copy of the denial letter or 
+Explanation of Payment from the Workers’ Compensation carrier. 
+ 
+If you have received an authorization to provide such care to the Member, you should 
+submit your claim to Kaiser Permanente in the same manner as you submit other claims 
+for services. Your Agreement may specify a different payment rate for these services. 
+ 
+10.14 COPAYMENTS, COINSURANCE AND DEDUCTIBLES 
+ 
+ Contracted providers are responsible for collecting copayments, coinsurance and 
+deductibles (collectively, “Copays”) in accordance with member benefits unless 
+explicitly stated otherwise in your Agreement. 
+ Claims submitted by providers who are responsible for collecting Copays will be 
+paid at the applicable rate(s) under your Agreement less the applicable Copay 
+amount due from the Health Plan member. 
+ You must not waive Copays you are required to collect, except as expressly 
+permitted under applicable law and your Agreement. 
+ 
+Please verify applicable Copays at the time of service by contacting Member Services 
+at the number listed in the “Key Contacts” section of this Provider Manual. 
+ 
+10.15 OVERPAYMENT POLICY 
+ 
+ If you receive an overpayment directly from Kaiser Permanente or as a result of 
+coordination of benefits, you must notify Kaiser Permanente promptly upon 
+discovery and return the overpayment as soon as possible. In addition, you must 
+return any overpayment identified by Kaiser Permanente within 30 working days 
+after receipt from Kaiser Permanente of a notice of overpayment, unless you 
+contest such notice. If you contest all or any portion of the overpayment described 
+in Kaiser Permanente’s notice of overpayment, you must send a written notice 
+identifying the contested amount and the basis upon which you believe the 
+claim(s) was (were) not overpaid, within 30 working days after receipt of the 
+notice of overpayment. Such required written notice must be provided to Kaiser 
+Permanente in accordance with the terms of your Agreement or as described in 
+the notice of overpayment. If your Agreement so provides, Kaiser Permanente 
+may offset from future claims payments to you the amount of any uncontested 
+overpayment not paid by you within the 30-working day repayment period. 
+
+54 
+Kaiser Permanente ND&A HMO Provider 
+Manual for Contracted Institutional Providers (REV. 10-24) 
+ 
+ Please include the following information when returning uncontested overpayments: 
+ 
+ Name of each Health Plan Member who received care for which an overpayment 
+was received 
+ Copy of each applicable remittance advice 
+ Primary carrier information, if applicable 
+ Each applicable member’s Kaiser Permanente medical record number (MRN) 
+ Authorization number(s) for all applicable non-emergency services 
+ Claim Number(s) 
+ Date(s) of Service 
+ 
+Mail your refund check (and brief note) to: 
+ 
+Kaiser Permanente 
+Attn: Regional Claims Recovery 
+PO Box 741639 
+Los Angeles, CA 90074-1639 
+ 
+ 
+ 10.16 OFFSETS TO PAYMENTS 
+We will only offset an uncontested notice of overpayment of a claim against a Provider’s 
+current claim submission when: (i) the provider fails to reimburse KP within the timeframe 
+set forth above, and (ii) KP’s contract with the provider specifically authorizes KP to 
+offset an uncontested overpayment of a claim from the provider’s current claims 
+submissions or KP has obtained other written offset authorization from the provider. In 
+the event that an overpayment of a claim or claims is offset, the Evidence of Payment 
+(EOP) includes a Recoupment Detail Report. This report provides additional details about 
+your vendor balance and offset, including which claims the offset was applied to. 
+ 
+10.17 DIRECT MEMBER BILLING 
+ 
+Health Plan Members may be billed only for copayments, coinsurance and deductibles 
+where applicable according to Member benefit coverage and your Agreement, which 
+payments may be subject to an out-of-pocket maximum. 
+ 
+The circumstances above are the only situations in which a Health Plan Member can be 
+billed for covered services. 
+ 
+10.18 MEMBER CLAIMS INQUIRIES 
+ 
+If you are presented with a Health Plan member complaint or inquiry regarding any 
+direct Member billing (including any billing for Copay or other Member liability described 
+above) you should direct the Member to call: 
+ 
+
+55 
+Kaiser Permanente ND&A HMO Provider 
+Manual for Contracted Institutional Providers (REV. 10-24) 
+ 
+ 
+ 
+ 
+ 
+Section XI: Provider Appeals Process 
+ 
+INTRODUCTION 
+ 
+KP actively encourages our contracted Providers to utilize the Online Affiliate Provider 
+Portal to resolve billing and payment issues. 
+ 
+This section of the Provider Manual provides information about our dispute resolution 
+process, but it is not intended to be a complete description of the law or the provisions 
+of your Agreement. Please make sure you review your Agreement and applicable 
+law for a complete description of the dispute resolution process. 
+ 
+11.1 SUBMITTING DISPUTES 
+ 
+If you have a dispute relating to the adjudication of a claim or a billing determination 
+(collectively referred to herein as “payment dispute”), you may submit such payment 
+disputes online via Online Affiliate or as a written notice to KP by U.S. Mail or other 
+physical delivery. Either notice of a payment dispute is referred to in this Provider Manual 
+as a “Provider Dispute Notice”. 
+ 
+ 
+ 
+ 
+Directions for Submission of Payment Disputes 
+ 
+The table below outlines the appropriate submission instructions depending on the type of 
+services rendered: 
+ 
+ 
+Member Services Contact 
+Center 1-800-464-4000 
+Monday – Friday 7 a.m.to 7 p.m. 
+Saturday – Sunday 7 a.m.to 3 p.m. 
+ 
+Medicare Member 
+Services 1-800-443-0815 
+Monday – Sunday 7 a.m.to 8 p.m. 
+
+56 
+Kaiser Permanente ND&A HMO Provider 
+Manual for Contracted Institutional Providers (REV. 10-24) 
+Submission Method Submit To 
+Online 
+For more information or to register for Online 
+Affiliate, please visit KP’s Southern California 
+Community Provider Portal at: 
+ https://healthy.kaiserpermanente.org/southern-california/community-
+providers 
+US Mail 
+Kaiser Foundation Health Plan, Inc. 
+Claims Administration Department 
+P.O. Box 7006 
+Downey, CA 90242-7006 
+ 
+To inquire about filing a payment dispute and/or the status of previously submitted 
+disputes, contact KP through Online Affiliate or by calling: (800) 390-3510. 
+ 
+Disputes Related to Visiting Member Claims 
+ 
+For information concerning provider payment disputes related to claims for services 
+rendered to visiting Members, please contact the Member Services Call Center for the 
+Member’s Home region. The specific phone numbers are provided in Section 4.1 of this 
+Provider Manual. 
+ 
+11.2 REQUIRED INFORMATION FOR PROVIDER DISPUTE NOTICES 
+ 
+Your Provider Dispute Notice must contain the required information listed below in order for 
+us to acknowledge your dispute: 
+• Tax Identification Number (TIN) under which services were billed 
+• Disputed Claim Number (original assigned claim number by KP) 
+• Name and KP Medical Record Number (MRN) of the Member 
+• Date(s) of Service(s) 
+• Clear explanation of the basis upon which you believe that the payment amount, 
+request for additional information, request for reimbursement for the 
+overpayment of a claim, contest, denial, adjustment or other action is incorrect 
+ 
+If your Provider Dispute Notice does not contain all the applicable information listed above, 
+we will reject the Provider Dispute Notice to you and will identify in writing the missing 
+information necessary for us to consider the payment dispute. If you choose to continue 
+the payment dispute, you must submit an amended Provider Dispute Notice to us within 30 
+business days from the date of such notification letter (but in no case later than 365 
+calendar days from KP’s last action on the claim), making sure to include all elements 
+noted therein as missing from your payment dispute. If KP does not receive your amended 
+payment dispute within this time, our previous decision will be considered final, and you will 
+have exhausted our provider payment dispute process. 
+ 
+Your Provider Dispute Notice may be submitted by you or by a representative (for 
+
+57 
+Kaiser Permanente ND&A HMO Provider 
+Manual for Contracted Institutional Providers (REV. 10-24) 
+example, a billing service, a collection agency or an attorney) authorized by you to perform 
+this function. If your authorized representative submits your Provider Dispute Notice, that 
+representative will be required to provide confirmation that an executed business associate 
+agreement between you, as the provider of health care services, and such representative 
+is in place and that it complies with HIPAA. 
+ 
+We recommended you or your representative submit each Provider Dispute Notice, related 
+to either an emergency or referred services claim, with KP’s Provider Dispute Resolution 
+Request form (PDRR). You may contact KP at the telephone number indicted on the 
+Explanation of Payment (EOP) to obtain the PDRR form. Alternately, you or your 
+representative may submit a payment dispute in writing without a PDRR, including all the 
+required information outlined above. 
+ 
+ 
+11.3 PROVIDER DISPUTE PROCESS TIMELINE 
+ 
+Time Period for Submission of Provider Dispute Notices 
+ 
+Provider Dispute Notices must be received by KP within 365 calendar days from our 
+action (or the most recent action if there are multiple actions) that led to the dispute. 
+ 
+Timeframes for Acknowledgement of Receipt and Determination of Provider Dispute 
+Notices 
+ 
+If your submission meets all requirements, we will acknowledge receipt of your Provider 
+Dispute Notice within 15 business days after KP’s receipt of hardcopy submission, or 
+within two business days after KP’s receipt of online submission. KP will issue a 
+resolution letter explaining the reasons for our determination, to the extent required by 
+applicable law, within 45 business days after the date of receipt of the complete Provider 
+Dispute Notice. 
+ 
+11.4 Instructions for Resolving Substantially Similar Payment Disputes 
+ 
+Online Affiliate cannot be utilized to submit batches of substantially similar payment 
+disputes at this time. If you proceed with filing substantially similar multiple disputes, they 
+may be filed in writing in batches, submitted via U.S. Mail. Each claim being disputed must 
+be individually numbered and contain the provider’s name and include the following 
+information: 
+• Tax Identification Number (TIN) under which services were billed 
+• Disputed Claim Number (original assigned claim number by KP) 
+• Name and KP Medical Record Number (MRN) of the Member 
+• Date(s) of Service(s) 
+• Clear explanation of the basis upon which you believe that the payment amount, 
+request for additional information, request for reimbursement for the 
+overpayment of a claim, contest, denial, adjustment or other action is incorrect 
+ 
+
+58 
+Kaiser Permanente ND&A HMO Provider 
+Manual for Contracted Institutional Providers (REV. 10-24) 
+The submission must include all these data elements as well as any documentation you 
+wish to submit to support your dispute. Any submission of substantially similar provider 
+payment disputes that does not include all required elements will be rejected as incomplete 
+and will need to be re-submitted with all necessary information. 
+ 
+Section XII: Credentialing and Recredentialing 
+ 
+INTRODUCTION 
+ 
+Kaiser Foundation Health Plan has developed and implemented credentialing and 
+re-credentialing policies and procedures for Health Delivery Organizations. 
+ 
+As a contracted provider, your facility has already met the basic criteria for initial 
+credentialing, including insurance requirements, absence of Medicare and Medicaid 
+sanctions, current state licensure, certificate of insurance and accreditation. If your 
+facility is not accredited, then it h a d met the a ccre d it a t io n o f Kaiser 
+Fo u n d a t io n He a lt h P la n site survey criteria in the areas of appearance, safety, 
+provider and staff availability, emergency preparedness, infection control, medical 
+record, quality assessment and improvement, and utilization management. Your facility 
+and all providers who furnish services to our members are required to meet applicable 
+requirements and, unless your Agreement expressly provides otherwise, be properly 
+enrolled in and certified under the Medicare and Medicaid programs. 
+ 
+12.1 CREDENTIALING AND RE-CREDENTIALING PROCESS 
+ 
+All staff, including employees, contractors and agents of your facility who provide 
+covered services to members, will be at all times properly licensed by the state in 
+which services are rendered, certified, qualified and in good standing in accord with all 
+applicable local, state and federal laws. 
+ 
+During the period between initial credentialing and re-credentialing, your facility is 
+required to continue to meet all initial credentialing criteria. This includes, but is not 
+limited to, submission of copies of current/renewed state license, accreditation and 
+certificates of insurance to Kaiser Foundation Health Plan, when requested. 
+ 
+Re-credentialing will occur at least every thirty-six months and may occur more 
+frequently if needed. In addition to the basic initial credentialing criteria, member 
+grievances, member satisfaction, quality assurance/improvement, and utilization 
+management data will be considered prior to re-credentialing. 
+ 
+ 
+12.2 CONFIDENTIALITY OF CREDENTIALING INFORMATION 
+ 
+All information obtained during the credentialing and re-credentialing process is 
+considered to be confidential except as otherwise required by applicable law. 
+
+59 
+Kaiser Permanente ND&A HMO Provider 
+Manual for Contracted Institutional Providers (REV. 10-24) 
+ 
+For additional information regarding credentialing and re-credentialing requirements and 
+policies, please contact the Ka iser Fo undation He alth P lan, Creden tia ling 
+at the telephone number included in the “Key Contacts” section of this Provider 
+Manual. 
+ 
+ 
+Section XIII: Utilization Management 
+ 
+ 
+ 
+13.1 UTILIZATION MANAGEMENT PROGRAM 
+ 
+Utilization Management (“UM”) is a health plan process that reviews and approves, 
+modifies, delays, or denies, based in whole or in part on medical necessity, requests by 
+the treating provider. The determination of whether a service is medically necessary is 
+based upon criteria that are consistent with and supported by sound clinical principles 
+and processes, which are reviewed and approved annually by Health Plan. 
+ 
+Patient care, including the provision of clinically appropriate services and treatment, is 
+determined by the treating clinician based on their judgement of clinical appropriateness 
+and not by Health Plan UM criteria. Kaiser Permanente expects Providers to allow open 
+provider-patient communication regarding appropriate treatment alternatives without 
+regard to a member’s benefit plan. Kaiser Permanente does not penalize providers for 
+discussing available care options with Members. Utilization Management is not employed 
+in the vast majority of services, except as listed in www.kp.org/um. 
+ 
+Kaiser Permanente does not reward or compensate anyone for denying services or 
+coverage. Kaiser Permanente does not use financial incentives to encourage denials of 
+care. 
+ 
+Utilization Management data collected by Kaiser Permanente is used to comply with 
+regulatory and accreditation requirements, to identify areas for improvement in the 
+delivery and management of care for both inpatient and outpatient services, and to 
+coordinate the evaluation of resource management. 
+ 
+Through standardized UM processes, objective information regarding medical necessity 
+of health care services is obtained. Appropriately licensed health care professionals 
+supervise all UM decisions. A licensed physician reviews all full and partial denials of a 
+health care service when the determination is based on medical necessity. The criteria 
+used in the UM review process are available to all practitioners upon request at no cost. 
+For further information about Kaiser Permanente’s UM process, please see 
+http://www.kp.org/um. 
+ 
+
+60 
+Kaiser Permanente ND&A HMO Provider 
+Manual for Contracted Institutional Providers (REV. 10-24) 
+ 
+13.2 REQUEST FOR PRIOR AUTHORIZATION FOR NON-KAISER PERMANENTE 
+(External) AND/OR OUT-OF-NETWORK PROVIDER SERVICES 
+ 
+For health care services provided to a Member by a non-Kaiser Permanente and/or 
+out-of-network provider, prior authorization is required. Contracted providers must 
+contact Kaiser Permanente to arrange for and to coordinate authorized medically 
+necessary care. 
+ 
+13.3 REQUEST FOR INFORMATION 
+ 
+Upon request from Kaiser Permanente, a provider may be asked to provide information 
+concerning Members in the provider’s facility. Information may include, but is not limited 
+to, the following data: 
+ 
+ Number of Members admitted 
+ Number of Members who were inpatients within the previous seven days 
+ Number of Members who presented to the Emergency Department (“ED”) 
+and number of Members admitted through the ED 
+ Type and number of procedures performed 
+ Number of Member consults 
+ Number of Members that expired 
+ Number of Member autopsies 
+ Average length of Member inpatient stays 
+ Provider Quality Assurance/Peer Review processes 
+ Number of Member cases reviewed 
+ Final action taken for each Member case reviewed 
+ Committee Membership (participation as it pertains to Members and 
+only in accordance with the terms of your contract) 
+ Other information as Kaiser Permanente may reasonably request 
+ 
+13.4 HOSPITAL ADMISSIONS OTHER THAN EMERGENCY SERVICES 
+ 
+Emergency care needed to stabilize an emergency medical condition does not require 
+prior authorization. However, Health Plan reviews and coordinates repatriation for post-
+stabilization care, pursuant to standards set forth in applicable statutes and regulations. 
+Authorization for post-stabilization care can be requested by contacting the Outside 
+Utilization Re so u rce Services (OURS) office at 1-800-225-8883. Should the Member 
+require continued hospitalization beyond the services authorized, the Provider must 
+contact OURS for further direction. 
+ 
+13.5 ADMISSION TO SKILLED NURSING FACILITY (SNF) 
+Requests for skilled nursing facility (SNF) placement should be directed to the OURS 
+office at 1-800-225-8883. 
+ 
+
+61 
+Kaiser Permanente ND&A HMO Provider 
+Manual for Contracted Institutional Providers (REV. 10-24) 
+Requests for SNF placement by contracted providers should be directed to the Long-Term 
+Care department local to the patient’s residence (from the list below). 
+ 
+Area(s) Phone Number 
+Antelope Valley (661) 428-1306 
+Baldwin Park (626) 851-7037 
+Downey (562) 622-3823 
+Fontana/Ontario (909) 609-3500 
+Kern County (661) 337-7235 
+Los Angeles (323) 783-4600 
+Ontario/Fontana (909) 609-3500 
+Orange County (714) 734-5500 
+Panorama City (818) 375-3758 
+Riverside (951) 602-4230 
+San Diego (619) 528-1245 
+South Bay (424) 251-7875 
+West Los Angeles (323) 648-1390 
+Woodland Hills (818) 592-2400 
+ 
+13.6 HOME HEALTH/HOSPICE SERVICES 
+ 
+Referral for home health services is based on the following information: 
+ A Medical Group physician must refer, oversee the plan of care and provide 
+orders for home health services. 
+ The Member is an eligible Health Plan Member. 
+ The Member requires skilled care in the Member’s place of residence within the 
+Kaiser Permanente Service Area. Any place that the Member is using as a home is 
+considered the Member’s residence, as long as care can be safely provided. 
+ For home health services, the Member, because of illness or injury, is confined to 
+home. The Member is not considered homebound when the Member lacks 
+transportation or is unable to drive. To be considered homebound absence from the 
+home is infrequent and/or short in duration. A Member is not considered 
+homebound if the Member would otherwise tolerate an absence from the home. 
+ The home environment is a safe and appropriate environment setting to meet the 
+Member’s needs and provide home health services. 
+ There is reasonable expectation that the needs of the Member can be met by the 
+provider. 
+ Clinically appropriate care must be provided by a registered nurse or therapist. 
+ The Member and caregiver(s) are willing to participate in the plan of care and 
+work toward specific treatment goals. 
+
+62 
+Kaiser Permanente ND&A HMO Provider 
+Manual for Contracted Institutional Providers (REV. 10-24) 
+ Services are provided under Health Plan coverage and benefit guidelines. 
+ Such home health services are based on the following information: 
+o For Health Plan Members, a prognosis of 12 months or less. For Medicare 
+patients, a prognosis of 6 months or less. 
+o The Member must elect the hospice benefit. 
+o Care is palliative in nature. 
+o All care related to the terminal illness is managed by the hospice provider. 
+ 
+ 
+The plan of care is developed and managed by the Member’s choice of an attending 
+physician, in collaboration with the Hospice Medical Director. Home health and hospice 
+staff coordinate care with the attending physician. Home Health and hospice staff 
+manage the Member’s plan of care through on-site visits with the Member and 
+telephone encounters to assess the Member’s progress toward achieving goals in the 
+plan of care. The plan of care is reviewed and, if required, revised with new physician 
+orders at least every 15 days and as needed to meet the needs of the Member. 
+ 
+Discharge planning begins when the applicable plan of care is initiated during the start 
+of care of home health or hospice service. 
+ 
+13.7 DURABLE MEDICAL EQUIPMENT (DME) 
+ 
+Health Plan evaluates authorization requests for durable medical equipment for 
+appropriateness based on, but not limited to, the following information: 
+ 
+ The Member’s care needs 
+ Member’s eligibility status 
+ The application of specific Health Plan formulary guidelines relative to Member’s 
+benefit coverage (benefit and medical necessity) 
+ 
+Health Plan DME Formulary information may be available upon request by calling the 
+Regional DME Hub at 855-805-7363 and through the link at: https://cl.kp.org/scal/home.html 
+(Type the DME item into the search box). 
+ 
+ 
+13.8 NON-EMERGENT MEMBER TRANSPORTATION SERVICES 
+ 
+To serve Kaiser Permanente Members and to coordinate care with our contracted 
+providers, Kaiser Permanente has a twenty-four hour (24 hour), seven-day per week, 
+centralized medical transportation department called the “HUB", to coordinate and to 
+schedule non-emergency medical transportation (NEMT services). 
+ 
+If a Member is to be transferred from a non-Kaiser Permanente facility to a Kaiser 
+Permanente Medical Center or other location designated by Kaiser Permanente, it is 
+
+63 
+Kaiser Permanente ND&A HMO Provider 
+Manual for Contracted Institutional Providers (REV. 10-24) 
+required that prior authorization be secured for the transport before the HUB is 
+contacted to coordinate the NEMT services. 
+ 
+If a transport order is authorized by an appropriate Southern California Permanente 
+Medical Group or Plan physician, the HUB will make the transportation arrangements. 
+ 
+ 
+ 
+The Kaiser Permanente Discharge Planner or Continuing Care Coordinator will work 
+with the HUB to arrange the transportation of the Member. 
+ 
+Non-emergency medical transportation may or may not be a covered benefit for the 
+Member. In the event any transports of the Member are not coordinated through the 
+HUB, and are not properly documented as authorized referrals, payment for the 
+transport may be denied. 
+ 
+ 
+Section XIV: Quality Management Program 
+ 
+INTRODUCTION 
+ 
+Kaiser Permanente Southern California (KPSC) maintains a Quality Management (QM) 
+Program to objectively and systematically monitor and improve the quality, safety, and 
+appropriateness of Member care. The Regional and Medical Center Quality 
+Departments work collaboratively toward the resolution of identified problems and pursue 
+opportunities for continuous improvement in the provision of Member care/ services 
+and Member safety. 
+ 
+You agree to collaborate with Health Plan through provision and sharing of provider-
+specific quality data/ information. Shared information should include quality/risk data 
+related to the identification, review, and resolution of quality-of-care issues, regardless of 
+the information source, (e.g., Member complaints, clinical department referral, regulatory 
+referral, UM referral etc.), other quality improvement activities, and public reports to 
+consumers. 
+ 
+The KPSC QM Program includes many aspects of clinical and service quality, including 
+patient safety, infection prevention, accreditation and regulatory, and the oversight of 
+access to care opportunities that result in a potential quality of care issue. 
+ 
+The K P S C Q M P r o g r a m is described in the 2024 Quality Program Description: 
+Kaiser Foundation Health Plan Southern California Region, which serves to document 
+HUB 
+1-877-227-8799 
+Available 7 days a week 
+24 hours a day 
+
+64 
+Kaiser Permanente ND&A HMO Provider 
+Manual for Contracted Institutional Providers (REV. 10-24) 
+how KPSC is organized to support our commitment to the provision of high quality, 
+safe, outcome-based Member care in accordance with professionally recognized 
+standards. 
+ 
+You can view more about the KPSC QM Program by visiting 
+https://healthy.kaiserpermanente.org/southern-california/pages/quality-safety to find 
+results specific to the Southern California Region. 
+ 
+To obtain a copy of the “Quality Program at KP” call our Member Services Call 
+Center at 1-800-464-4000 or for TTY, call 711. 
+ 
+Member safety is a central component of KPSC's care delivery model. We believe our 
+distinctive structure as a fully integrated health care delivery system provides us unique 
+opportunities to design and implement effective, comprehensive safety strategies to 
+protect our Members. Providers play a key role in the implementation and oversight of 
+Member safety efforts. 
+ 
+At KPSC, Member safety is every Member’s right and everyone’s responsibility. As a 
+leader in Member safety, our strategic plan outlines six (6) focus areas. These themes 
+include safe culture, safe care, safe staff, safe support systems, safe place, and safe 
+Members. 
+ 
+If you would like independent information about KP’s health care quality and safety, the 
+following external organizations offer information online: 
+ 
+The National Committee for Quality Assurance 
+ 
+The National Committee for Quality Assurance (NCQA) works with consumers, 
+purchasers of health care benefits, state regulators, and health plans to develop 
+standards that evaluate health plan quality. KP is responsible for managing, measuring, 
+and assessing Member care to achieve NCQA accreditation, which includes ensuring 
+that all Members are entitled to the same high level of care regardless of the site or 
+provider of care. Health Plan is accredited by NCQA. You can review the report card 
+for Kaiser Permanente’s Southern California Region at 
+https://reportcards.ncqa.org/health-plans. 
+ 
+The Leapfrog Group 
+ 
+The Leapfrog Group is a national nonprofit organization founded by large employers and 
+purchasers to drive movement in quality and safety in American health care. The group 
+gathers information about aspects of medical care and patient safety relevant to urban 
+hospitals via an annual Leapfrog Survey. The survey assesses hospital safety, quality, 
+and efficiency based on national performance measures that are of specific interest to 
+health care purchasers and consumers. All KFH hospitals in California participated in the 
+most recent survey. Survey results are publicly reported and provide hospitals with 
+
+65 
+Kaiser Permanente ND&A HMO Provider 
+Manual for Contracted Institutional Providers (REV. 10-24) 
+information to benchmark their progress in improving the care that is delivered. To review 
+survey results, visit https://ratings.leapfroggroup.org 
+ 
+The Joint Commission 
+ 
+The Joint Commission (TJC) is an independent, not-for-profit organization and is the 
+nation’s largest standards-setting and accrediting body in health care. TJC accreditation 
+is recognized nationwide as a symbol of quality that reflects an organization's 
+compliance with TJC performance standards. To achieve and maintain TJC 
+accreditation, KFH facilities must undergo an onsite survey by TJC survey team at least 
+every three (3) years. Kaiser Permanente has adopted a set of TJC compliance 
+expectations for contracted practitioners coming into our facilities. For more 
+information on TJC performance standards visit: www.jointcommission.org. 
+ 
+ 
+14.1 QUALITY ASSURANCE AND QUALITY IMPROVEMENT PROGRAM 
+ 
+KP’s Quality Improvement (QI) program uses a multidisciplinary and integrated 
+approach, which focuses on opportunities for improving operational processes including 
+transitions in care, health outcomes, and patient and provider satisfaction. 
+ 
+With respect to covered services provided to Members, Providers shall participate in 
+KP’s QI program, as established and amended from time to time, which includes 
+cooperating with KP’s QI activities to monitor and evaluate covered services provided to 
+Members (such as tracking and regular reporting on quality, Member safety and 
+regulatory indicators, and providing performance data), facilitating review of such covered 
+services by KP’s QI committees and staff, and cooperating with any independent 
+quality review and improvement organization or other external review organization 
+evaluating KP’s QI program. 
+ 
+The quality- o f - c a r e members receive is monitored by and reported through the 
+Southern California Quality Committee and to the Quality & Healthcare Improvement 
+Committee, a subcommittee of the KFHP Board of Directors. As part of KP’s QI program, 
+Providers shall cooperate with providing performance data for use in QI activities. You will 
+be monitored for various indicators and required to participate in some KP processes 
+related to the clinical and service measures of the QI program. For example, we monitor 
+and track the following: 
+ 
+ Member access to care 
+ Member complaint and satisfaction survey data of both administrative and quality of 
+care issues 
+ Compliance with KP policies and procedures 
+ Utilization Management statistics 
+ Over and under-utilization of services 
+
+66 
+Kaiser Permanente ND&A HMO Provider 
+Manual for Contracted Institutional Providers (REV. 10-24) 
+ Quality of care indicators as necessary for KP to comply with requirements of 
+Department of Managed Health Care (DMHC), NCQA, Medicare, Department of 
+Health Care Services (DHCS), The Joint Commission and other regulatory and 
+accreditation bodies 
+ Performance standards in accordance with your Agreement 
+ Credentialing and re-credentialing of Providers 
+ 
+In any of the above situations, when KP reasonably determines that the Provider’s 
+performance may adversely affect the care provided to members, KP may take 
+corrective actions in accordance with your Agreement. As a Provider, you are expected to 
+investigate and respond in a timely manner to all quality issues and to work with KP to 
+resolve any quality and accessibility issues related to services for Members. Each 
+Provider is expected to remedy, as soon as reasonably possible, any condition related to 
+patient care involving a Member that has been determined by KP or any regulatory/ 
+accrediting agencies to be unsatisfactory. 
+ 
+ 
+14.2 MONITORING AND REPORTING REQUIREMENTS 
+ 
+The Agreement identifies events that must be reported to KP by provider and 
+particular monitoring actions that must be performed by provider in conjunction with KP’s 
+QI program. Reportable events are in alignment with the state and federal requirements as 
+well as accrediting body standards. In addition, as part of its required participation in KP’s 
+QI program and in addition to the claims submission requirements set forth in Section X 
+of this Provider Manual, and to the extent permitted by state and federal law, Provider 
+must promptly notify KP and, upon request, provide information about any Do Not Bill 
+Event (as defined in Section X.1.11) that occurs in connection with services provided to a 
+Health Plan Member. 
+ 
+Section XV: Emergency Services 
+ 
+When Health Plan Members present in your Emergency Room for treatment, we expect 
+you to triage and treat them in accordance with EMTALA requirements, and to contact 
+Kaiser Permanente’s Emergency Prospective Review Program (EPRP) once the 
+member has been stabilized or stabilizing care has been initiated.* You may contact 
+EPRP at any time, including prior to stabilization to the extent legally and clinically 
+appropriate, to receive relevant Member-specific medical history information which may 
+assist you in your stabilization efforts and any subsequent post-stabilization care. 
+EPRP has access to Member medical history, including recent test results, which can 
+help expedite diagnosis and inform further care. In addition, EPRP can authorize post- 
+stabilization care at your facility, as required under each Member’s Evidence of 
+Coverage for non-emergency care to be a covered benefit or assist in making other 
+appropriate care arrangements. 
+ 
+ Please note: Under the EMTALA regulations issued September 2003; providers 
+
+67 
+Kaiser Permanente ND&A HMO Provider 
+Manual for Contracted Institutional Providers (REV. 10-24) 
+may, but are not required to, contact EPRP once stabilizing care has been 
+initiated but prior to the member’s actual stabilization if such contact will not 
+delay necessary care or otherwise harm the member. 
+ 
+EPRP provides a statewide emergency services notification system in California for all 
+Health Plan Members. It also provides authorization for requested post-stabilization 
+care and must be contacted prior to a stabilized Health Plan Member’s admission to 
+your facility unless your Agreement establishes a different process. 
+ 
+ 
+ 
+ 
+EPRP PROVIDES: 
+ 
+Access to clinical information 24 hours a day, every day of the year, to help you in 
+evaluating a Member’s condition and to enable our physicians and the treating 
+physicians at your facility, to quickly determine the appropriate treatment for the 
+Member. 
+ 
+Emergency physician to emergency physician discussion regarding a Member’s case 
+24 hours a day, every day of the year. 
+ 
+Authorization of post-stabilization care, 24 hours a day, every day of the year, or 
+assistance with making appropriate alternative care arrangements. 
+ 
+15.1 POST STABILIZATION AUTHORIZATIONS 
+ 
+If there is mutual agreement at the time of the phone call as to your provision of post- 
+stabilization services, EPRP will authorize you to provide the post-stabilization 
+services and give you a confirming claims reference number. If requested, Kaiser 
+Permanente will also provide a written confirmation of the services authorized and the 
+confirmation number. This claims reference number must be included with the claim 
+for payment for the authorized services. The claims reference number is required for 
+payment, along with the following: 
+ 
+ All reasonably relevant information relating to the post-stabilization services 
+on your claim submission consistent with the information provided to EPRP as 
+the basis for the authorization; and 
+ 
+ EPRP must have confirmed that the member was eligible for and had 
+ 
+EPRP 
+1-800- 447-3777 
+Available 7 days a week 
+24 hours a day 
+
+68 
+Kaiser Permanente ND&A HMO Provider 
+Manual for Contracted Institutional Providers (REV. 10-24) 
+benefit coverage for the authorized post-stabilization services provided. 
+ 
+If EPRP authorizes the admission of a clinically stable Member to your facility, Kaiser 
+Permanente’s Outside Utilization Resource Services (OURS), will follow that Member’s 
+care in your facility, including any authorization of subsequent care, until discharge or 
+transfer. 
+ 
+15.2 POST STABILIZATION ADMISSIONS 
+ 
+If the Member is admitted to your facility as part of the stabilizing process and you have 
+not yet been in contact with EPRP, you must call Outside Utilization Resource Services 
+(OURS) once the Member’s emergency medical condition is stabilized and before 
+providing any post-stabilization care. 
+ 
+ 
+ 
+ 
+ 
+LIKE EPRP, OURS NOTIFICATION ALSO PROVIDES: 
+ 
+ Access to clinical information 24 hours a day, every day of the year, to help you in 
+evaluating a Member’s condition and to enable our physicians and the treating 
+physicians at your facility, to quickly determine the appropriate treatment for the 
+Member. 
+ Physician- to- physician discussion regarding a Member’s case 24 hours a day, 
+every day of the year. 
+ 
+ Authorization of post-stabilization care, 24 hours a day, every day of the year, or 
+assistance with making appropriate alternative care arrangements. 
+ 
+ OURS may request that the Member be transferred to a Kaiser Permanente-
+designated facility for continuing care or OURS may authorize certain post-
+stabilization services in your facility on the condition that such services be rendered 
+under the management of a physician who is a member of your facility’s medical staff 
+or who has contracted with Kaiser Permanente to manage the care of our Members 
+being treated in community hospitals. 
+ 
+ If the Health Plan Member insists on receiving unauthorized post-stabilization care 
+from your facility, we strongly recommend that you require that the Member sign a 
+financial responsibility form acknowledging and accepting his or her sole financial 
+liability for the cost of the unauthorized post-stabilization care and/or services. 
+ 
+OURS NOTIFICATION 
+1-800- 225-8883 
+Available 7 days a week 
+24 hours a day 
+
+69 
+Kaiser Permanente ND&A HMO Provider 
+Manual for Contracted Institutional Providers (REV. 10-24) 
+ Note: If the Member wishes to discuss the process of filing a claim with Kaiser 
+Permanente, please refer the Member to Kaiser Permanente’s Member Services 
+Department at 800-464-4000, available the days and hours set forth in the “Key 
+Contacts” section of this Provider Manual. A Member Services Representative will 
+explain the claims process to the Member. 
+ 
+ 
+ 
+ 
+Section XVI: Cultural Diversity 
+ 
+At Kaiser Permanente, we are committed to improving the quality of care provided to our 
+increasingly diverse membership. Member’s cultural needs are considered and 
+respected at every point of contact. This is integral for providing a culturally competent 
+system of care. 
+ 
+A person’s culture is composed of many factors. Examples include: 
+ Ethnicity 
+ Gender 
+ Physical/mental ability 
+ Race 
+ Sexual orientation 
+ Age 
+ Language 
+ Education 
+ Health literacy/beliefs 
+ Religion/spirituality 
+ Income 
+ 
+At Kaiser Permanente, we 
+ Value differences in culture, experience, and perspective 
+ Seek out and consider differing points of view 
+ Treat all individuals with dignity and respect 
+ Make all individuals feel important and welcome 
+ Seek to understand different medical needs based on diversity and promote 
+culturally and linguistically appropriate care 
+ 
+16.1 NON-DISCRIMINATION 
+ 
+The Kaiser Permanente Medical Care Program (KPMCP) does not discriminate in the 
+delivery of health care based on race/ethnicity, color, national origin, ancestry, religion, 
+sexual orientation (including gender, gender identity, or gender related 
+appearance/behavior whether or not stereotypically associated with the person’s 
+assigned sex at birth), marital status, veteran’s status, age, genetic information, medical 
+
+70 
+Kaiser Permanente ND&A HMO Provider 
+Manual for Contracted Institutional Providers (REV. 10-24) 
+history, medical conditions, claims experience, evidence of insurability (including 
+conditions arising out of acts of domestic violence), source of payment or any other 
+protected status. 
+ 
+It is also the policy of KPMCP to require that facilities and services be accessible to 
+individuals with mental or physical disabilities in compliance with the Americans with 
+Disabilities Act of 1990 (“ADA”), Section 504 of the Rehabilitation Act of 1973, and 
+other applicable federal and state laws and regulations that prohibit discrimination on 
+the basis of disability. Kaiser Permanente is committed to providing equal access for 
+members with disabilities. 
+ 
+As a provider for HMO products offered by KP, you are expected to adhere to KP’s 
+“Nondiscrimination in the Delivery of Health Care Policy” (as may be amended from 
+time to time) and to all applicable federal and state laws and regulations that prohibit 
+discrimination on the basis of disability. For copy of the most current policy, Providers may 
+contact Member Services. The Member Services telephone number is located in the 
+“Key Contacts” section of this Provider Manual. 
+ 
+ 
+16.2 KP’S LANGUAGE ASSISTANCE PROGRAM 
+ 
+All Providers must cooperate and comply with KP’s Language Assistance Program by 
+assisting any limited English proficient (LEP) KP Member with access to KP’s Language 
+Assistance Program services. 
+ 
+Providers must ensure that KP Members or, if applicable, their family, caregivers or 
+legal guardian(s) receive effective, understandable, and respectful care that is provided 
+in a manner compatible with their cultural health beliefs, practices, and preferred 
+language. Providers should offer language assistance, auxiliary aids and services, 
+including sign language interpreters to KP members who appear to need it even if they 
+do not ask for it or if their language preference was not indicated on the referral form. If 
+facility or place of business is open 24 hours/day, 7 days/week, then language assistance 
+is to be made available 24 hours/day, 7 days/week. Kaiser Permanente also requires 
+contracted providers and their staff to comply with ADA regulations in providing auxiliary 
+aids services, free of charge, for Members and their companions who are deaf or hard of 
+hearing in order to ensure effective communication. 
+ 
+Please refer to the: Qualified Interpreter Services for Limited English Proficient Persons 
+Policy CA.HP.Operations.LA005002, available at 
+ https://healthy.kaiserpermanente.org/southern-california/get-care/interpreter-
+services. 
+ 
+ 
+The proactive offer and/or use of language assistance services must be documented in 
+the KP Member's medical record, even if the communication occurred directly with the 
+Provider or Provider’s qualified bilingual staff (QBS). If language assistance was utilized 
+
+71 
+Kaiser Permanente ND&A HMO Provider 
+Manual for Contracted Institutional Providers (REV. 10-24) 
+the type of service provided must be documented, along with the type/name of the 
+service and the interpreter’s name and ID, either of the Provider, the Provider’s QBS or 
+the contracted KP language assistance vendor. Should an LEP KP Member refuse to 
+accept language interpreter services, the Provider must document this refusal in the 
+KP Member's medical record and the reason for such refusal. In addition, if language 
+assistance was requested by the KP Member and not provided the reason for not 
+providing such services must be documented in the Member’s medical record. Please 
+see the subsection titled “Documentation” below. 
+ 
+You can review Kaiser Permanente’s Qualified Interpreter Services for Limited English 
+Proficient Persons policy on the kp.org website at 
+https://healthy.kaiserpermanente.org/southern-california/get-care/interpreter-services or 
+you may contact the SCAL Equity, Inclusion & Diversity department at equity-inclusion-
+diversity-scal-hi-rgnl@kp.org for questions regarding language services. 
+ 
+16.3 USING QUALIFIED BILINGUAL STAFF 
+ 
+Our expectation is that you will provide interpreter services in-person using your own 
+qualified bilingual staff if you have them. 
+ 
+Your qualified bilingual staff should meet the regulatory standards set out in KP’s 
+minimum quality standards for interpreters: 
+ Documented and demonstrated proficiency in both English and the other (target) 
+language. 
+ Fundamental knowledge in both languages of health care, clinical, and medical 
+terminology, and concepts; and 
+ Education and training in interpreting ethics, conduct and confidentiality. 
+ 
+Provider must have a process in place to ensure ongoing competency of staff and to 
+cooperate with KP by providing access to this information upon reasonable notice. 
+ 
+ 
+WHEN QUALIFIED BILINGUAL STAFF ARE NOT AVAILABLE 
+ 
+If you do not have qualified bilingual staff at the time services are needed, KP has 
+made the following arrangements available to Providers when providing services to KP 
+Members. KP will directly reimburse the companies described below for interpreter 
+services provided to KP Members. Neither Members nor Providers will be billed by 
+these companies for interpreter services. 
+ 
+16.4 TELEPHONE INTERPRETATION 
+ 
+United Language Group is a company with the capability to provide telephonic 
+interpreter services in 200 different languages. Phone interpreter services are 
+available 24 hours per day, 7 days per week through United Language Group by 
+calling: (855) 701-8100. This phone number is dedicated to the interpreter needs of 
+
+72 
+Kaiser Permanente ND&A HMO Provider 
+Manual for Contracted Institutional Providers (REV. 10-24) 
+Members. While no lead time is needed to engage an interpreter through this service, 
+Providers must have the following data elements available before placing the call: 
+ KP Client ID number. This number will be provided to you, in writing, 
+together with your authorization. 
+ KP referral or authorization number 
+ Member’s MRN 
+ Member’s language preference 
+ 
+United Language Group customer service can be reached through email 
+(customer.care@ulgroup.com). You will receive a follow-up response within 48 hours. 
+ 
+16.5 SIGN LANGUAGE SUPPORT 
+ 
+Interpreters Unlimited is a company with the capability to provide in-person interpreter 
+services for Members requiring sign language services (i.e., American Sign Language, 
+etc.). At least t w o week’s advance notification of need for a Sign Language interpreter 
+is recommended to help ensure an interpreter is available. Please provide as much 
+advance notice as possible when requesting a Sign Language interpreter. Interpreters 
+Unlimited can be reached by calling: (844) 855-0249 7 days a week. Providers may 
+arrange in-person interpreter services for multiple dates of service with one call. 
+ 
+Providers must have the following data elements available before placing the request 
+for service: 
+ KP Client ID number. This number will be provided to you, in writing, 
+together with your authorization. 
+ KP referral or authorization number 
+ Member’s Medical Record Number (MRN) 
+ Date(s) of member’s appointment(s) 
+ Time and duration of each appointment 
+ Specific address and location of appointment(s) 
+ Any access or security measures the interpreter will need to know and 
+plan for to gain entry to the place of service 
+ Key contact name and number for KP inquiries regarding the 
+request for interpreter services 
+ 
+Any cancellation must be made at least 24 hours in advance of the scheduled 
+appointment. 
+ 
+Interpreters Unlimited customer service can be reached at (800) 726-9891, 24 hours per 
+day, 7 days a week. 
+ 
+Note: Interpreters Unlimited interpreter will provide a verification of service form while 
+onsite. Please ensure the Provider staff verify and sign this form. 
+ 
+Please inform KP of any complaints, concerns or questions that you have with the KP 
+
+73 
+Kaiser Permanente ND&A HMO Provider 
+Manual for Contracted Institutional Providers (REV. 10-24) 
+provided language assistance service vendors by sending an email to equity-inclusion-
+diversity-scal-hi-rgnl@kp.org. 
+ 
+16.6 FAMILY MEMBERS AND FRIENDS AS INTERPRETERS 
+ 
+The KP Language Assistance Program strongly discourages, but does not prohibit, 
+adult family members and friends (age 18 and over) from serving as interpreters for 
+Members. Members must first be offered language assistance and informed of the 
+benefits of using professional language assistance. If after that offer, the Member 
+refuses and prefers to use a family member, that refusal must be documented in the 
+Member's medical record. However, the Provider can still elect to utilize language 
+assistance services to ensure effective, accurate and appropriate communication 
+occurs. Minor children should not be used as interpreters except in extraordinary 
+situations such as medical emergencies where any delay could result in harm to a 
+member/patient, and only until a qualified interpreter is available. Use of a minor child 
+for interpretation under these circumstances should be documented in the medical 
+record. 
+ 
+16.7 DOCUMENTATION 
+ 
+Providers need to document the following in the KP Member's Medical Record: 
+ 
+ Language assistance was either offered (or requested) to (by) a Limited 
+English Proficient or hearing impaired KP Member. 
+ If language assistance was refused by the KP Member; the reason why must be 
+noted, e.g., used family member. 
+ What type of service was utilized (telephonic, in-person interpreter services or 
+qualified bilingual staff), for those Members who accept/use language assistance? 
+ Name, ID, association, of the vendor, person and/or family member (18 years of 
+age or older) that provided such language assistance. 
+ 
+Providers must document the required information for KP to assess compliance and 
+cooperate with KP by providing access to that information upon reasonable notice. 
+ 
+16.8 ONSITE SIGHT TRANSLATION SERVICES 
+ 
+The requirements set forth above also apply to KP Member requests for the onsite 
+verbal sight translation of documents related to such Member's care (i.e., verbal sight 
+translation of a written document provided to the KP Member and related to services 
+provided to such Member). To the extent a KP Member requests written translation 
+of one or more documents, the Member should be referred to the KP Member Services 
+Department. 
+ 
+ 
+ 
+
+74 
+Kaiser Permanente ND&A HMO Provider 
+Manual for Contracted Institutional Providers (REV. 10-24) 
+16.9 STAFF TRAINING 
+ 
+Providers shall provide adequate training regarding the KP’s language assistance 
+program requirements to Provider staff who have contact with KP’s LEP 
+members. The training shall include instruction on: 
+ 
+ Understanding and complying with KP’s Language Assistance Program 
+ Working effectively with KP’s LEP and hearing-impaired Members 
+ Working effectively with interpreters in person and through video, telephone, and 
+other media, as may be applicable 
+ How to access the KP language vendors and how to report any problems 
+ How to document the use and refusal of language services 
+ Understanding the cultural diversity of KP’s Member population and sensitivity to 
+cultural differences relevant to delivery of health care interpretation services. 
+ 
+Providers must document that training has occurred and submit training materials, sign-in 
+sheets, attestations, knowledge checks and other relevant materials to KP to allow KP 
+to assess compliance and cooperate with KP by providing access to that information 
+upon reasonable notice. 
+ 
+16.10 COMPLIANCE WITH LANGUAGE ASSISTANCE 
+ 
+Providers must ensure they comply with KP’s Language Assistance Program 
+requirements. Providers must cooperate with KP by providing any and all information 
+necessary to access compliance, including but not limited to, participation in onsite 
+audits and requests for documentation as required by KP. 
+ 
+Section XVII: Compliance 
+ 
+KP strives to demonstrate high ethical standards in our business practices. The 
+Agreement details specific laws and contractual provisions with which you are expected 
+to comply. This section of the Manual details additional compliance obligations. 
+ 
+17.1 COMPLIANCE WITH LAW 
+ 
+Providers are expected, and required by their Agreement, to conduct their business 
+activities in full compliance with all applicable state and federal laws. 
+ 
+17.2 KP PRINCIPLES OF RESPONSIBILITY AND COMPLIANCE HOTLINE 
+ 
+The KP Principles of Responsibility (POR) is the code of conduct for KP physicians, 
+employees and contractors working in KP facilities (KP Personnel) in their daily work 
+environment. If you are working in a KP facility, you will be given/have access to a copy 
+of the POR for your reference. You should report to KP any suspected wrongdoing or 
+
+75 
+Kaiser Permanente ND&A HMO Provider 
+Manual for Contracted Institutional Providers (REV. 10-24) 
+compliance violations by KP Personnel under the POR. The KP Ethics and Compliance 
+Hotline is a convenient and anonymous way to report a suspected wrongdoing without 
+fear of retaliation. It is available twenty-four (24) hours per day, three hundred sixty-five 
+(365) days per year. The toll-free Ethics and Compliance Hotline number is (888) 774-
+9100. KP also provides an online resource to report suspected wrongdoing online, 
+at https://compliance.kaiserpermanente.org/ 
+ 
+Providers are encouraged to review the KP POR and Vendor Code of Conduct at: 
+http://www.kp.org/compliance. The KP POR and Vendor Code of Conduct are 
+applicable to interactions between you and KP and failure to comply with provisions of 
+these standards may result in a breach of your Agreement with KP. 
+ 
+ 
+17.3 GIFTS AND BUSINESS COURTESIES 
+ 
+Even if certain types of remuneration are permitted by law, KP discourages Providers 
+from giving gifts, meals, entertainment or other business courtesies to KP Personnel, in 
+particular the following strictly prohibited items: 
+ 
+ Gifts or entertainment of any value 
+ Gifts, meals or entertainment that are provided on a regular basis 
+ Cash or cash-equivalents, such as checks, gift certificates/cards, stocks, or 
+coupons 
+ Gifts from government representatives 
+ Gifts or entertainment that reasonably could be perceived as a bribe, payoff, deal 
+or any other attempt to gain advantage 
+ Gifts or entertainment given to KP Personnel involved in KP purchasing and 
+contracting decisions 
+ Gifts or entertainment that violate any laws or KP policy 
+ 
+17.4 CONFLICTS OF INTEREST 
+ 
+Conflicts of interest between a Provider and KP Personnel or the appearance of it, 
+should be avoided. There may be some circumstances in which members of the same 
+family or household may work for KP and for a Provider. However, if this creates an 
+actual or potential conflict of interest, you must disclose the conflict at the earliest 
+opportunity, in writing, to a person in authority at KP (other than the person who has the 
+relationship with the Provider). You may call the toll-free Ethics and Compliance Hotline 
+number at (888) 774-9100 for further guidance on potential conflicts of interest. 
+ 
+17.5 FRAUD, WASTE, AND ABUSE 
+ 
+You are expected to comply with all applicable state and federal laws governing 
+remuneration for health care services, including anti-kickback and physician self-referral 
+laws. KP will investigate allegations of Provider fraud, waste, or abuse, related to 
+
+76 
+Kaiser Permanente ND&A HMO Provider 
+Manual for Contracted Institutional Providers (REV. 10-24) 
+services provided to Members, and where appropriate, will take corrective action, 
+including but not limited to civil or criminal action. The Federal False Claims Act and 
+similar state laws are designed to reduce fraud, waste, and abuse by allowing citizens to 
+bring suit on behalf of the government to recover fraudulently obtained funds (i.e., 
+“whistleblower” or “qui tam” actions). KP Personnel may not be threatened, harassed or 
+in any manner discriminated against in retaliation for exercising their rights under the 
+False Claims Act or similar state laws. 
+ 
+17.6 PROVIDERS INELIGIBLE FOR PARTICIPATION IN GOVERNMENT HEALTH 
+CARE PROGRAMS 
+ 
+KP expects the Provider to (a) disclose whether any of its officers, directors, employees, 
+or subcontractors are or become sanctioned by, excluded from, debarred from, or 
+ineligible to participate in any State or federal program or is convicted of a criminal 
+offense related to the provision of healthcare and (b) assume full responsibility for 
+taking all necessary steps to assure that your employees, subcontractors and agents 
+directly or indirectly involved in KP business have not been and are not currently 
+excluded from participation in any federal program and this shall include, but not be 
+limited to, routinely screening all such names against all applicable lists of individuals or 
+entities sanctioned by, excluded from, debarred from, or ineligible to participate in any 
+federal program published by government agencies (including the U.S Department of 
+Health and Human Services, Office of Inspector General, List of Excluded Individuals and 
+Entities at http://oig.hhs.gov/exclusions/exclusions_list.asp and U.S General Services 
+Administration, Excluded Parties List System at https://www.sam.gov as and when those 
+lists are updated from time to time, but no less often than upon initial hiring or contracting 
+and annually thereafter. Providers are required to document their actions to screen such 
+lists, and upon request certify compliance with this requirement to KP. KP will not do 
+business with any entity or individual who is or becomes excluded by, precluded from, 
+debarred from or otherwise ineligible to participate in any federal health care program or 
+is convicted of a criminal offense related to the provision of health care. 
+ 
+17.7 VISITATION POLICY 
+ 
+When visiting KP facilities (if applicable), you are expected to comply with the applicable 
+visitation policy, which is available at KP facilities upon request. “Visitor” badges provided 
+by the visited KP facility must be worn at all times during the visit. 
+ 
+17.8 ACCESS AND AVAILABILITY 
+Provider shall ensure covered services are available (i) during normal business hours, 
+(ii) when medically indicated, on a prompt or same-day basis, and (iii) as otherwise 
+specified in the Agreement, this Provider Manual or applicable laws. Provider shall 
+ensure covered services are readily available and accessible to members; provided in a 
+timely manner, without delays in appointment scheduling and waiting times; and provided 
+in a manner appropriate for the nature of a member’s condition, and consistent with 
+applicable recognized standards of good professional practice, Kaiser Permanente 
+
+77 
+Kaiser Permanente ND&A HMO Provider 
+Manual for Contracted Institutional Providers (REV. 10-24) 
+policies and applicable laws. If it is necessary for Provider, a commercial or Medi-Cal 
+member to reschedule an appointment, the appointment shall be promptly rescheduled in 
+a manner that is appropriate for the member’s health care needs and ensures continuity 
+of care consistent with good professional practice, and as otherwise required by 
+applicable law. 
+ 
+If Provider provides covered services to treat commercial or Medi-Cal members who are 
+undergoing a course of treatment for an ongoing mental health (including an autism 
+diagnosis) or substance use disorder condition, Provider must offer follow-up 
+appointments as follows, except as otherwise required or permitted by applicable laws: 
+ Nonurgent follow-up appointments with a nonphysician mental health care or 
+substance use disorder provider must be offered within 10 business days of the 
+member’s prior appointment, except as otherwise permitted by law and as 
+described in below. This requirement does not limit coverage for nonurgent follow 
+up appointments with a nonphysician mental health care or substance use 
+disorder provider to once every 10 business days. 
+ The 10-business day timeframe for a follow-up appointment may be extended if 
+the referring or treating health care provider, or the health professional providing 
+triage or screening services, as applicable, acting within the scope of their practice 
+and consistent with professionally recognized standards of practice, has 
+determined and noted in the relevant record that a longer waiting time will not have 
+a detrimental impact on the health of the Member. 
+ 
+If a Member declines an appointment offered within the above guidelines, or if Provider, 
+in consultation with the referring or treating health care provider, determines that a longer 
+waiting time will not have a detrimental impact on the health of the Member, the 
+declination or the professional determination and underlying clinical basis for a delayed 
+appointment shall be documented in the Member’s medical record maintained by the 
+treating provider. 
+ 
+Section XVIII: Confidentiality of Member Information 
+ 
+Health care providers, including Kaiser Permanente and you or your facility, are legally 
+and ethically obligated to protect the privacy of Members and patients. Kaiser 
+Permanente requires that you keep its Members’ medical information confidential and 
+secure. This requirement is based on state and federal confidentiality laws, as well as 
+policies and procedures created by Kaiser Permanente. 
+ 
+As a contracted provider for Kaiser Permanente, you may not use or disclose the 
+personal health information of a Health Plan Member, except as needed to provide 
+medical care to Members or patients, to bill for services or as necessary to regularly 
+conduct business. Personal health information refers to medical information, as well as 
+information that can identify a Member, including a Member’s address and telephone 
+number. 
+
+78 
+Kaiser Permanente ND&A HMO Provider 
+Manual for Contracted Institutional Providers (REV. 10-24) 
+ 
+Medical information may not be disclosed without the authorization of the Member or 
+patient, except when the release of information is either permitted or required by law. 
+ 
+18.1 HIPAA AND PRIVACY RULES 
+ 
+As a contracted provider, you may have signed a document that creates a Business 
+Associate (BA) relationship with Kaiser Permanente as such relationship is defined by 
+federal regulations commonly known as “HIPAA” (Health Insurance Portability and 
+Accountability Act of 1996 (Public Law 104-91)). If you are providing standard member 
+care services that does not require a Business Associate Agreement (BAA), you still 
+must preserve the confidentiality and privacy of our Members’ medical information as a 
+HIPAA “covered entity”. 
+ 
+If you did not sign a BAA, you are a "covered entity" as that term is defined under 
+HIPAA, and the Privacy Rule. As a covered entity, you have specific responsibilities to 
+limit the uses and disclosures of protected health information (“PHI”), as that term is 
+defined by the Privacy Rule (45 CFR Section 164.501). 
+ 
+Certain data which may be exchanged because of your relationship with Kaiser 
+Permanente is subject to the HIPAA regulations. To the full extent applicable by the 
+provisions of HIPAA, you must comply with HIPAA, including but not limited to the 
+HIPAA standards for (i) privacy, (ii) code set, (iii) data transmission standards, and (iv) 
+security regarding physical storage, maintenance, transmission of and access to 
+individual health information. 
+ 
+You must use and disclose PHI only as permitted by HIPAA and the Privacy Rule, 
+subject to any additional limitations, if any, on the use and disclosure of that information 
+as imposed by your Agreement or any B A A you may have signed with Kaiser 
+Permanente. You must maintain and distribute a Notice of Privacy Practices (NPP) (45 
+CFR Section 164.520) to Members using your services. You must distribute your (NPP) 
+to and obtain acknowledgements from Members receiving services from you, in a 
+manner consistent with your practices for other members. You must give Kaiser 
+Permanente a copy of your NPP and give Kaiser Permanente a copy of each 
+subsequent version of your NPP whenever a material change has been made to the 
+original Notice. 
+ 
+You are required by HIPAA to provide a Member with access to his or her PHI, to allow 
+that Member to amend his or her PHI, and to provide an accounting of those disclosures 
+identified under the Privacy Rule as reportable disclosures. You must extend these 
+same rights to Health Plan Members who are your members. If you amend a 
+Member’s record, allows a Member to amend their record, or include in your records 
+any statement of a Member pursuant to HIPAA requirements, you must give a copy of 
+such item to Kaiser Permanente. 
+ 
+ 
+
+79 
+Kaiser Permanente ND&A HMO Provider 
+Manual for Contracted Institutional Providers (REV. 10-24) 
+18.2 CONFIDENTIALITY OF ALCOHOL AND DRUG ABUSE PATIENT RECORDS 
+ 
+In receiving, storing, processing, or otherwise dealing with any member records, Provider 
+is fully bound by the federal substance abuse confidentiality rules set forth at 42 CFR Part 
+2 and if necessary, must resist in judicial proceedings any efforts to obtain access to 
+member records, except as permitted by these regulations. 
+ 
+ 
+ 
+18.3 PROVIDER RESOURCES 
+ 
+ KP’s Ethics & Compliance Hotline: (888) 774-9100 
+ KP’s Network Development and Administration: (626) 405-3240 
+ 
+ 
+ 
+ 
+Appendix 1 
+ 
+ 
+Please refer to this link for ‘POL – 020 Clinical Review Payment Determination Policy’ 
+as referenced on page 45 of this HMO Provider Manual. 
+ 
+https://healthy.kaiserpermanente.org/content/dam/kporg/final/documents/community-
+providers/scal/ever/clinical-review-payment-determination-policy-en.pdf

@@ -6,6 +6,7 @@ from .llm import PromptMessage, StructuredLLM
 from .policy_retriever import PolicyRetriever
 from .schemas import InsuranceAgentInput, InsuranceAgentOutput
 
+
 def _normalize_insurance_output(result: InsuranceAgentOutput) -> InsuranceAgentOutput:
     requirement_map = {
         "physician_justification": "physician_justification_note",
@@ -38,17 +39,34 @@ def _normalize_insurance_output(result: InsuranceAgentOutput) -> InsuranceAgentO
 
     return result
 
+
 class InsuranceLLMAgent:
     def __init__(
         self,
         llm: StructuredLLM,
         retriever: PolicyRetriever,
+        *,
+        debug: bool = False,
     ) -> None:
         self.llm = llm
         self.retriever = retriever
+        self.debug = debug
 
     def run(self, payload: InsuranceAgentInput) -> InsuranceAgentOutput:
         retrieved_policy = self.retriever.retrieve(payload)
+
+        # added debug message to test retrieved policy 
+        if self.debug:
+            print("\n=== Retrieved Policy Chunks ===")
+            if not retrieved_policy:
+                print("[WARN] No policy chunks retrieved.")
+            for i, chunk in enumerate(retrieved_policy, start=1):
+                print(f"\n--- Chunk {i} ---")
+                print(f"source_ref: {chunk.source_ref}")
+                print(f"title: {chunk.title}")
+                print(f"url: {chunk.url}")
+                print(chunk.text[:800])
+
         messages = build_insurance_messages(
             payload=payload,
             retrieved_policy=retrieved_policy,
@@ -61,7 +79,7 @@ class InsuranceLLMAgent:
                 messages=messages,
                 response_model=InsuranceAgentOutput,
             )
-            
+
             result = _normalize_insurance_output(result)
 
             errors = validate_insurance_output(

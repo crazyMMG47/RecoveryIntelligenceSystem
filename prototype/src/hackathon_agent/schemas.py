@@ -7,7 +7,7 @@ from __future__ import annotations
 from enum import Enum
 
 from pydantic import BaseModel, ConfigDict, Field
-
+from typing import Optional
 
 class StrictModel(BaseModel):
     model_config = ConfigDict(extra="forbid", str_strip_whitespace=True)
@@ -166,7 +166,7 @@ class ClinicalAgentOutput(StrictModel):
 
 class InsuranceAgentInput(StrictModel):
     question: str = Field(min_length=1)
-    policy_text: str = Field(min_length=1)
+    policy_text: Optional[str] = None
     clinical_decision: ClinicalDecision
     clinical_evidence: list[EvidenceItem] = Field(default_factory=list)
     clinical_requirements: list[RequirementItem] = Field(default_factory=list)
