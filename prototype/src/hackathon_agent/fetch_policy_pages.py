@@ -1,5 +1,6 @@
 ### Fetch policy pages 
 # read url, fetch each url once, save cleaned text locally into a cache folder 
+# TODO: current issue: need to gectch everytime
 
 from __future__ import annotations
 

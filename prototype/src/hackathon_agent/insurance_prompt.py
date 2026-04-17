@@ -2,8 +2,8 @@ from __future__ import annotations
 
 import json
 
+from ...kp.bucketed_policy_retriever import EvidenceBucket
 from .llm import PromptMessage
-from .policy_retriever import RetrievedPolicyChunk
 from .schemas import InsuranceAgentInput
 
 
@@ -43,14 +43,18 @@ ALLOWED_COVERAGE_RULE_IDS = [
 INSURANCE_SYSTEM_PROMPT_TEMPLATE = """
 You are the Insurance Agent in a multi-agent healthcare workflow.
 
-Your job is to review the requested clinical service against the retrieved insurance policy text
+Your job is to review the requested clinical service against the retrieved insurance policy evidence
 and return only structured insurance output.
+
+You are given bucketed policy evidence. Each bucket represents a different insurance decision dimension.
+Use the buckets to reason systematically.
 
 Rules:
 - Do not rewrite the clinical recommendation.
 - Do not invent policy language or coverage rules.
-- Use only information present in the provided clinical input and retrieved policy text.
+- Use only information present in the provided clinical input and retrieved bucket evidence.
 - If policy support is unclear, return unclear rather than inventing certainty.
+- If important buckets are weak or underfilled, lower your confidence.
 - Return an InsuranceAgentOutput object only.
 - All code-like fields must use only the allowed internal vocabulary shown below.
 
@@ -65,6 +69,12 @@ Allowed decision.decision_drivers values:
 
 Allowed coverage_rules.rule_id values:
 {allowed_coverage_rule_ids}
+
+Interpret the buckets as follows:
+- coverage_rules: applicable plan / policy / benefit language
+- medical_necessity: support for continuation or medical necessity
+- documentation_requirements: what documents or structured evidence must be present
+- stop_or_escalate: reasons therapy may stop, be denied, require escalation, continuity handling, or re-authorization
 
 Use these exact mappings:
 - physician justification requirement -> physician_justification_note
@@ -88,17 +98,28 @@ Use these exact rule_id mappings:
 
 def build_insurance_messages(
     payload: InsuranceAgentInput,
-    retrieved_policy: list[RetrievedPolicyChunk],
+    retrieved_buckets: list[EvidenceBucket],
 ) -> list[PromptMessage]:
-    policy_context = [
-        {
-            "source_ref": chunk.source_ref,
-            "title": chunk.title,
-            "text": chunk.text,
-            "url": chunk.url,
-        }
-        for chunk in retrieved_policy
-    ]
+    bucket_context = []
+    for bucket in retrieved_buckets:
+        bucket_context.append(
+            {
+                "bucket_name": bucket.bucket_name,
+                "query": bucket.query,
+                "confidence": bucket.confidence,
+                "notes": bucket.notes,
+                "chunks": [
+                    {
+                        "source_ref": chunk.source_ref,
+                        "title": chunk.title,
+                        "section": chunk.section,
+                        "text": chunk.text,
+                        "url": chunk.url,
+                    }
+                    for chunk in bucket.chunks
+                ],
+            }
+        )
 
     example_json = {
         "decision": {
@@ -161,7 +182,7 @@ def build_insurance_messages(
         "clinical_decision": payload.clinical_decision.model_dump(),
         "clinical_evidence": [item.model_dump() for item in payload.clinical_evidence],
         "clinical_requirements": [item.model_dump() for item in payload.clinical_requirements],
-        "retrieved_policy": policy_context,
+        "retrieved_buckets": bucket_context,
     }
 
     system_prompt = INSURANCE_SYSTEM_PROMPT_TEMPLATE.format(

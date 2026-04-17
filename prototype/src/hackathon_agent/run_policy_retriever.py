@@ -1,6 +1,15 @@
 from __future__ import annotations
 
-from policy_retriever import PolicyRetriever
+import sys
+from pathlib import Path
+
+# project root = .../RecoveryIntelligenceSystem/prototype
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
+if str(PROJECT_ROOT) not in sys.path:
+    sys.path.insert(0, str(PROJECT_ROOT))
+    
+from kp.bucketed_policy_retriever import BucketedPolicyRetriever   
+
 from schemas import (
     CarePath,
     ClinicalDecision,
@@ -16,19 +25,14 @@ from schemas import (
 
 
 def main() -> None:
-    retriever = PolicyRetriever(
-        # cache_dir="policy_cache",
-        cache_dir="/home/smooi/RecoveryIntelligenceSystem/data/policy_cache",
-        # TODO: make relative path 
-        top_k=4,
-    )
+    retriever = BucketedPolicyRetriever(top_k_per_bucket=3)
 
     payload = InsuranceAgentInput(
         question=(
             "Is additional 2x/week physical therapy medically necessary, "
             "and what documentation is needed for approval?"
         ),
-        policy_text="",  # IMPORTANT: force real retrieval from cache
+        policy_text=None,
         clinical_decision=ClinicalDecision(
             recommended_service="supervised_pt",
             recommendation_disposition=RecommendationDisposition.RECOMMEND,
@@ -66,16 +70,39 @@ def main() -> None:
         ],
     )
 
-    chunks = retriever.retrieve(payload)
+    buckets = retriever.retrieve(payload)
 
-    print(f"\nRetrieved {len(chunks)} chunk(s)\n")
-    for i, chunk in enumerate(chunks, start=1):
-        print(f"=== Chunk {i} ===")
-        print("source_ref:", chunk.source_ref)
-        print("title:", chunk.title)
-        print("url:", chunk.url)
-        print(chunk.text[:1200])
-        print("\n")
+    print(f"\nRetrieved {len(buckets)} bucket(s)\n")
+
+    for bucket in buckets:
+        print("=" * 90)
+        print(f"BUCKET: {bucket.bucket_name}")
+        print(f"QUERY: {bucket.query}")
+        print(f"CONFIDENCE: {bucket.confidence:.2f}")
+
+        if bucket.notes:
+            print("NOTES:")
+            for note in bucket.notes:
+                print(f"  - {note}")
+
+        if not bucket.chunks:
+            print("[WARN] No chunks retrieved for this bucket.\n")
+            continue
+
+        print(f"\nRetrieved {len(bucket.chunks)} chunk(s) for this bucket:\n")
+
+        for i, chunk in enumerate(bucket.chunks, start=1):
+            print(f"--- Chunk {i} ---")
+            print("source_ref:", chunk.source_ref)
+            print("title:", chunk.title)
+            print("section:", chunk.section)
+            print("bucket:", chunk.bucket)
+            print("url:", chunk.url)
+            print(chunk.text[:1200])
+            print("\n")
+
+    print("=" * 90)
+    print("Done.\n")
 
 
 if __name__ == "__main__":

@@ -1,9 +1,9 @@
 from __future__ import annotations
 
+from ...kp.bucketed_policy_retriever import BucketedPolicyRetriever, EvidenceBucket
 from .insurance_contract import validate_insurance_output
 from .insurance_prompt import build_insurance_messages
 from .llm import PromptMessage, StructuredLLM
-from .policy_retriever import PolicyRetriever
 from .schemas import InsuranceAgentInput, InsuranceAgentOutput
 
 
@@ -44,7 +44,7 @@ class InsuranceLLMAgent:
     def __init__(
         self,
         llm: StructuredLLM,
-        retriever: PolicyRetriever,
+        retriever: BucketedPolicyRetriever,
         *,
         debug: bool = False,
     ) -> None:
@@ -53,23 +53,34 @@ class InsuranceLLMAgent:
         self.debug = debug
 
     def run(self, payload: InsuranceAgentInput) -> InsuranceAgentOutput:
-        retrieved_policy = self.retriever.retrieve(payload)
+        retrieved_buckets = self.retriever.retrieve(payload)
 
-        # added debug message to test retrieved policy 
         if self.debug:
-            print("\n=== Retrieved Policy Chunks ===")
-            if not retrieved_policy:
-                print("[WARN] No policy chunks retrieved.")
-            for i, chunk in enumerate(retrieved_policy, start=1):
-                print(f"\n--- Chunk {i} ---")
-                print(f"source_ref: {chunk.source_ref}")
-                print(f"title: {chunk.title}")
-                print(f"url: {chunk.url}")
-                print(chunk.text[:800])
+            print("\n=== Retrieved Evidence Buckets ===")
+            if not retrieved_buckets:
+                print("[WARN] No evidence buckets retrieved.")
+
+            for bucket in retrieved_buckets:
+                print(f"\n=== Bucket: {bucket.bucket_name} ===")
+                print(f"Query: {bucket.query}")
+                print(f"Confidence: {bucket.confidence:.2f}")
+                for note in bucket.notes:
+                    print(f"Note: {note}")
+
+                if not bucket.chunks:
+                    print("[WARN] No chunks in this bucket.")
+
+                for i, chunk in enumerate(bucket.chunks, start=1):
+                    print(f"\n--- Chunk {i} ---")
+                    print(f"source_ref: {chunk.source_ref}")
+                    print(f"title: {chunk.title}")
+                    print(f"section: {chunk.section}")
+                    print(f"url: {chunk.url}")
+                    print(chunk.text[:800])
 
         messages = build_insurance_messages(
             payload=payload,
-            retrieved_policy=retrieved_policy,
+            retrieved_buckets=retrieved_buckets,
         )
 
         last_errors: list[str] = []
@@ -82,9 +93,12 @@ class InsuranceLLMAgent:
 
             result = _normalize_insurance_output(result)
 
+            # flatten bucket chunks for current validator compatibility
+            flat_chunks = self.retriever.flatten_buckets(retrieved_buckets)
+
             errors = validate_insurance_output(
                 payload=payload,
-                retrieved_policy=retrieved_policy,
+                retrieved_policy=flat_chunks,
                 result=result,
             )
             if not errors:

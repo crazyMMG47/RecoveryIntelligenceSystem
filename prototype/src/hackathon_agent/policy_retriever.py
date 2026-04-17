@@ -1,3 +1,5 @@
+### This module has now being replaced by the bucketed_policy_retriever.py
+
 from __future__ import annotations
 
 import re
