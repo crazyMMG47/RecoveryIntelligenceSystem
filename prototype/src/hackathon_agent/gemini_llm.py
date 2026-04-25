@@ -6,6 +6,7 @@ from typing import TypeVar
 from google import genai
 from google.genai import types
 from pydantic import BaseModel
+from pydantic import ValidationError
 
 from .llm import PromptMessage, StructuredLLM
 
@@ -58,4 +59,13 @@ class GeminiStructuredLLM(StructuredLLM):
         if not response.text:
             raise RuntimeError("Gemini returned an empty response.")
 
-        return response_model.model_validate_json(response.text)
+        try:
+            return response_model.model_validate_json(response.text)
+        except ValidationError as exc:
+            preview = response.text[:800]
+            raise RuntimeError(
+                "Gemini returned invalid structured JSON. "
+                "This usually means the model output was truncated or drifted from the schema.\n"
+                f"Validation error: {exc}\n"
+                f"Response preview:\n{preview}"
+            ) from exc

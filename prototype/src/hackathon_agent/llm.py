@@ -32,5 +32,5 @@ class UnconfiguredStructuredLLM:
         response_model: type[T],
     ) -> T:
         raise RuntimeError(
-            "Structured LLM is not configured. Wire a real model client before using the LLM-based clinical agent."
+            "Structured LLM is not configured. Wire a real model client before using an LLM-based agent."
         )

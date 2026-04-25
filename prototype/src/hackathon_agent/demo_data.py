@@ -26,11 +26,4 @@ DEMO_CASE = CaseData(
         "MRI shows mild joint effusion and early cartilage degeneration.",
         "MRI shows no acute tear or displaced hardware complication.",
     ],
-    policy_text=[
-        "Standard PT coverage is 1 session per week without additional approval.",
-        "Two sessions per week requires physician justification and utilization review.",
-        "Extended PT requests should document measurable functional deficits and a clear therapy plan.",
-        "Approval is stronger when the patient has not completed an appropriate structured rehabilitation course.",
-        "Patient adherence history may be reviewed during approval decisions.",
-    ],
 )
