@@ -1,0 +1,499 @@
+Hello everyone, welcome to the Agent
+Assemble Challenge.
+This is a quick start guide to help you
+get started on the competition.
+So, what I'm going to do is I'm going to
+walk you through the steps that you will
+need to complete to start building your
+application or your agent.
+I'm going to go first to
+app.promptopinion.ai
+and I'm going to click on sign up
+and I'm going to fill in some details in
+here.
+After you have filled in the details,
+click on the create button.
+And at this point, what you need to do
+is select a model. So, to get you
+started, what you can do is you can use
+Google AI Studio. So, you can actually
+click on this link to go to AI Studio.
+You just need a Gmail account to get a
+AI Studio account. You can go down here,
+click on get API key, and then create a
+new API key, and then create the key
+which will create a new API key for you,
+and from there you can actually copy
+this key.
+I'm going to copy that key and come back
+in here, click on load models, and what
+we recommend for the Connectathon is to
+use the Gemini 3.1 flashlight.
+So, I will go back in here.
+This one. Again, you can choose a
+different one. I'll just give it a
+quick name.
+And then what I can do is add the model.
+So, with that, your initial setup and is
+completed, and you are ready to start
+creating your first agent. So, to get
+started, what you can do is you can just
+click on this configure an agent and
+turn on this agent, which is available
+by default, which is a general chat
+agent. This is not the agent that you
+will be submitting for the competition,
+but you can use that for various testing
+scenarios.
+The next thing you would want to do is
+basically have some patients in your
+system. So, what we give you is you have
+different options. You can import some
+synthetic patients,
+or you can upload your own fire bundle,
+or the simplest way is that you can
+actually go in here and we have a couple
+of patients you know, loaded. So, I can
+just go in there and individually select
+a patient that will basically import
+some basic demographics and other data.
+And we're building on some more samples
+that we'll be sharing. You could also
+manually add a patient. And then one of
+the things that definitely recommend is
+that after you have added the patient,
+what you want to do is you basically
+want to go to the patient and upload
+some documents, clinical notes, or or
+something because most of the scenarios
+that we're working with are around
+generative AI exploring clinical notes.
+So, everyone will have a different
+scenario, but anything that works for
+your use case, upload those documents or
+any other data you want to kind of load
+for that patient. So, I'm going to do
+that here quickly.
+Once that is done, I am basically ready
+to start creating my application for you
+know, for the competition. So, what
+we're going to do is we are going to go
+through three different scenarios so
+that you have. So, you can basically
+apply for any one of them, or you can
+submit multiple applications, and I'm
+going to go through each one of them.
+The first use case basically involves no
+code at all. So, you can actually build
+an agent within Prompt Opinion workspace
+and publish it as what is known as A2A.
+What we're going to do in this scenario
+is that we're going to upload some
+sample policy documents of an
+organization, and we'll show how the
+agent basically responds based on those
+policy documents. Again, the idea here
+is to show you an example of what can be
+done without any coding within the
+system, and then you can basically build
+something accordingly based on the
+different scenarios that you're working
+on. So, what I'll do is I'm going to go
+back to Prompt Opinion, and I'm going to
+go to configuration. I'm going to go to
+these collections, and I'm going to
+create a new collection in here, and
+I'll just call it my org
+policies.
+And then what I'm going to do is I'm
+going to go ahead and upload some
+documents to it. These are just some
+policies that I've created locally that
+I can upload it in here. So, let me do
+that.
+Once I have uploaded these policies,
+I'm ready to basically build my first
+agent. So, for that, what I can do is
+I'll go to the agents tab, to the build
+your own agents, and I'm going to say
+that I'm going to configure my first
+agent in here. So, I'm going to click on
+that agent. So, what I'm going to be
+doing is I'm going to select patient in
+here because we will be testing this
+agent in the context of a patient, and
+I'll give it some name and description.
+And then what I will do is I will
+basically say that this agent is going
+to use all its grounding from the folder
+that we created. So, that way all its
+answers will be grounded in those
+policies only.
+We do let you override the system prompt
+for the agents, but if you don't put any
+system prompt in here, the agents are
+configured to by default use the content
+that it has been given to them.
+We will look at some of the other
+options in here, but the last option I
+need to do for this is go to this A2A
+and enable this because this is how we
+will be testing this particular agent
+responding to another agent's request of
+you know, with with the organization
+policies. So, once I do that, I also
+have the choice to enable the fire
+context. What that means is that if if I
+want my agent to be able to actually
+query for the patient data, I can
+actually select this.
+We'll talk about how this happens in
+some of the advanced scenarios when
+you're writing code. When you are
+building an agent within Prompt Opinion,
+this is all taken care of you, but if
+you need that, you can just turn it on
+here. And then the last thing is I need
+to basically define a skill. So, skill
+in this case is very similar to you
+know, what this agent can do. So, what
+I'm going to do is I'm going to put a
+quick name and description in here.
+And once I have done that, I can go
+ahead and save this.
+So, with that, my first agent is
+basically configured. Now, again, you
+will basically come up with scenarios
+that you feel are good
+for this particular scenarios, but to
+test this agent, what I can do is I can
+go back to my launchpad. I'm going to
+select my patient scope here because I'm
+going to test this as a patient. I'm
+going to select a patient. And then what
+I want to do is I want to select the
+general chat, not the one that the agent
+I built because we're going to show how
+it actually works in an A2A scenario.
+So, I'm going to select that particular
+agent, and the first thing I can do is I
+can just chat with it something like,
+"Summarize this patient." So, this will
+basically go and give me summary of the
+patient, but then to test my agent that
+I have built, what I can do is I can say
+I want to consult with that agent, and I
+will give it a prompt something like
+So,
+So, basically, what you'll see is that
+when I ask that question, that
+particular agent connected to the new
+agent that we had created,
+it was able to read the documents that I
+have uploaded to it,
+checked with the patient's conditions,
+and then responded based on that what I
+can you know, what I needed it to.
+So, again, this is the very simple
+scenario of how you can build
+content-based grounded agents within the
+Prompt Opinion framework as one of the
+options for submitting your to your
+competition.
+So, I'm going to go back to my drawing.
+So, this was option one, where you
+basically configured this agent within
+Prompt Opinion. It can be with you know,
+with basically content, with some other
+system prompts, however you want to
+configure it. And now we are going to go
+to the second scenario, where we want to
+build an MCP server. So, for the MCP
+server, the way it works is that you
+will be building a set of tools. These
+could be any tools that use the patient
+data and then return some you know,
+responses back to the user agent that
+will be developed.
+And what we will also do is we can
+basically pass the fire context to it,
+where the MCP server will return receive
+a token that can use to get that data.
+So, don't worry if it sounds complicated
+because what we have done is we have
+actually built some default repositories
+that you can use as a starting point.
+So, for the MCP server, you will be
+using this PO community MCP, and what I
+have is I have actually downloaded that
+repository to my local location so that
+I can run it from here, and I can show
+you how you will be using it to test it.
+But then you will be building your own
+tools in this to submit for your entry.
+And we have what we have done is we have
+basically built a couple of very basic
+tools that I'll show you, but that will
+give you ideas to get started on your
+own tools. Okay, so I already have this
+tool running on a local host, but
+obviously, to test with your
+application, you'll need to make it
+available through the internet. So, what
+I'm going to do is I'm going to actually
+use ngrok, and I'm going to create a
+port to map it to this particular port.
+So, once I have ngrok running and I have
+copied the port, I can go back to my
+application, and what I'm going to do is
+I'm going to go back to my workspace
+hub, and I'm going to add the new MCP
+server that we just added
+here. So, what I need to do is just copy
+the URL. This is my ngrok URL, and then
+forward slash MCP. I'll give it a name
+my mcp. Um, streamable HTTP, we don't
+have any authentication built on it by
+default, so you can obviously, you know,
+customize it and put keys in there. Uh,
+and then the important thing here is
+that I'm going to check this box. This
+is the box that will tell that, you
+know, hey, I need to pass in the token
+uh, using which then that mcp server can
+actually make fire calls back to the
+fire server and, you know, kind of
+return some uh, data and other things.
+Uh, and again, all of this code is
+available in the repo in .net or in
+TypeScript, so we have both the samples
+in that repo that you can see. So, I'm
+just going to go back in here and click
+uh, first of all, I'll just make test to
+make sure. Uh, and you can see that it
+is returning these two tools. They're
+very simple tools that just return a
+patient age, uh, but that will give you
+ideas to get started. And I'm just going
+to click on save. Now, to test the mcp
+server, what I can do is I can go back
+to the custom agent that I had created
+and I'm going to go into the edit there.
+And what I'm going to say is that I want
+to actually use a tool in that
+particular, uh, sorry, I'm going to use
+a tool uh, within that particular agent.
+And if I click on add, it will give me
+the tools that are in my system and then
+I can select that tool and save it. So,
+once I have this done, I can go back to
+the launchpad and again, go same way,
+select a patient, but this time I'm
+actually going to select this agent
+because what I'm trying to demo is the
+mcp server. So, I'm going to select
+there. And then what I'm going to go
+ahead and just say is is like
+I'm just going to ask a question to uh,
+get the patient age. And what you can
+see is that it returned me a response,
+uh, but the way to check that it
+actually called the tool is that you can
+actually turn this on and you will see
+that the call was made to that
+particular tool. Uh, if I had put a
+breakpoint in here, I would have seen
+it, but I could actually go down the
+path and see that the call was made to
+this. Uh, and that's kind of how it you
+know, worked.
+So, again, this was scenario number two.
+So, in this case, we built an mcp server
+and we have added that mcp server and
+made that available so that it can be
+tested uh, from an agent within the
+Prompt Opinion workspace. Again, this
+server, this repository is to give you
+something to start with. You can add as
+many tools, as many fire calls, uh, to
+kind of get that going. Uh, I will also
+just remind uh, here is uh, if I didn't
+before that uh, uh,
+when you create the workspace within
+Prompt Opinion, it is actually a fire
+server, so you can pretty much make any
+fire server calls from that mcp server,
+uh, which will be kind of being made to
+your workspace.
+So, the last option again, what we have
+is in here is uh, what we're going to do
+is to build a completely independent A2A
+agent. So, this is where if you have a
+scenario where you are building an agent
+using
+uh, Google ADK or anything, but the
+agent can support A2A
+uh, yourself, uh, then this is the
+option that you can build and then
+publish that agent. Again, to get you
+started with that, what we have done is
+we have published two repositories.
+Uh, both of them are based on Google
+ADK. They were actually white coded from
+Google ADK. One is in Python and one is
+in TypeScript. And uh, depending on
+again, your preference, you can download
+each one of them and you can see which
+one, you know, helps you and then based
+on that, you can customize them for the
+scenarios uh, that you are working on.
+I have already them downloaded in here
+and again, uh,
+if you will go into the code of that, so
+let me just close off these latest
+changes.
+Uh, it has all the steps to get started.
+Uh, the main thing I'm going to go in
+here, so the readme file, you can
+actually see how to go get started, but
+what I have done is I've already kind of
+running it, so this actually has three
+built-in agents. Uh, we are only be
+going to using one of them, which is on
+running on port 8001 and that's the one
+that we will use to test it. Now, before
+we test this, there's a couple of things
+that we need to do. First is obviously,
+we need to kind of put our ngrok to this
+particular server, so let me do that
+really quickly. So, I'm going to stop
+that.
+My current ngrok server and then I'm
+going to basically point it towards
+80 81. I think that's the server which
+is where the where the server is
+running.
+Uh, or it is actually 8001, sorry.
+Okay. So, and what then I need also need
+to do is that I need to basically copy
+this particular URL and then I need to
+go in there and copy this URL back into
+my environment variable uh, because when
+the agent card is submitted, it needs to
+kind of know where the where the agent
+is running
+uh, and it kind of needs to pick it up
+from there. Once I've done that, I will
+need to restart the application once if
+I already have it running, so let me do
+that really quickly here. Okay, so the
+application is running again and it's
+basically picked up that port. So, now
+what I can do is I will go back to my
+application
+and now we're going to actually connect
+an external agent. So, again, what I'll
+do is I will go back to my workspace
+hub, but this time I'm basically
+connecting an external agent and I'm
+going to go and say add connection and
+I'm going to paste the URL
+uh, that is basically for that ngrok URL
+and then I can click on check. Uh, what
+it will do at this point, it is
+basically connecting to that particular
+agent and it's pulling the card of that
+agent. I can see that I have the skills,
+uh, other things that are available from
+that agent, so I'm going to give it a
+name to say um,
+my external
+agent just to kind of get started. And
+then the thing is that in this case, we
+are actually uh, you know, it's telling
+me that this agent requires a key. Uh,
+so we did this on purpose. Again, while
+testing, you can adjust it, but because
+this agent will have your Gemini key or
+whatever you're using the model. Um, so
+we have a security kind of sample built
+in there, but the way it is very simple.
+If I go into the middleware, I can just
+copy that key from there
+and bring it here and just paste it
+here.
+Um, the other thing is that this agent
+will warn you that, you know, this agent
+requires fire context, so just like the
+mcp server, we can actually pass fire
+context to the agent too and the agent
+can actually then, you know, get the
+fire data directly and make calls. Uh,
+so I'm going to say yes, I do want to do
+that and then I'm going to just click
+save there to uh, you know, add that
+agent to my workspace.
+So, at this point again, the you will be
+customizing your own agent, but I have
+added that agent and that agent is
+available within my workspace. So,
+there's one last thing left to test this
+agent with one of my own agents. So,
+again, I'm going to go back to the
+launchpad and I'm going to just select
+the same patient we have been selecting.
+I'm just going to select the general
+agent because again, we are testing an
+external agent. This is how the judges
+will be testing it, too. And what I'm
+going to do is I'm just going to select
+that external agent in here and uh, just
+again, as an example, I will just say
+ask the
+And again, this is a very, very basic
+um, you know, command to show you kind
+of how the communication and the
+exchange happens. Uh, obviously based on
+your own you know, agent scenarios, this
+will be a lot more data, but what you're
+seeing in here is that I I basically
+asked the demographics. Um, this our
+agent made a call to the external agent.
+The external agent pulled that data
+directly from the fire, returned that
+data and then our agent has summarized
+this. Um, so this is how you can
+actually go into this particular agent
+and customize it and build different A2A
+scenarios for health care and then bring
+them all together.
+So, this was a very quick overview of
+what are the three different ways
+um, you can basically submit an agent or
+an mcp server for your application. Uh,
+as once you have done, once you have
+built your agents or your mcp server and
+you have tested it, uh, there will be
+one additional step that you will have
+to do and we will be building a detailed
+video on that, too. Uh, but what it
+basically will be is like any of these
+agents need to be published so that they
+can be tested by the judges and uh, you
+know, for for all the different
+scenarios. And the way you will do that
+is you will just go to this marketplace
+studio at the bottom. And depending on
+if you're submitting an mcp server uh,
+or an agent, uh, you will just go in
+here and you can basically add the way
+you added your mcp servers in here and
+you can publish them from here. Uh, this
+step will be needed before the judging
+starts. Uh, we will be doing a lot of
+office hours and other discussions
+before that, so uh, for now, you can
+basically start testing your agents and
+contact us on Discord if you have any
+other issues and we'll go from there.
+Thanks so much for uh, listening. Bye.

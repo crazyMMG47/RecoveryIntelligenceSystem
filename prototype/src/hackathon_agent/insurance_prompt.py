@@ -1,8 +1,9 @@
 from __future__ import annotations
 
 import json
+import re
 
-from ...kp.bucketed_policy_retriever import EvidenceBucket
+from .insurance_retriever import EvidenceBucket
 from .llm import PromptMessage
 from .schemas import InsuranceAgentInput
 
@@ -18,6 +19,7 @@ ALLOWED_NEXT_STEPS = [
     "attach_physician_justification_note",
     "attach_objective_deficit_measurements",
     "attach_structured_pt_plan",
+    "attach_prior_rehab_documentation",
     "add_context_for_attendance_interruptions",
 ]
 
@@ -31,6 +33,10 @@ ALLOWED_DECISION_DRIVERS = [
     "missing_required_documentation",
 ]
 
+ALLOWED_APPEAL_RISK_CODES = [
+    "attendance_interruptions_may_reduce_approval_strength",
+]
+
 ALLOWED_COVERAGE_RULE_IDS = [
     "physician_justification_required",
     "objective_deficit_required",
@@ -39,24 +45,51 @@ ALLOWED_COVERAGE_RULE_IDS = [
     "incomplete_rehab_history_supports_request",
 ]
 
+ALLOWED_APPEAL_RISK_CODES = [
+    "attendance_interruptions_may_reduce_approval_strength",
+    "weak_prior_rehab_documentation",
+    "incomplete_objective_measurements",
+    "missing_physician_justification",
+]
 
-INSURANCE_SYSTEM_PROMPT_TEMPLATE = """
+DEMO_PLAN_CONTEXT = """
+Fixed demo plan: Kaiser Foundation Health Plan of Washington VisitsPlus Silver 4500 (2026).
+- Outpatient physical therapy and rehabilitation: covered subject to plan rules.
+- Preauthorization not required for outpatient PT under this plan.
+- Rehabilitation benefit limit: 25 outpatient visits per calendar year.
+- Outpatient specialty rehab office visit copay: $75 per visit.
+- Annual deductible: $4,500 per member / $9,000 per family.
+- Out-of-pocket maximum: $9,800 per member / $19,600 per family per calendar year.
+- All covered services must be received from a Network Provider at a Network Facility.
+""".strip()
+
+INSURANCE_SYSTEM_PROMPT = """
 You are the Insurance Agent in a multi-agent healthcare workflow.
 
-Your job is to review the requested clinical service against the retrieved insurance policy evidence
-and return only structured insurance output.
+Your job is to review the requested clinical service against retrieved insurance
+policy evidence and return only structured insurance output.
 
-You are given bucketed policy evidence. Each bucket represents a different insurance decision dimension.
-Use the buckets to reason systematically.
+Fixed demo plan context (use these facts when assessing coverage and cost):
+{demo_plan_context}
 
 Rules:
 - Do not rewrite the clinical recommendation.
 - Do not invent policy language or coverage rules.
-- Use only information present in the provided clinical input and retrieved bucket evidence.
-- If policy support is unclear, return unclear rather than inventing certainty.
-- If important buckets are weak or underfilled, lower your confidence.
+- Use only the clinical input and retrieved policy buckets provided below.
+- If policy support is unclear, return unclear.
+- If required documentation is missing, reflect it in requirements and next_steps.
+- Lower confidence when bucket evidence is weak or sparse.
 - Return an InsuranceAgentOutput object only.
 - All code-like fields must use only the allowed internal vocabulary shown below.
+- Keep the output compact. Do not quote or paraphrase long policy passages.
+- Keep each coverage_rules.rule_text under 220 characters.
+- Return at most 4 coverage_rules, 4 requirements, 2 appeal_risk_factors, and 5 next_steps.
+
+Coverage position rules:
+- Use likely_covered only when all requirements are satisfied.
+- Use conditionally_covered_pending_documentation when policy supports coverage but required documentation is still missing or unresolved.
+- Use likely_denied when there is active policy exclusion or clear denial signal.
+- Use unclear when evidence is insufficient to decide.
 
 Allowed requirement.code values:
 {allowed_requirement_codes}
@@ -67,59 +100,76 @@ Allowed next_steps values:
 Allowed decision.decision_drivers values:
 {allowed_decision_drivers}
 
+Allowed appeal_risk_factors.code values:
+{allowed_appeal_risk_codes}
+
 Allowed coverage_rules.rule_id values:
 {allowed_coverage_rule_ids}
 
-Interpret the buckets as follows:
-- coverage_rules: applicable plan / policy / benefit language
-- medical_necessity: support for continuation or medical necessity
-- documentation_requirements: what documents or structured evidence must be present
-- stop_or_escalate: reasons therapy may stop, be denied, require escalation, continuity handling, or re-authorization
+Allowed appeal_risk_factors.code values:
+{allowed_appeal_risk_codes}
 
-Use these exact mappings:
+Use the evidence buckets as follows:
+- coverage_rules: plan or benefit language that governs approval
+- medical_necessity: support for continued PT or evidence that rehab remains indicated
+- documentation_requirements: physician note, therapy plan, measurements, reassessment
+- stop_or_escalate: adherence, denial risk, escalation, review triggers
+
+Use these exact mappings when supported by the evidence:
 - physician justification requirement -> physician_justification_note
 - measurable functional deficits -> objective_functional_measurements
 - clear therapy plan -> structured_therapy_plan
-- documentation of incomplete prior rehab -> document_incomplete_rehab_course
+- incomplete prior rehab documentation -> document_incomplete_rehab_course
 
-Use these exact next step mappings:
+Critical consistency rules:
+- If clinical_evidence_codes contains post_revision_rehab_incomplete and you output coverage_rules.rule_id = incomplete_rehab_history_supports_request, that rule must be supportive, satisfied_by must include post_revision_rehab_incomplete, and unsatisfied_reason must be empty.
+- Do not mark incomplete_rehab_history_supports_request as unsatisfied when post_revision_rehab_incomplete is present in the clinical evidence.
+
+Use these exact next-step mappings:
 - attach physician note -> attach_physician_justification_note
 - attach objective deficit measurements -> attach_objective_deficit_measurements
 - attach structured PT plan -> attach_structured_pt_plan
+- attach prior rehab documentation -> attach_prior_rehab_documentation
+- add context for interrupted attendance -> add_context_for_attendance_interruptions
 
-Use these exact rule_id mappings:
-- physician justification rule -> physician_justification_required
-- measurable deficit rule -> objective_deficit_required
-- therapy plan rule -> therapy_plan_required
-- adherence history review rule -> adherence_history_review
-- incomplete rehab history support rule -> incomplete_rehab_history_supports_request
+Forbidden near-miss values:
+- Do not output add_context_for_interrupted_attendance
+- Do not use decision.decision_drivers values as appeal_risk_factors.code values
 """.strip()
+
+
+def _compact_text(text: str, *, max_chars: int = 320) -> str:
+    compact = re.sub(r"\s+", " ", text).strip()
+    if len(compact) <= max_chars:
+        return compact
+    return compact[: max_chars - 3].rstrip() + "..."
 
 
 def build_insurance_messages(
     payload: InsuranceAgentInput,
     retrieved_buckets: list[EvidenceBucket],
 ) -> list[PromptMessage]:
-    bucket_context = []
-    for bucket in retrieved_buckets:
-        bucket_context.append(
-            {
-                "bucket_name": bucket.bucket_name,
-                "query": bucket.query,
-                "confidence": bucket.confidence,
-                "notes": bucket.notes,
-                "chunks": [
-                    {
-                        "source_ref": chunk.source_ref,
-                        "title": chunk.title,
-                        "section": chunk.section,
-                        "text": chunk.text,
-                        "url": chunk.url,
-                    }
-                    for chunk in bucket.chunks
-                ],
-            }
-        )
+    bucket_context = [
+        {
+            "bucket_name": bucket.bucket_name,
+            "query": bucket.query,
+            "confidence": bucket.confidence,
+            "notes": bucket.notes,
+            "chunks": [
+                {
+                    "source_ref": chunk.source_ref,
+                    "title": chunk.title,
+                    "section": chunk.section,
+                    "excerpt": _compact_text(chunk.text),
+                    "bucket": chunk.bucket,
+                    "url": chunk.url,
+                    "source_type": chunk.source_type,
+                }
+                for chunk in bucket.chunks
+            ],
+        }
+        for bucket in retrieved_buckets
+    ]
 
     example_json = {
         "decision": {
@@ -129,24 +179,16 @@ def build_insurance_messages(
                 "physician_justification",
                 "objective_functional_deficit",
                 "therapy_plan",
-                "incomplete_prior_rehab_supports_request",
             ],
         },
         "coverage_rules": [
             {
                 "rule_id": "physician_justification_required",
-                "rule_text": "Higher-frequency PT requires physician justification.",
+                "rule_text": "Two sessions per week requires physician justification and utilization review.",
                 "effect": "supporting_if_satisfied",
                 "satisfied_by": [],
                 "unsatisfied_reason": "missing_physician_note",
-            },
-            {
-                "rule_id": "objective_deficit_required",
-                "rule_text": "Extended PT requests should document measurable functional deficits.",
-                "effect": "supporting_if_satisfied",
-                "satisfied_by": ["documented_quadriceps_weakness"],
-                "unsatisfied_reason": "missing_objective_measurements",
-            },
+            }
         ],
         "requirements": [
             {
@@ -154,42 +196,34 @@ def build_insurance_messages(
                 "description": "Physician note requesting 2x/week PT is required.",
                 "owner": "insurance",
                 "status": "unsatisfied",
-            },
-            {
-                "code": "objective_functional_measurements",
-                "description": "Objective strength and movement deficit measurements are needed for utilization review.",
-                "owner": "insurance",
-                "status": "unsatisfied",
-            },
-            {
-                "code": "structured_therapy_plan",
-                "description": "Structured PT plan with goals, frequency, and reassessment timing is required.",
-                "owner": "insurance",
-                "status": "unsatisfied",
-            },
+            }
         ],
         "appeal_risk_factors": [],
         "next_steps": [
             "attach_physician_justification_note",
             "attach_objective_deficit_measurements",
-            "attach_structured_pt_plan",
+            "attach_prior_rehab_documentation",
+            "add_context_for_attendance_interruptions",
         ],
         "confidence": "medium",
     }
 
     user_payload = {
         "question": payload.question,
-        "clinical_decision": payload.clinical_decision.model_dump(),
-        "clinical_evidence": [item.model_dump() for item in payload.clinical_evidence],
-        "clinical_requirements": [item.model_dump() for item in payload.clinical_requirements],
+        "clinical_decision": payload.clinical_decision.model_dump(mode="json"),
+        "clinical_evidence_codes": [item.code for item in payload.clinical_evidence],
+        "clinical_evidence": [item.model_dump(mode="json") for item in payload.clinical_evidence],
+        "clinical_requirements": [item.model_dump(mode="json") for item in payload.clinical_requirements],
         "retrieved_buckets": bucket_context,
     }
 
-    system_prompt = INSURANCE_SYSTEM_PROMPT_TEMPLATE.format(
+    system_prompt = INSURANCE_SYSTEM_PROMPT.format(
+        demo_plan_context=DEMO_PLAN_CONTEXT,
         allowed_requirement_codes=json.dumps(ALLOWED_REQUIREMENT_CODES, indent=2),
         allowed_next_steps=json.dumps(ALLOWED_NEXT_STEPS, indent=2),
         allowed_decision_drivers=json.dumps(ALLOWED_DECISION_DRIVERS, indent=2),
         allowed_coverage_rule_ids=json.dumps(ALLOWED_COVERAGE_RULE_IDS, indent=2),
+        allowed_appeal_risk_codes=json.dumps(ALLOWED_APPEAL_RISK_CODES, indent=2),
     )
 
     return [

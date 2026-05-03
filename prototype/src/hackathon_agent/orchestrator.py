@@ -1,15 +1,15 @@
-import os
-
-from .clinical_agent import ClinicalAgent
-from .insurance_agent import InsuranceAgent
+from .clinical_llm_agent import ClinicalLLMAgent
+from .gemini_llm import GeminiStructuredLLM
+from .insurance_llm_agent import InsuranceLLMAgent
+from .insurance_retriever import InsurancePolicyRetriever
 from .schemas import (
     CarePath,
     CaseData,
     CaseResolution,
     ClinicalAgentInput,
-    ConfidenceLevel,
     ConflictItem,
-    CoverageDecision,
+    ExternalAgentResponse,
+    ExternalAnswerSection,
     HandoffPacket,
     InsuranceAgentInput,
     OrchestratorInput,
@@ -18,65 +18,45 @@ from .schemas import (
     Readiness,
     RequirementItem,
     RequirementStatus,
-    RunCaseResponse,
+    RunCaseDebugResponse,
     WorkflowOwner,
     WorkflowStep,
 )
 
+_DEMO_BENEFITS = [
+    "Fixed demo plan: Kaiser Foundation Health Plan of Washington VisitsPlus Silver 4500 (2026).",
+    "Outpatient physical therapy and rehabilitation: covered subject to plan rules.",
+    "Preauthorization not required for outpatient PT under the fixed demo plan.",
+    "Rehabilitation benefit: up to 25 outpatient visits per calendar year.",
+    "Outpatient specialty rehab office visit copay: $75 per visit.",
+    "Annual deductible: $4,500 per member / $9,000 per family.",
+    "Out-of-pocket maximum: $9,800 per member / $19,600 per family per calendar year.",
+    "Covered services must be received from a Network Provider at a Network Facility.",
+]
+
 
 class Orchestrator:
-    """
-    Coordinates the end-to-end workflow across agents.
-
-    Responsibilities:
-    1. Build agent-specific inputs from raw case data
-    2. Run clinical agent first, then insurance agent
-    3. Detect conflicts / blockers / missing information
-    4. Build a case-level workflow and final orchestrated output
-    """
-
     def __init__(
         self,
         *,
-        clinical_agent: object | None = None,
-        insurance_agent: object | None = None,
+        clinical_agent: ClinicalLLMAgent,
+        insurance_agent: InsuranceLLMAgent,
     ) -> None:
-        self.clinical_agent = clinical_agent or ClinicalAgent()
-        self.insurance_agent = insurance_agent or InsuranceAgent()
+        self.clinical_agent = clinical_agent
+        self.insurance_agent = insurance_agent
 
     @classmethod
     def from_env(cls) -> "Orchestrator":
-        use_gemini_clinical = os.getenv("USE_GEMINI_CLINICAL_AGENT", "").lower() == "true"
-        use_gemini_insurance = os.getenv("USE_GEMINI_INSURANCE_AGENT", "").lower() == "true"
-
-        if use_gemini_clinical:
-            from .clinical_llm_agent import ClinicalLLMAgent
-            from .gemini_llm import GeminiStructuredLLM
-            clinical_agent = ClinicalLLMAgent(GeminiStructuredLLM())
-        else:
-            clinical_agent = ClinicalAgent()
-
-        if use_gemini_insurance:
-            from .gemini_llm import GeminiStructuredLLM
-            from .insurance_llm_agent import InsuranceLLMAgent
-            from .policy_retriever import PolicyRetriever
-
-            insurance_agent = InsuranceLLMAgent(
-                llm=GeminiStructuredLLM(),
-                retriever=PolicyRetriever(),
-            )
-        else:
-            insurance_agent = InsuranceAgent()
-
+        llm = GeminiStructuredLLM()
         return cls(
-            clinical_agent=clinical_agent,
-            insurance_agent=insurance_agent,
+            clinical_agent=ClinicalLLMAgent(llm),
+            insurance_agent=InsuranceLLMAgent(
+                llm=llm,
+                retriever=InsurancePolicyRetriever(),
+            ),
         )
 
     def build_clinical_input(self, user_question: str, case: CaseData) -> ClinicalAgentInput:
-        """
-        Build the raw clinical input package from the case.
-        """
         return ClinicalAgentInput(
             question=user_question,
             patient_summary=case.patient_summary,
@@ -88,393 +68,377 @@ class Orchestrator:
     def build_insurance_input(
         self,
         user_question: str,
-        case: CaseData,
         clinical_output,
     ) -> InsuranceAgentInput:
-        """
-        Build the insurance input package using:
-        - the original user question
-        - policy text
-        - the structured output from the clinical agent
-        """
         return InsuranceAgentInput(
             question=user_question,
-            policy_text=" ".join(case.policy_text),
             clinical_decision=clinical_output.decision,
             clinical_evidence=clinical_output.evidence,
             clinical_requirements=clinical_output.requirements,
         )
 
-    def detect_conflicts(self, orchestrator_input: OrchestratorInput) -> list[ConflictItem]:
-        """
-        Detect major case-level conflicts that should block automatic progression.
-        This does not "fix" the conflict; it records it so the orchestrator can
-        choose a safer next step.
-        """
+    def resolve_conflicts(self, orchestrator_input: OrchestratorInput) -> list[ConflictItem]:
         conflicts: list[ConflictItem] = []
         clinical_output = orchestrator_input.clinical_output
         insurance_output = orchestrator_input.insurance_output
 
-        # Conflict 1:
-        # Clinical path says additional structured PT is appropriate,
-        # but insurance trends toward denial.
         if (
             clinical_output.decision.recommended_path == CarePath.ADDITIONAL_STRUCTURED_PT
-            and insurance_output.decision.coverage_position == CoverageDecision.LIKELY_DENIED
+            and insurance_output.decision.coverage_position == "likely_denied"
         ):
             conflicts.append(
                 ConflictItem(
                     conflict_type="clinical_insurance_mismatch",
                     between=["clinical", "insurance"],
-                    reason=(
-                        "Clinical recommends additional structured PT while insurance "
-                        "position trends toward denial."
-                    ),
+                    reason="Clinical path recommends additional PT while insurance position trends toward denial.",
                     blocking=True,
                 )
             )
-
-        # Conflict 2:
-        # Clinical side is too uncertain for automatic progression.
-        if clinical_output.confidence == ConfidenceLevel.LOW:
+        if clinical_output.confidence.value == "low" or insurance_output.confidence.value == "low":
             conflicts.append(
                 ConflictItem(
-                    conflict_type="low_clinical_confidence",
-                    between=["clinical", "orchestrator"],
-                    reason="Clinical output has low confidence and should not drive automatic progression.",
+                    conflict_type="low_confidence",
+                    between=["clinical", "insurance"],
+                    reason="At least one agent returned low confidence.",
                     blocking=True,
                 )
             )
-
-        # Conflict 3:
-        # Insurance side is too uncertain for automatic progression.
-        if insurance_output.confidence == ConfidenceLevel.LOW:
-            conflicts.append(
-                ConflictItem(
-                    conflict_type="low_insurance_confidence",
-                    between=["insurance", "orchestrator"],
-                    reason="Insurance output has low confidence and should not drive automatic progression.",
-                    blocking=True,
-                )
-            )
-
-        # Conflict 4:
-        # Clinical side explicitly says there is not enough information yet.
-        if clinical_output.decision.recommended_path == CarePath.NEED_MORE_INFORMATION:
-            conflicts.append(
-                ConflictItem(
-                    conflict_type="insufficient_clinical_information",
-                    between=["clinical", "orchestrator"],
-                    reason="Clinical agent indicates more information is needed before choosing a reliable care path.",
-                    blocking=True,
-                )
-            )
-
-        # Conflict 5:
-        # Clinical output has no evidence at all.
-        if not clinical_output.evidence:
-            conflicts.append(
-                ConflictItem(
-                    conflict_type="missing_supporting_evidence",
-                    between=["clinical", "orchestrator"],
-                    reason="Clinical recommendation lacks supporting structured evidence.",
-                    blocking=True,
-                )
-            )
-
         return conflicts
 
-    def collect_blocking_requirements(self, orchestrator_input: OrchestratorInput) -> list[RequirementItem]:
-        """
-        Collect all unsatisfied or unknown requirements from both agents.
-        These are the actionable blockers in the case.
-        """
+    def _dedupe_blocking_requirements(
+        self,
+        requirements: list[RequirementItem],
+    ) -> list[RequirementItem]:
+        canonical_map = {
+            "document_prior_rehab_gap": "prior_rehab_gap",
+            "document_incomplete_rehab_course": "prior_rehab_gap",
+            "objective_deficit_measurement": "objective_measurements",
+            "objective_functional_measurements": "objective_measurements",
+            "structured_pt_plan_definition": "structured_pt_plan",
+            "structured_therapy_plan": "structured_pt_plan",
+        }
+
+        deduped: list[RequirementItem] = []
+        seen: set[str] = set()
+        for requirement in requirements:
+            key = canonical_map.get(requirement.code, requirement.code)
+            if key in seen:
+                continue
+            seen.add(key)
+            deduped.append(requirement)
+        return deduped
+
+    def build_final_output(self, orchestrator_input: OrchestratorInput) -> OrchestratorOutput:
         clinical_output = orchestrator_input.clinical_output
         insurance_output = orchestrator_input.insurance_output
+        conflict_items = self.resolve_conflicts(orchestrator_input)
 
-        return [
+        raw_blocking_requirements = [
             item
-            for item in (clinical_output.requirements + insurance_output.requirements)
+            for item in clinical_output.requirements + insurance_output.requirements
             if item.status != RequirementStatus.SATISFIED
         ]
+        blocking_requirements = self._dedupe_blocking_requirements(raw_blocking_requirements)
 
-    def collect_open_questions(self, orchestrator_input: OrchestratorInput) -> list[QuestionItem]:
-        """
-        Convert important missing requirements into human-readable questions.
-        """
-        questions: list[QuestionItem] = []
-        clinical_output = orchestrator_input.clinical_output
-        insurance_output = orchestrator_input.insurance_output
-
-        clinical_requirement_codes = {
-            item.code
-            for item in clinical_output.requirements
-            if item.status != RequirementStatus.SATISFIED
-        }
-        insurance_requirement_codes = {
-            item.code
-            for item in insurance_output.requirements
-            if item.status != RequirementStatus.SATISFIED
-        }
-
+        open_questions: list[QuestionItem] = []
+        clinical_requirement_codes = {item.code for item in clinical_output.requirements}
         if "objective_deficit_measurement" in clinical_requirement_codes:
-            questions.append(
+            open_questions.append(
                 QuestionItem(
                     code="objective_deficit_quantification",
                     question="What objective strength and functional measurements can be attached to support the PT request?",
                 )
             )
-
-        if "document_prior_rehab_gap" in clinical_requirement_codes:
-            questions.append(
-                QuestionItem(
-                    code="prior_rehab_gap_clinical_documentation",
-                    question="What clinical documentation shows that the prior rehabilitation course was incomplete?",
-                )
-            )
-
+        insurance_requirement_codes = {item.code for item in insurance_output.requirements}
         if "document_incomplete_rehab_course" in insurance_requirement_codes:
-            questions.append(
+            open_questions.append(
                 QuestionItem(
-                    code="prior_rehab_gap_insurance_documentation",
+                    code="prior_rehab_gap_documentation",
                     question="What documentation proves that the prior post-revision rehabilitation course was incomplete?",
                 )
             )
 
-        if "objective_functional_measurements" in insurance_requirement_codes:
-            questions.append(
-                QuestionItem(
-                    code="insurance_objective_measurements",
-                    question="Which measurable strength or movement deficits can be submitted for utilization review?",
-                )
-            )
-
-        if "physician_justification_note" in insurance_requirement_codes:
-            questions.append(
-                QuestionItem(
-                    code="physician_justification_needed",
-                    question="Can a physician note be attached to justify the requested PT frequency and medical necessity?",
-                )
-            )
-
-        if "structured_therapy_plan" in insurance_requirement_codes:
-            questions.append(
-                QuestionItem(
-                    code="therapy_plan_needed",
-                    question="Can a structured PT plan with goals, frequency, and reassessment timing be attached?",
-                )
-            )
-
-        return questions
-
-    def determine_readiness(
-        self,
-        orchestrator_input: OrchestratorInput,
-        conflict_items: list[ConflictItem],
-        blocking_requirements: list[RequirementItem],
-    ) -> Readiness:
-        """
-        Convert the current case state into an overall readiness signal.
-        """
-        clinical_output = orchestrator_input.clinical_output
-
-        if clinical_output.decision.recommended_path == CarePath.NEED_MORE_INFORMATION:
-            return Readiness.NEED_MORE_INFO
-
-        if any(item.blocking for item in conflict_items):
-            return Readiness.BLOCKED
-
+        readiness = Readiness.READY
         if blocking_requirements:
-            return Readiness.BLOCKED
+            readiness = Readiness.BLOCKED
+        if clinical_output.decision.recommended_path == CarePath.NEED_MORE_INFORMATION:
+            readiness = Readiness.NEED_MORE_INFO
 
-        return Readiness.READY
-
-    def build_recommended_workflow(
-        self,
-        orchestrator_input: OrchestratorInput,
-        conflict_items: list[ConflictItem],
-    ) -> list[WorkflowStep]:
-        """
-        Build a dynamic workflow based on actual unsatisfied requirements
-        and the current recommended path.
-        """
-        workflow: list[WorkflowStep] = []
-        clinical_output = orchestrator_input.clinical_output
-        insurance_output = orchestrator_input.insurance_output
-
-        clinical_missing = {
-            item.code
-            for item in clinical_output.requirements
-            if item.status != RequirementStatus.SATISFIED
-        }
-        insurance_missing = {
-            item.code
-            for item in insurance_output.requirements
-            if item.status != RequirementStatus.SATISFIED
-        }
-
-        # Branch workflow based on the clinical path.
-        if clinical_output.decision.recommended_path == CarePath.SURGICAL_REEVALUATION:
-            workflow.append(
-                WorkflowStep(
-                    step_id="clinical_surgical_reevaluation",
-                    owner=WorkflowOwner.CLINICAL,
-                    action="Arrange surgical reevaluation based on the current clinical and imaging findings.",
-                    depends_on=[],
-                    done_definition="A clinician reviews the case for possible structural failure and next surgical steps.",
-                )
-            )
-
-        elif clinical_output.decision.recommended_path == CarePath.NEED_MORE_INFORMATION:
-            workflow.append(
-                WorkflowStep(
-                    step_id="clinical_collect_missing_information",
-                    owner=WorkflowOwner.CLINICAL,
-                    action="Collect additional clinical information before a final care path is chosen.",
-                    depends_on=[],
-                    done_definition="Missing clinical information is attached and the case is ready for reassessment.",
-                )
-            )
-
-        else:
-            # PT-oriented workflow
-            if "objective_deficit_measurement" in clinical_missing or "objective_functional_measurements" in insurance_missing:
-                workflow.append(
-                    WorkflowStep(
-                        step_id="clinical_collect_deficits",
-                        owner=WorkflowOwner.CLINICAL,
-                        action="Collect objective strength and functional movement measurements.",
-                        depends_on=[],
-                        done_definition="Objective deficit measurements are attached to the case.",
-                    )
-                )
-
-            if "document_prior_rehab_gap" in clinical_missing or "document_incomplete_rehab_course" in insurance_missing:
-                workflow.append(
-                    WorkflowStep(
-                        step_id="clinical_document_rehab_gap",
-                        owner=WorkflowOwner.CLINICAL,
-                        action="Document that the prior post-revision rehabilitation course was incomplete.",
-                        depends_on=[],
-                        done_definition="The case clearly documents the incomplete prior rehabilitation course.",
-                    )
-                )
-
-            if "structured_therapy_plan" in insurance_missing:
-                workflow.append(
-                    WorkflowStep(
-                        step_id="clinical_define_pt_plan",
-                        owner=WorkflowOwner.CLINICAL,
-                        action="Define a structured supervised PT plan with goals, frequency, and reassessment window.",
-                        depends_on=[
-                            step.step_id
-                            for step in workflow
-                            if step.owner == WorkflowOwner.CLINICAL
-                        ],
-                        done_definition="A structured PT plan is available for submission.",
-                    )
-                )
-
-            if "physician_justification_note" in insurance_missing:
-                workflow.append(
-                    WorkflowStep(
-                        step_id="insurance_prepare_packet",
-                        owner=WorkflowOwner.INSURANCE,
-                        action="Prepare the utilization review packet with physician justification and supporting documentation.",
-                        depends_on=[step.step_id for step in workflow],
-                        done_definition="The submission packet includes physician justification and required supporting documents.",
-                    )
-                )
-
-        # Human review is appended only if unresolved blocking conflicts remain.
-        if any(item.blocking for item in conflict_items):
-            workflow.append(
+        recommended_workflow = [
+            WorkflowStep(
+                step_id="clinical_collect_deficits",
+                owner=WorkflowOwner.CLINICAL,
+                action="Collect objective strength and functional movement measurements.",
+                depends_on=[],
+                done_definition="Objective deficit measurements are attached to the case.",
+            ),
+            WorkflowStep(
+                step_id="clinical_define_pt_plan",
+                owner=WorkflowOwner.CLINICAL,
+                action="Define a structured supervised PT plan with frequency and reassessment window.",
+                depends_on=["clinical_collect_deficits"],
+                done_definition="A time-bounded PT plan is available for submission.",
+            ),
+            WorkflowStep(
+                step_id="insurance_prepare_packet",
+                owner=WorkflowOwner.INSURANCE,
+                action="Prepare coverage support packet with objective deficits, prior rehab documentation, and therapy plan.",
+                depends_on=["clinical_collect_deficits", "clinical_define_pt_plan"],
+                done_definition="Support packet includes objective deficits, prior rehab documentation, and a structured therapy plan.",
+            ),
+        ]
+        if conflict_items:
+            recommended_workflow.append(
                 WorkflowStep(
                     step_id="human_review",
                     owner=WorkflowOwner.HUMAN,
-                    action="Review unresolved conflict or low-confidence case before further progression.",
-                    depends_on=[step.step_id for step in workflow],
-                    done_definition="A clinician or reviewer decides whether the case can proceed safely.",
+                    action="Resolve blocking conflict before submission.",
+                    depends_on=["insurance_prepare_packet"],
+                    done_definition="A clinician or reviewer resolves the blocking conflict.",
                 )
             )
-
-        return workflow
-
-    def build_handoff_packet(self, recommended_workflow: list[WorkflowStep]) -> HandoffPacket:
-        """
-        Build a compact packet for the next system or UI layer.
-        """
-        payload_keys = [
-            "case_resolution",
-            "key_evidence",
-            "blocking_requirements",
-            "recommended_workflow",
-            "open_questions",
-        ]
-
-        if any(step.step_id == "human_review" for step in recommended_workflow):
-            payload_keys.append("conflict_items")
-
-        return HandoffPacket(
-            next_consumer="downstream_llm_or_ui",
-            payload_keys=payload_keys,
-            notes=[
-                "Generate user-facing explanation from structured fields only.",
-                "Do not invent missing documentation.",
-                "Escalate to human review when blocking conflicts remain unresolved.",
-            ],
-        )
-
-    def build_final_output(self, orchestrator_input: OrchestratorInput) -> OrchestratorOutput:
-        """
-        Merge all agent outputs into a final case-level orchestration result.
-        """
-        clinical_output = orchestrator_input.clinical_output
-
-        conflict_items = self.detect_conflicts(orchestrator_input)
-        blocking_requirements = self.collect_blocking_requirements(orchestrator_input)
-        open_questions = self.collect_open_questions(orchestrator_input)
-        readiness = self.determine_readiness(
-            orchestrator_input=orchestrator_input,
-            conflict_items=conflict_items,
-            blocking_requirements=blocking_requirements,
-        )
-        recommended_workflow = self.build_recommended_workflow(
-            orchestrator_input=orchestrator_input,
-            conflict_items=conflict_items,
-        )
-        handoff_packet = self.build_handoff_packet(recommended_workflow)
 
         return OrchestratorOutput(
             case_resolution=CaseResolution(
                 recommended_path=clinical_output.decision.recommended_path,
                 readiness=readiness,
-                requires_human_review=any(item.blocking for item in conflict_items),
+                requires_human_review=bool(conflict_items),
             ),
             key_evidence=clinical_output.evidence,
             blocking_requirements=blocking_requirements,
+            benefits_summary=list(_DEMO_BENEFITS),
             conflict_items=conflict_items,
             recommended_workflow=recommended_workflow,
-            handoff_packet=handoff_packet,
-            open_questions=open_questions,
-            escalation_reason=(
-                "Blocking conflict exists and requires human review."
-                if any(item.blocking for item in conflict_items)
-                else ""
+            handoff_packet=HandoffPacket(
+                next_consumer="prompt_opinion_agent",
+                payload_keys=[
+                    "case_resolution",
+                    "key_evidence",
+                    "blocking_requirements",
+                    "benefits_summary",
+                    "recommended_workflow",
+                ],
+                notes=[
+                    "Generate user-facing explanation from structured fields only.",
+                    "Do not invent missing documentation.",
+                ],
             ),
+            open_questions=open_questions,
+            escalation_reason="Blocking conflict exists." if conflict_items else "",
         )
 
-    def run(self, user_question: str, case: CaseData) -> RunCaseResponse:
-        """
-        Execute the full workflow:
-        clinical -> insurance -> orchestration.
-        """
+    def _confidence_rank(self, confidence: str) -> int:
+        return {"low": 0, "medium": 1, "high": 2}[confidence]
+
+    def _min_confidence(self, *levels: str) -> str:
+        return min(levels, key=self._confidence_rank)
+
+    def _topic_confidence(self, *levels: str):
+        from .schemas import ConfidenceLevel
+
+        return ConfidenceLevel(self._min_confidence(*levels))
+
+    def _supporting_evidence_refs(self, orchestrator_input: OrchestratorInput) -> list[str]:
+        refs = [item.source_ref for item in orchestrator_input.clinical_output.evidence[:3]]
+        refs.extend(
+            f"policy_rule:{rule.rule_id}"
+            for rule in orchestrator_input.insurance_output.coverage_rules[:2]
+        )
+        deduped: list[str] = []
+        seen: set[str] = set()
+        for ref in refs:
+            if ref in seen:
+                continue
+            seen.add(ref)
+            deduped.append(ref)
+        return deduped
+
+    def _format_requirement_list(self, requirements: list[RequirementItem]) -> list[str]:
+        return [item.description for item in requirements if item.status != RequirementStatus.SATISFIED]
+
+    def _dedupe_strings(self, values: list[str]) -> list[str]:
+        deduped: list[str] = []
+        seen: set[str] = set()
+        for value in values:
+            if value in seen:
+                continue
+            seen.add(value)
+            deduped.append(value)
+        return deduped
+
+    def _build_external_response(
+        self,
+        *,
+        case: CaseData,
+        user_question: str,
+        orchestrator_input: OrchestratorInput,
+        orchestrator_output: OrchestratorOutput,
+    ) -> ExternalAgentResponse:
+        clinical_output = orchestrator_input.clinical_output
+        insurance_output = orchestrator_input.insurance_output
+        blocking_items = self._format_requirement_list(orchestrator_output.blocking_requirements)
+        blocking_items.extend(item.reason for item in orchestrator_output.conflict_items)
+        blocking_items = self._dedupe_strings(blocking_items)
+
+        eligibility_points = [
+            f"Authorization signal: {insurance_output.decision.coverage_position.value}.",
+        ]
+        if blocking_items:
+            eligibility_points.append(
+                "Open blockers remain before a clean approval packet can be submitted."
+            )
+
+        if insurance_output.decision.coverage_position.value == "likely_denied":
+            eligibility_answer = (
+                "With the current packet, approval for additional 2x/week supervised PT looks unlikely."
+            )
+        elif blocking_items:
+            eligibility_answer = (
+                "Daniel may be eligible for additional 2x/week supervised PT, but approval still "
+                "depends on medical-necessity review and the missing items in the packet."
+            )
+        else:
+            eligibility_answer = (
+                "Daniel looks likely eligible for additional 2x/week supervised PT under the fixed "
+                "demo assumptions and the current evidence package."
+            )
+
+        documentation_items = self._format_requirement_list(orchestrator_output.blocking_requirements)
+        documentation_items = self._dedupe_strings(documentation_items)
+        documentation_answer = (
+            "Approval would be strengthened by objective functional deficit measurements, a structured "
+            "supervised PT plan, physician justification, and documentation that the prior rehab course "
+            "was incomplete."
+        )
+        if documentation_items:
+            documentation_answer = "Approval would be strengthened by: " + "; ".join(documentation_items) + "."
+
+        if clinical_output.decision.recommended_path == CarePath.ADDITIONAL_STRUCTURED_PT:
+            next_care_answer = (
+                "The next care plan should be a time-bounded supervised PT block focused on objective "
+                "strength and movement deficits, followed by reassessment. Escalate to surgical review "
+                "if instability worsens or structured PT fails."
+            )
+        elif clinical_output.decision.recommended_path == CarePath.SURGICAL_REEVALUATION:
+            next_care_answer = (
+                "The next care plan should shift to surgical re-evaluation rather than continued PT-only management."
+            )
+        else:
+            next_care_answer = (
+                "The next care plan should first close the missing clinical information gap before deciding on "
+                "additional PT versus surgical re-evaluation."
+            )
+
+        supporting_refs = self._supporting_evidence_refs(orchestrator_input)
+        sections = [
+            ExternalAnswerSection(
+                topic="case_context",
+                answer=case.patient_summary,
+                confidence=self._topic_confidence(clinical_output.confidence.value),
+                supporting_points=[case.patient_summary],
+                supporting_evidence_refs=["patient_summary"],
+            ),
+            ExternalAnswerSection(
+                topic="injury_and_rehab_history",
+                answer=(
+                    "Daniel had primary ACL reconstruction about 2.5 years ago and revision ACL "
+                    "reconstruction 8 months ago. His first rehab course lasted about 10 weeks but "
+                    "did not complete return-to-sport progression. His revision-surgery rehab lasted "
+                    "only 4 to 5 weeks and did not document structured strengthening or neuromuscular "
+                    "progression."
+                ),
+                confidence=self._topic_confidence(clinical_output.confidence.value),
+                supporting_points=[
+                    case.clinical_notes[0],
+                    case.clinical_notes[1],
+                    *case.pt_notes[:3],
+                ],
+                supporting_evidence_refs=[
+                    "clinical_notes[0]",
+                    "clinical_notes[1]",
+                    "pt_notes[0]",
+                    "pt_notes[1]",
+                    "pt_notes[2]",
+                ],
+            ),
+            ExternalAnswerSection(
+                topic="current_clinical_status",
+                answer=(
+                    "Current symptoms include activity-related knee pain, mild laxity, quadriceps "
+                    "weakness, poor neuromuscular control, and fear of re-injury. Imaging shows an "
+                    "intact ACL graft with mild stretching, mild effusion and early cartilage "
+                    "degeneration, and no acute tear or displaced hardware complication."
+                ),
+                confidence=self._topic_confidence(clinical_output.confidence.value),
+                supporting_points=[
+                    case.clinical_notes[2],
+                    case.clinical_notes[3],
+                    case.clinical_notes[4],
+                    case.pt_notes[3],
+                    *case.imaging,
+                ],
+                supporting_evidence_refs=[
+                    "clinical_notes[2]",
+                    "clinical_notes[3]",
+                    "clinical_notes[4]",
+                    "pt_notes[3]",
+                    "imaging[0]",
+                    "imaging[1]",
+                    "imaging[2]",
+                ],
+            ),
+            ExternalAnswerSection(
+                topic="insurance_authorization",
+                answer=eligibility_answer,
+                confidence=self._topic_confidence(insurance_output.confidence.value),
+                supporting_points=eligibility_points,
+                supporting_evidence_refs=supporting_refs,
+            ),
+            ExternalAnswerSection(
+                topic="documentation_gaps",
+                answer=documentation_answer,
+                confidence=self._topic_confidence(insurance_output.confidence.value),
+                supporting_points=documentation_items,
+                supporting_evidence_refs=supporting_refs,
+            ),
+            ExternalAnswerSection(
+                topic="next_care_plan",
+                answer=next_care_answer,
+                confidence=self._topic_confidence(clinical_output.confidence.value),
+                supporting_points=[step.action for step in orchestrator_output.recommended_workflow[:3]],
+                supporting_evidence_refs=[item.source_ref for item in clinical_output.evidence[:3]],
+            ),
+        ]
+
+        short_answer = (
+            "External orchestrator completed a structured case packet for Daniel. Use the packet "
+            "sections to answer the user's original question; do not treat this status line as the "
+            "full answer."
+        )
+
+        recommended_next_steps = self._dedupe_strings(
+            [step.action for step in orchestrator_output.recommended_workflow]
+        )
+
+        return ExternalAgentResponse(
+            case_id=case.case_id,
+            user_question=user_question,
+            short_answer=short_answer,
+            readiness=orchestrator_output.case_resolution.readiness,
+            requires_human_review=orchestrator_output.case_resolution.requires_human_review,
+            sections=sections,
+            recommended_next_steps=recommended_next_steps,
+            blocking_items=blocking_items,
+            benefits_at_a_glance=orchestrator_output.benefits_summary,
+            open_questions=[],
+        )
+
+    def run_debug(self, user_question: str, case: CaseData) -> RunCaseDebugResponse:
         clinical_input = self.build_clinical_input(user_question, case)
         clinical_output = self.clinical_agent.run(clinical_input)
 
         insurance_input = self.build_insurance_input(
             user_question=user_question,
-            case=case,
             clinical_output=clinical_output,
         )
         insurance_output = self.insurance_agent.run(insurance_input)
@@ -486,11 +450,20 @@ class Orchestrator:
         )
         orchestrator_output = self.build_final_output(orchestrator_input)
 
-        return RunCaseResponse(
+        return RunCaseDebugResponse(
             clinical_input=clinical_input,
             clinical_output=clinical_output,
             insurance_input=insurance_input,
             insurance_output=insurance_output,
             orchestrator_input=orchestrator_input,
             orchestrator_output=orchestrator_output,
+        )
+
+    def run(self, user_question: str, case: CaseData) -> ExternalAgentResponse:
+        debug_response = self.run_debug(user_question=user_question, case=case)
+        return self._build_external_response(
+            case=case,
+            user_question=user_question,
+            orchestrator_input=debug_response.orchestrator_input,
+            orchestrator_output=debug_response.orchestrator_output,
         )

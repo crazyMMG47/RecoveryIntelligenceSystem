@@ -5,8 +5,8 @@
 我们只做一个能在 Prompt Opinion 里跑通的最小可演示流程：
 
 - 输入：用户问题 + 临床材料 + 保险 policy
-- 输出：结构化的 clinical / insurance / orchestrator 中间结果
-- 最终展示：平台入口 chatbot 把结构化结果转成用户可读回答
+- 输出：给 Prompt Opinion 消费的 external agent 数据包，以及内部 clinical / insurance / orchestrator 中间结果
+- 最终展示：平台入口 chatbot 读取 external agent 数据包，再转成用户可读回答
 
 这个 MVP 的目标不是证明某个模型强，而是证明：
 
@@ -19,14 +19,14 @@
 
 | 层 | 形式 | 职责 |
 |---|---|---|
-| Prompt Opinion chatbot | 平台内置 LLM | 接用户自然语言、触发 external agent、把最终结构化结果转成人话 |
-| Orchestrator | 代码逻辑为主 | 调度 Clinical / Insurance，做冲突检测、优先级合并、workflow 生成 |
+| Prompt Opinion chatbot | 平台内置 LLM | 接用户自然语言、触发 external agent、把 external packet 转成人话 |
+| Orchestrator | 代码逻辑为主 | 调度 Clinical / Insurance，做冲突检测、优先级合并，并生成 external packet |
 | Clinical Agent | `LLM + structured output` | 读取病历/PT/影像，输出临床结构化判断 |
 | Insurance Agent | `RAG + LLM + structured output` | 先从长 policy 中检索相关条款，再输出保险结构化判断 |
 
 系统流程：
 
-`用户问题 -> Prompt Opinion chatbot -> external orchestrator -> Clinical Agent + Insurance Agent -> Orchestrator -> 结构化结果 -> Prompt Opinion chatbot -> 用户可读回答`
+`用户问题 -> Prompt Opinion chatbot -> external orchestrator -> Clinical Agent + Insurance Agent -> Orchestrator -> external packet -> Prompt Opinion chatbot -> 用户可读回答`
 
 ## 2.1 Prompt Opinion最终接法
 
@@ -78,7 +78,7 @@
 |---|---|---|---|
 | Clinical Agent | 用户问题中的临床部分 + patient summary + PT + imaging | 临床结构化中间结果 | 不直接输出给用户看的最终答案；不读 policy |
 | Insurance Agent | 用户问题中的保险部分 + relevant policy clauses + clinical structured output | 保险结构化中间结果 | 不直接做完整临床判断；不读全部原始病历 |
-| Orchestrator | 用户问题 + clinical output + insurance output | 最终结构化 workflow 和 case resolution | 不承担重文本阅读；不直接写最终用户话术 |
+| Orchestrator | 用户问题 + clinical output + insurance output | external packet + 内部 workflow / case resolution | 不承担重文本阅读；不直接承担最终 UI 聊天层 |
 
 ## 5. Contract原则
 
@@ -122,7 +122,6 @@
 | 字段 | 类型 | 说明 |
 |---|---|---|
 | `question` | string | 当前用户问题中与保险相关的部分 |
-| `policy_text` | string | 检索后的 relevant policy clauses |
 | `clinical_decision` | object | Clinical Agent 的决策对象 |
 | `clinical_evidence[]` | object[] | Clinical Agent 的证据对象 |
 | `clinical_requirements[]` | object[] | Clinical Agent 的缺失项/前提 |
@@ -146,7 +145,7 @@
 | `clinical_output` | object | Clinical Agent 输出 |
 | `insurance_output` | object | Insurance Agent 输出 |
 
-### 6.6 Orchestrator 输出
+### 6.6 Orchestrator 内部输出
 
 | 字段 | 类型 | 说明 |
 |---|---|---|
@@ -158,6 +157,17 @@
 | `handoff_packet` | object | 给 downstream LLM 或 UI 的最小结构化上下文 |
 | `open_questions[]` | object[] | 还需要回答的问题 |
 | `escalation_reason` | string | 是否需要人工介入及原因 |
+
+### 6.7 External Agent 对外输出
+
+| 字段 | 类型 | 说明 |
+|---|---|---|
+| `short_answer` | string | 给 Prompt Opinion 的简短结论 |
+| `sections[]` | object[] | 按 eligibility / documentation / next care plan 分块的数据 |
+| `recommended_next_steps[]` | string[] | 可直接转成用户建议的下一步 |
+| `blocking_items[]` | string[] | 当前阻断项 |
+| `benefits_at_a_glance[]` | string[] | benefit 与 cost-share 关键点 |
+| `open_questions[]` | string[] | 仍待补齐的问题 |
 
 ## 7. Orchestrator实际做的4件事
 
@@ -197,7 +207,7 @@
 | 2 | 让这个 orchestrator 内部调用 Clinical 和 Insurance | multi-agent 价值体现在系统内部 |
 | 3 | Clinical 直接接 Gemini，输出结构化 clinical result | 临床层从规则版升级为可泛化实现 |
 | 4 | Insurance 做 retrieval + Gemini，输出结构化 insurance result | 处理长 policy，不把整段 policy 直接喂给单层逻辑 |
-| 5 | Orchestrator 只输出结构化 workflow / resolution | 不提前写最终用户 prose |
+| 5 | Orchestrator 输出 external packet，并保留内部 debug packet | Prompt Opinion 有稳定输入，内部链路仍可调试 |
 | 6 | 再加一层对外 A2A adapter | 把平台传来的请求转成内部 orchestrator 输入 |
 | 7 | 用 ngrok 暴露这个 external agent | 让 Prompt Opinion 能连上 |
 | 8 | 在 Prompt Opinion 的 workspace hub 里 add external agent | 平台拉 card、skills、auth、FHIR context |

@@ -7,7 +7,6 @@ from __future__ import annotations
 from enum import Enum
 
 from pydantic import BaseModel, ConfigDict, Field
-from typing import Optional
 
 class StrictModel(BaseModel):
     model_config = ConfigDict(extra="forbid", str_strip_whitespace=True)
@@ -21,6 +20,7 @@ class ConfidenceLevel(str, Enum):
 
 class CoverageDecision(str, Enum):
     LIKELY_COVERED = "likely_covered"
+    CONDITIONALLY_COVERED = "conditionally_covered_pending_documentation"
     LIKELY_DENIED = "likely_denied"
     UNCLEAR = "unclear"
 
@@ -166,7 +166,6 @@ class ClinicalAgentOutput(StrictModel):
 
 class InsuranceAgentInput(StrictModel):
     question: str = Field(min_length=1)
-    policy_text: Optional[str] = None
     clinical_decision: ClinicalDecision
     clinical_evidence: list[EvidenceItem] = Field(default_factory=list)
     clinical_requirements: list[RequirementItem] = Field(default_factory=list)
@@ -179,6 +178,7 @@ class InsuranceAgentOutput(StrictModel):
     appeal_risk_factors: list[RiskItem] = Field(default_factory=list)
     next_steps: list[str] = Field(default_factory=list)
     confidence: ConfidenceLevel
+    validation_errors: list[str] = Field(default_factory=list)
 
 
 class OrchestratorInput(StrictModel):
@@ -191,11 +191,33 @@ class OrchestratorOutput(StrictModel):
     case_resolution: CaseResolution
     key_evidence: list[EvidenceItem] = Field(default_factory=list)
     blocking_requirements: list[RequirementItem] = Field(default_factory=list)
+    benefits_summary: list[str] = Field(default_factory=list)
     conflict_items: list[ConflictItem] = Field(default_factory=list)
     recommended_workflow: list[WorkflowStep] = Field(default_factory=list)
     handoff_packet: HandoffPacket
     open_questions: list[QuestionItem] = Field(default_factory=list)
     escalation_reason: str = ""
+
+
+class ExternalAnswerSection(StrictModel):
+    topic: str = Field(min_length=1)
+    answer: str = Field(min_length=1)
+    confidence: ConfidenceLevel
+    supporting_points: list[str] = Field(default_factory=list)
+    supporting_evidence_refs: list[str] = Field(default_factory=list)
+
+
+class ExternalAgentResponse(StrictModel):
+    case_id: str = Field(min_length=1)
+    user_question: str = Field(min_length=1)
+    short_answer: str = Field(min_length=1)
+    readiness: Readiness
+    requires_human_review: bool
+    sections: list[ExternalAnswerSection] = Field(default_factory=list)
+    recommended_next_steps: list[str] = Field(default_factory=list)
+    blocking_items: list[str] = Field(default_factory=list)
+    benefits_at_a_glance: list[str] = Field(default_factory=list)
+    open_questions: list[str] = Field(default_factory=list)
 
 
 class CaseData(StrictModel):
@@ -204,7 +226,6 @@ class CaseData(StrictModel):
     clinical_notes: list[str] = Field(min_length=1)
     pt_notes: list[str] = Field(min_length=1)
     imaging: list[str] = Field(min_length=1)
-    policy_text: list[str] = Field(min_length=1)
 
 
 class RunCaseRequest(StrictModel):
@@ -212,7 +233,7 @@ class RunCaseRequest(StrictModel):
     case: CaseData
 
 
-class RunCaseResponse(StrictModel):
+class RunCaseDebugResponse(StrictModel):
     clinical_input: ClinicalAgentInput
     clinical_output: ClinicalAgentOutput
     insurance_input: InsuranceAgentInput
