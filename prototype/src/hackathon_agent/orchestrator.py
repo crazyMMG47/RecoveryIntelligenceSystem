@@ -1,6 +1,5 @@
 from .clinical_llm_agent import ClinicalLLMAgent
 from .gemini_llm import GeminiStructuredLLM
-from .insurance_benefits_agent import InsuranceBenefitsAgent
 from .insurance_llm_agent import InsuranceLLMAgent
 from .insurance_retriever import InsurancePolicyRetriever
 from .schemas import (
@@ -13,7 +12,6 @@ from .schemas import (
     ExternalAnswerSection,
     HandoffPacket,
     InsuranceAgentInput,
-    InsuranceBenefitsInput,
     OrchestratorInput,
     OrchestratorOutput,
     QuestionItem,
@@ -25,6 +23,17 @@ from .schemas import (
     WorkflowStep,
 )
 
+_DEMO_BENEFITS = [
+    "Fixed demo plan: Kaiser Foundation Health Plan of Washington VisitsPlus Silver 4500 (2026).",
+    "Outpatient physical therapy and rehabilitation: covered subject to plan rules.",
+    "Preauthorization not required for outpatient PT under the fixed demo plan.",
+    "Rehabilitation benefit: up to 25 outpatient visits per calendar year.",
+    "Outpatient specialty rehab office visit copay: $75 per visit.",
+    "Annual deductible: $4,500 per member / $9,000 per family.",
+    "Out-of-pocket maximum: $9,800 per member / $19,600 per family per calendar year.",
+    "Covered services must be received from a Network Provider at a Network Facility.",
+]
+
 
 class Orchestrator:
     def __init__(
@@ -32,23 +41,19 @@ class Orchestrator:
         *,
         clinical_agent: ClinicalLLMAgent,
         insurance_agent: InsuranceLLMAgent,
-        insurance_benefits_agent: InsuranceBenefitsAgent,
     ) -> None:
         self.clinical_agent = clinical_agent
         self.insurance_agent = insurance_agent
-        self.insurance_benefits_agent = insurance_benefits_agent
 
     @classmethod
     def from_env(cls) -> "Orchestrator":
         llm = GeminiStructuredLLM()
-
         return cls(
             clinical_agent=ClinicalLLMAgent(llm),
             insurance_agent=InsuranceLLMAgent(
                 llm=llm,
                 retriever=InsurancePolicyRetriever(),
             ),
-            insurance_benefits_agent=InsuranceBenefitsAgent(),
         )
 
     def build_clinical_input(self, user_question: str, case: CaseData) -> ClinicalAgentInput:
@@ -72,38 +77,20 @@ class Orchestrator:
             clinical_requirements=clinical_output.requirements,
         )
 
-    def build_insurance_benefits_input(
-        self,
-        user_question: str,
-        clinical_output,
-    ) -> InsuranceBenefitsInput:
-        return InsuranceBenefitsInput(
-            question=user_question,
-            clinical_decision=clinical_output.decision,
-            clinical_evidence=clinical_output.evidence,
-        )
-
     def resolve_conflicts(self, orchestrator_input: OrchestratorInput) -> list[ConflictItem]:
         conflicts: list[ConflictItem] = []
         clinical_output = orchestrator_input.clinical_output
         insurance_output = orchestrator_input.insurance_output
-        benefits_output = orchestrator_input.insurance_benefits_output
 
-        if clinical_output.decision.recommended_path == CarePath.ADDITIONAL_STRUCTURED_PT and insurance_output.decision.coverage_position == "likely_denied":
+        if (
+            clinical_output.decision.recommended_path == CarePath.ADDITIONAL_STRUCTURED_PT
+            and insurance_output.decision.coverage_position == "likely_denied"
+        ):
             conflicts.append(
                 ConflictItem(
                     conflict_type="clinical_insurance_mismatch",
                     between=["clinical", "insurance"],
                     reason="Clinical path recommends additional PT while insurance position trends toward denial.",
-                    blocking=True,
-                )
-            )
-        if benefits_output.coverage_status == "not_covered":
-            conflicts.append(
-                ConflictItem(
-                    conflict_type="benefit_exclusion",
-                    between=["insurance", "plan_benefits"],
-                    reason="The fixed demo plan does not treat the requested service as a covered benefit.",
                     blocking=True,
                 )
             )
@@ -144,7 +131,6 @@ class Orchestrator:
     def build_final_output(self, orchestrator_input: OrchestratorInput) -> OrchestratorOutput:
         clinical_output = orchestrator_input.clinical_output
         insurance_output = orchestrator_input.insurance_output
-        benefits_output = orchestrator_input.insurance_benefits_output
         conflict_items = self.resolve_conflicts(orchestrator_input)
 
         raw_blocking_requirements = [
@@ -153,6 +139,7 @@ class Orchestrator:
             if item.status != RequirementStatus.SATISFIED
         ]
         blocking_requirements = self._dedupe_blocking_requirements(raw_blocking_requirements)
+
         open_questions: list[QuestionItem] = []
         clinical_requirement_codes = {item.code for item in clinical_output.requirements}
         if "objective_deficit_measurement" in clinical_requirement_codes:
@@ -176,16 +163,6 @@ class Orchestrator:
             readiness = Readiness.BLOCKED
         if clinical_output.decision.recommended_path == CarePath.NEED_MORE_INFORMATION:
             readiness = Readiness.NEED_MORE_INFO
-
-        benefits_summary = [
-            f"Fixed demo plan: {benefits_output.plan_name}.",
-            f"Benefit coverage status: {benefits_output.coverage_status.value}.",
-            benefits_output.authorization_requirement,
-            benefits_output.visit_limit,
-            benefits_output.member_cost_share,
-            benefits_output.deductible,
-            benefits_output.out_of_pocket_max,
-        ]
 
         recommended_workflow = [
             WorkflowStep(
@@ -229,7 +206,7 @@ class Orchestrator:
             ),
             key_evidence=clinical_output.evidence,
             blocking_requirements=blocking_requirements,
-            benefits_summary=benefits_summary,
+            benefits_summary=list(_DEMO_BENEFITS),
             conflict_items=conflict_items,
             recommended_workflow=recommended_workflow,
             handoff_packet=HandoffPacket(
@@ -251,11 +228,7 @@ class Orchestrator:
         )
 
     def _confidence_rank(self, confidence: str) -> int:
-        return {
-            "low": 0,
-            "medium": 1,
-            "high": 2,
-        }[confidence]
+        return {"low": 0, "medium": 1, "high": 2}[confidence]
 
     def _min_confidence(self, *levels: str) -> str:
         return min(levels, key=self._confidence_rank)
@@ -303,25 +276,19 @@ class Orchestrator:
     ) -> ExternalAgentResponse:
         clinical_output = orchestrator_input.clinical_output
         insurance_output = orchestrator_input.insurance_output
-        benefits_output = orchestrator_input.insurance_benefits_output
         blocking_items = self._format_requirement_list(orchestrator_output.blocking_requirements)
         blocking_items.extend(item.reason for item in orchestrator_output.conflict_items)
         blocking_items = self._dedupe_strings(blocking_items)
 
         eligibility_points = [
             f"Authorization signal: {insurance_output.decision.coverage_position.value}.",
-            f"Benefit signal: {benefits_output.coverage_status.value}.",
         ]
         if blocking_items:
             eligibility_points.append(
                 "Open blockers remain before a clean approval packet can be submitted."
             )
 
-        if benefits_output.coverage_status.value == "not_covered":
-            eligibility_answer = (
-                "Under the fixed demo plan assumptions, this request does not currently look covered."
-            )
-        elif insurance_output.decision.coverage_position.value == "likely_denied":
+        if insurance_output.decision.coverage_position.value == "likely_denied":
             eligibility_answer = (
                 "With the current packet, approval for additional 2x/week supervised PT looks unlikely."
             )
@@ -367,10 +334,7 @@ class Orchestrator:
             ExternalAnswerSection(
                 topic="eligibility",
                 answer=eligibility_answer,
-                confidence=self._topic_confidence(
-                    insurance_output.confidence.value,
-                    benefits_output.confidence.value,
-                ),
+                confidence=self._topic_confidence(insurance_output.confidence.value),
                 supporting_points=eligibility_points,
                 supporting_evidence_refs=supporting_refs,
             ),
@@ -431,17 +395,11 @@ class Orchestrator:
             clinical_output=clinical_output,
         )
         insurance_output = self.insurance_agent.run(insurance_input)
-        insurance_benefits_input = self.build_insurance_benefits_input(
-            user_question=user_question,
-            clinical_output=clinical_output,
-        )
-        insurance_benefits_output = self.insurance_benefits_agent.run(insurance_benefits_input)
 
         orchestrator_input = OrchestratorInput(
             user_question=user_question,
             clinical_output=clinical_output,
             insurance_output=insurance_output,
-            insurance_benefits_output=insurance_benefits_output,
         )
         orchestrator_output = self.build_final_output(orchestrator_input)
 
@@ -450,8 +408,6 @@ class Orchestrator:
             clinical_output=clinical_output,
             insurance_input=insurance_input,
             insurance_output=insurance_output,
-            insurance_benefits_input=insurance_benefits_input,
-            insurance_benefits_output=insurance_benefits_output,
             orchestrator_input=orchestrator_input,
             orchestrator_output=orchestrator_output,
         )

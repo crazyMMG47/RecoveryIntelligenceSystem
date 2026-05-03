@@ -17,13 +17,8 @@ class ConfidenceLevel(str, Enum):
 
 class CoverageDecision(str, Enum):
     LIKELY_COVERED = "likely_covered"
+    CONDITIONALLY_COVERED = "conditionally_covered_pending_documentation"
     LIKELY_DENIED = "likely_denied"
-    UNCLEAR = "unclear"
-
-
-class BenefitCoverageStatus(str, Enum):
-    COVERED_SUBJECT_TO_PLAN_RULES = "covered_subject_to_plan_rules"
-    NOT_COVERED = "not_covered"
     UNCLEAR = "unclear"
 
 
@@ -142,34 +137,6 @@ class InsuranceDecision(StrictModel):
     decision_drivers: list[str] = Field(default_factory=list)
 
 
-class PlanSource(StrictModel):
-    title: str = Field(min_length=1)
-    url: str = Field(min_length=1)
-    note: str = Field(min_length=1)
-
-
-class InsuranceBenefitsInput(StrictModel):
-    question: str = Field(min_length=1)
-    clinical_decision: ClinicalDecision
-    clinical_evidence: list[EvidenceItem] = Field(default_factory=list)
-
-
-class InsuranceBenefitsOutput(StrictModel):
-    plan_id: str = Field(min_length=1)
-    plan_name: str = Field(min_length=1)
-    service: str = Field(min_length=1)
-    coverage_status: BenefitCoverageStatus
-    network_requirement: str = Field(min_length=1)
-    authorization_requirement: str = Field(min_length=1)
-    visit_limit: str = Field(min_length=1)
-    member_cost_share: str = Field(min_length=1)
-    deductible: str = Field(min_length=1)
-    out_of_pocket_max: str = Field(min_length=1)
-    assumptions: list[str] = Field(default_factory=list)
-    sources: list[PlanSource] = Field(default_factory=list)
-    confidence: ConfidenceLevel
-
-
 class CaseResolution(StrictModel):
     recommended_path: CarePath
     readiness: Readiness
@@ -208,13 +175,13 @@ class InsuranceAgentOutput(StrictModel):
     appeal_risk_factors: list[RiskItem] = Field(default_factory=list)
     next_steps: list[str] = Field(default_factory=list)
     confidence: ConfidenceLevel
+    validation_errors: list[str] = Field(default_factory=list)
 
 
 class OrchestratorInput(StrictModel):
     user_question: str = Field(min_length=1)
     clinical_output: ClinicalAgentOutput
     insurance_output: InsuranceAgentOutput
-    insurance_benefits_output: InsuranceBenefitsOutput
 
 
 class OrchestratorOutput(StrictModel):
@@ -268,7 +235,5 @@ class RunCaseDebugResponse(StrictModel):
     clinical_output: ClinicalAgentOutput
     insurance_input: InsuranceAgentInput
     insurance_output: InsuranceAgentOutput
-    insurance_benefits_input: InsuranceBenefitsInput
-    insurance_benefits_output: InsuranceBenefitsOutput
     orchestrator_input: OrchestratorInput
     orchestrator_output: OrchestratorOutput

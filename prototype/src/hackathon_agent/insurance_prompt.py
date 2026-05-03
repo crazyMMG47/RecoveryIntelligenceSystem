@@ -41,11 +41,32 @@ ALLOWED_COVERAGE_RULE_IDS = [
     "incomplete_rehab_history_supports_request",
 ]
 
+ALLOWED_APPEAL_RISK_CODES = [
+    "attendance_interruptions_may_reduce_approval_strength",
+    "weak_prior_rehab_documentation",
+    "incomplete_objective_measurements",
+    "missing_physician_justification",
+]
+
+DEMO_PLAN_CONTEXT = """
+Fixed demo plan: Kaiser Foundation Health Plan of Washington VisitsPlus Silver 4500 (2026).
+- Outpatient physical therapy and rehabilitation: covered subject to plan rules.
+- Preauthorization not required for outpatient PT under this plan.
+- Rehabilitation benefit limit: 25 outpatient visits per calendar year.
+- Outpatient specialty rehab office visit copay: $75 per visit.
+- Annual deductible: $4,500 per member / $9,000 per family.
+- Out-of-pocket maximum: $9,800 per member / $19,600 per family per calendar year.
+- All covered services must be received from a Network Provider at a Network Facility.
+""".strip()
+
 INSURANCE_SYSTEM_PROMPT = """
 You are the Insurance Agent in a multi-agent healthcare workflow.
 
 Your job is to review the requested clinical service against retrieved insurance
 policy evidence and return only structured insurance output.
+
+Fixed demo plan context (use these facts when assessing coverage and cost):
+{demo_plan_context}
 
 Rules:
 - Do not rewrite the clinical recommendation.
@@ -60,6 +81,12 @@ Rules:
 - Keep each coverage_rules.rule_text under 220 characters.
 - Return at most 4 coverage_rules, 4 requirements, 2 appeal_risk_factors, and 5 next_steps.
 
+Coverage position rules:
+- Use likely_covered only when all requirements are satisfied.
+- Use conditionally_covered_pending_documentation when policy supports coverage but required documentation is still missing or unresolved.
+- Use likely_denied when there is active policy exclusion or clear denial signal.
+- Use unclear when evidence is insufficient to decide.
+
 Allowed requirement.code values:
 {allowed_requirement_codes}
 
@@ -71,6 +98,9 @@ Allowed decision.decision_drivers values:
 
 Allowed coverage_rules.rule_id values:
 {allowed_coverage_rule_ids}
+
+Allowed appeal_risk_factors.code values:
+{allowed_appeal_risk_codes}
 
 Use the evidence buckets as follows:
 - coverage_rules: plan or benefit language that governs approval
@@ -180,10 +210,12 @@ def build_insurance_messages(
     }
 
     system_prompt = INSURANCE_SYSTEM_PROMPT.format(
+        demo_plan_context=DEMO_PLAN_CONTEXT,
         allowed_requirement_codes=json.dumps(ALLOWED_REQUIREMENT_CODES, indent=2),
         allowed_next_steps=json.dumps(ALLOWED_NEXT_STEPS, indent=2),
         allowed_decision_drivers=json.dumps(ALLOWED_DECISION_DRIVERS, indent=2),
         allowed_coverage_rule_ids=json.dumps(ALLOWED_COVERAGE_RULE_IDS, indent=2),
+        allowed_appeal_risk_codes=json.dumps(ALLOWED_APPEAL_RISK_CODES, indent=2),
     )
 
     return [

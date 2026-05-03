@@ -1,10 +1,10 @@
 from __future__ import annotations
 
-from hackathon_agent.clinical_llm_agent import ClinicalLLMAgent
-from hackathon_agent.demo_data import DEMO_CASE
-from hackathon_agent.gemini_llm import GeminiStructuredLLM
-from hackathon_agent.insurance_retriever import InsurancePolicyRetriever
-from hackathon_agent.schemas import ClinicalAgentInput, InsuranceAgentInput
+from src.hackathon_agent.clinical_llm_agent import ClinicalLLMAgent
+from src.hackathon_agent.demo_data import DEMO_CASE
+from src.hackathon_agent.gemini_llm import GeminiStructuredLLM
+from src.hackathon_agent.insurance_retriever import InsurancePolicyRetriever
+from src.hackathon_agent.schemas import ClinicalAgentInput, InsuranceAgentInput
 
 
 def main() -> None:
@@ -39,7 +39,8 @@ def main() -> None:
         for note in bucket.notes:
             print(f"note: {note}")
         for chunk in bucket.chunks:
-            print(f"\n[{chunk.source_ref}] {chunk.title}")
+            score = bucket.scores.get(chunk.source_ref, 0.0)
+            print(f"\n[{chunk.source_ref}] {chunk.title}  (hybrid_score={score:.4f})")
             print(f"section: {chunk.section}")
             print(f"bucket: {chunk.bucket}")
             print(f"url: {chunk.url}")

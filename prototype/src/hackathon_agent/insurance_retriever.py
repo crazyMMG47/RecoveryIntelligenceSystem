@@ -1,9 +1,14 @@
 from __future__ import annotations
 
+import hashlib
 import json
 import re
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from pathlib import Path
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    import numpy as np
 
 from .policy_map import POLICY_MAP
 from .policy_router import PolicyRouter
@@ -13,6 +18,74 @@ from .schemas import InsuranceAgentInput
 ROOT = Path(__file__).resolve().parents[2]
 DEFAULT_SNIPPETS_PATH = ROOT / "data" / "policy_snippets" / "snippets.jsonl"
 
+# Hybrid scoring weights: cosine similarity + normalised keyword score
+_HYBRID_COSINE_WEIGHT = 0.6
+_HYBRID_KEYWORD_WEIGHT = 0.4
+
+# Keyword score threshold below which a chunk is discarded regardless of cosine similarity.
+# The noise penalty for bad URLs is -3.0, so -2.0 safely catches those while
+# allowing mildly-off-topic chunks to still be rescued by a strong cosine score.
+_NOISE_SCORE_THRESHOLD = -2.0
+
+# Generic section headings that contribute little clinical/policy evidence.
+# Chunks whose section matches one of these are down-scored by 2.0 in keyword scoring.
+_NOISY_SECTIONS: frozenset[str] = frozenset({
+    "references",
+    "revision history",
+    "source policy",
+    "document_start",
+    "table of contents",
+    "acknowledgments",
+    "footnotes",
+    "appendix",
+    "glossary",
+})
+
+
+# ---------------------------------------------------------------------------
+# Embedding model
+# ---------------------------------------------------------------------------
+
+class EmbeddingModel:
+    """Lazy-loading wrapper around sentence-transformers all-MiniLM-L6-v2.
+
+    Imported lazily so the module loads cleanly even before the package is
+    installed; the model is only loaded on first actual use.
+    """
+
+    MODEL_NAME = "all-MiniLM-L6-v2"
+    _instance: EmbeddingModel | None = None
+
+    def __init__(self) -> None:
+        try:
+            from sentence_transformers import SentenceTransformer
+        except ImportError as exc:
+            raise RuntimeError(
+                "sentence-transformers is required for embedding retrieval. "
+                "Run: pip install sentence-transformers"
+            ) from exc
+        self._model = SentenceTransformer(self.MODEL_NAME)
+
+    @classmethod
+    def get_default(cls) -> EmbeddingModel:
+        if cls._instance is None:
+            cls._instance = cls()
+        return cls._instance
+
+    def encode(self, texts: list[str]) -> np.ndarray:
+        import numpy as np
+
+        vecs = self._model.encode(
+            texts,
+            normalize_embeddings=True,
+            show_progress_bar=False,
+        )
+        return np.asarray(vecs, dtype=np.float32)
+
+
+# ---------------------------------------------------------------------------
+# Data classes
+# ---------------------------------------------------------------------------
 
 @dataclass(frozen=True)
 class RetrievedPolicyChunk:
@@ -32,6 +105,9 @@ class EvidenceBucket:
     chunks: list[RetrievedPolicyChunk]
     confidence: float
     notes: list[str]
+    # Maps source_ref → combined hybrid score for each selected chunk.
+    # Useful for debugging retrieval quality in run_policy_retriever.py.
+    scores: dict[str, float] = field(default_factory=dict)
 
 
 @dataclass(frozen=True)
@@ -41,6 +117,10 @@ class RoutedSnippetSet:
     chunks: list[RetrievedPolicyChunk]
     notes: list[str]
 
+
+# ---------------------------------------------------------------------------
+# Bucket definitions
+# ---------------------------------------------------------------------------
 
 _BUCKET_DEFINITIONS: dict[str, dict[str, object]] = {
     "coverage_rules": {
@@ -157,10 +237,23 @@ _CONTENT_POSITIVE: dict[str, list[str]] = {
 }
 
 
+# ---------------------------------------------------------------------------
+# Corpus — loads JSONL and manages the embedding cache
+# ---------------------------------------------------------------------------
+
 class PolicySnippetCorpus:
-    def __init__(self, snippets_path: str | Path = DEFAULT_SNIPPETS_PATH) -> None:
+    def __init__(
+        self,
+        snippets_path: str | Path = DEFAULT_SNIPPETS_PATH,
+        *,
+        embedding_model: EmbeddingModel | None = None,
+    ) -> None:
         self.snippets_path = Path(snippets_path)
+        self._embedding_model = embedding_model
         self.chunks = self._load()
+        self.embeddings, self._ref_to_idx = self._load_or_build_embeddings()
+
+    # -- JSONL loader --------------------------------------------------------
 
     def _load(self) -> list[RetrievedPolicyChunk]:
         if not self.snippets_path.exists():
@@ -196,6 +289,58 @@ class PolicySnippetCorpus:
 
         return chunks
 
+    # -- Embedding cache -----------------------------------------------------
+
+    def _corpus_hash(self) -> str:
+        h = hashlib.md5()
+        with self.snippets_path.open("rb") as f:
+            h.update(f.read())
+        return h.hexdigest()
+
+    def _cache_paths(self) -> tuple[Path, Path]:
+        parent = self.snippets_path.parent
+        stem = self.snippets_path.stem
+        return (
+            parent / f"{stem}_embeddings.npy",
+            parent / f"{stem}_embeddings_hash.txt",
+        )
+
+    def _load_or_build_embeddings(self) -> tuple[np.ndarray, dict[str, int]]:
+        import numpy as np
+
+        emb_path, hash_path = self._cache_paths()
+        current_hash = self._corpus_hash()
+        ref_to_idx = {chunk.source_ref: i for i, chunk in enumerate(self.chunks)}
+
+        if emb_path.exists() and hash_path.exists():
+            if hash_path.read_text().strip() == current_hash:
+                return np.load(str(emb_path)), ref_to_idx
+
+        # Build embeddings from scratch
+        model = self._embedding_model or EmbeddingModel.get_default()
+        texts = [
+            f"{chunk.title} {chunk.section} {chunk.text}"
+            for chunk in self.chunks
+        ]
+        embeddings = model.encode(texts)
+        np.save(str(emb_path), embeddings)
+        hash_path.write_text(current_hash)
+
+        return embeddings, ref_to_idx
+
+    # -- Subset lookup -------------------------------------------------------
+
+    def get_embeddings_for(self, chunks: list[RetrievedPolicyChunk]) -> np.ndarray:
+        """Return embedding matrix for a subset of corpus chunks, shape (n, dim)."""
+        import numpy as np
+
+        indices = [self._ref_to_idx[chunk.source_ref] for chunk in chunks]
+        return self.embeddings[indices]
+
+
+# ---------------------------------------------------------------------------
+# Retriever
+# ---------------------------------------------------------------------------
 
 class InsurancePolicyRetriever:
     def __init__(
@@ -211,22 +356,42 @@ class InsurancePolicyRetriever:
     def retrieve(self, payload: InsuranceAgentInput) -> list[EvidenceBucket]:
         routed = self._route_chunks(payload)
         base_query = self._build_base_query(payload)
-        buckets: list[EvidenceBucket] = []
 
+        # Fetch the embedding sub-matrix for the domain-filtered chunk subset
+        # once — reused across all 4 bucket queries.
+        chunk_embeddings = self.corpus.get_embeddings_for(routed.chunks)
+        model = self.corpus._embedding_model or EmbeddingModel.get_default()
+
+        buckets: list[EvidenceBucket] = []
         for bucket_name, definition in _BUCKET_DEFINITIONS.items():
             query = f"{base_query} {definition['suffix']}"
+            query_embedding = model.encode([query])[0]
+
             ranked = self._rank_chunks(
                 query=query,
                 chunks=routed.chunks,
+                chunk_embeddings=chunk_embeddings,
+                query_embedding=query_embedding,
                 bucket_boosts=list(definition["boosts"]),
                 related_buckets=set(definition["related_buckets"]),
                 candidate_urls=routed.candidate_urls,
                 domain=routed.domain,
             )
-            selected = self._select_diverse(ranked, top_k=self.top_k_per_bucket)
+
+            # ranked is [(combined_score, chunk), ...] sorted descending
+            ranked_chunks = [chunk for _, chunk in ranked]
+            all_scores = {chunk.source_ref: score for score, chunk in ranked}
+
+            selected = self._select_diverse(ranked_chunks, top_k=self.top_k_per_bucket)
+            # Re-sort selected chunks by hybrid score descending so the LLM sees
+            # the strongest evidence first, regardless of diverse-selection order.
+            selected_scores = {c.source_ref: all_scores[c.source_ref] for c in selected}
+            selected.sort(key=lambda c: selected_scores[c.source_ref], reverse=True)
+
             confidence = self._confidence(
                 chunks=selected,
                 candidate_urls=routed.candidate_urls,
+                scores=selected_scores,
             )
             buckets.append(
                 EvidenceBucket(
@@ -235,6 +400,7 @@ class InsurancePolicyRetriever:
                     chunks=selected,
                     confidence=confidence,
                     notes=routed.notes + self._build_notes(bucket_name, selected, confidence),
+                    scores={c.source_ref: all_scores[c.source_ref] for c in selected},
                 )
             )
 
@@ -245,6 +411,8 @@ class InsurancePolicyRetriever:
         for bucket in buckets:
             flat.extend(bucket.chunks)
         return flat
+
+    # -- Routing -------------------------------------------------------------
 
     def _route_chunks(self, payload: InsuranceAgentInput) -> RoutedSnippetSet:
         route = self.router.route(payload)
@@ -271,7 +439,6 @@ class InsurancePolicyRetriever:
         url_lower = chunk.url.lower()
         if any(term in url_lower for term in _URL_NEGATIVE.get(domain, [])):
             return False
-
         if any(term in url_lower for term in _URL_POSITIVE.get(domain, [])):
             return True
 
@@ -289,21 +456,35 @@ class InsurancePolicyRetriever:
             " ".join(payload.clinical_decision.recommendation_reason_codes),
             " ".join(item.description for item in payload.clinical_requirements),
         ]
-        return " ".join(part for part in parts if part).strip().lower()
+        raw = " ".join(part for part in parts if part).strip().lower()
+        # Deduplicate tokens while preserving order — prevents repetition from
+        # clinical codes and reason codes sharing the same terms.
+        seen: set[str] = set()
+        deduped: list[str] = []
+        for token in raw.split():
+            if token not in seen:
+                seen.add(token)
+                deduped.append(token)
+        return " ".join(deduped)
+
+    # -- Hybrid ranking ------------------------------------------------------
 
     def _rank_chunks(
         self,
         *,
         query: str,
         chunks: list[RetrievedPolicyChunk],
+        chunk_embeddings: np.ndarray | None,
+        query_embedding: np.ndarray | None,
         bucket_boosts: list[str],
         related_buckets: set[str],
         candidate_urls: list[str],
         domain: str,
-    ) -> list[RetrievedPolicyChunk]:
+    ) -> list[tuple[float, RetrievedPolicyChunk]]:
         query_tokens = set(self._tokenize(query))
-        scored: list[tuple[float, RetrievedPolicyChunk]] = []
 
+        # --- Keyword scores (same signals as before) ---
+        keyword_scores: list[float] = []
         for chunk in chunks:
             blob = f"{chunk.title} {chunk.section} {chunk.text}".lower()
             score = 0.0
@@ -340,11 +521,41 @@ class InsurancePolicyRetriever:
             if any(noise in chunk.url.lower() for noise in ["mri-knee", "radiology"]):
                 score -= 3.0
 
-            if score > 0:
-                scored.append((score, chunk))
+            # Penalise generic/structural sections with little policy substance
+            if any(ns in chunk.section.lower() for ns in _NOISY_SECTIONS):
+                score -= 2.0
+
+            keyword_scores.append(score)
+
+        # --- Cosine similarities ---
+        if chunk_embeddings is not None and query_embedding is not None:
+            raw_cosine = (chunk_embeddings @ query_embedding).tolist()
+            cosine_sims: list[float] = [max(0.0, float(s)) for s in raw_cosine]
+        else:
+            cosine_sims = [0.0] * len(chunks)
+
+        # --- Combine ---
+        # Normalise keyword scores so both components live in [0, 1].
+        max_kw = max((s for s in keyword_scores if s > 0), default=1.0)
+
+        scored: list[tuple[float, RetrievedPolicyChunk]] = []
+        for chunk, kw_score, cos_sim in zip(chunks, keyword_scores, cosine_sims):
+            # Hard-discard strongly noisy chunks — a high cosine score on a
+            # completely irrelevant URL (e.g. radiology) should not override
+            # the explicit noise penalty.
+            if kw_score <= _NOISE_SCORE_THRESHOLD:
+                continue
+
+            norm_kw = max(0.0, kw_score) / max_kw
+            combined = _HYBRID_COSINE_WEIGHT * cos_sim + _HYBRID_KEYWORD_WEIGHT * norm_kw
+
+            if combined > 0:
+                scored.append((combined, chunk))
 
         scored.sort(key=lambda item: item[0], reverse=True)
-        return [chunk for _, chunk in scored]
+        return scored
+
+    # -- Selection and scoring -----------------------------------------------
 
     def _select_diverse(
         self,
@@ -371,6 +582,7 @@ class InsurancePolicyRetriever:
         *,
         chunks: list[RetrievedPolicyChunk],
         candidate_urls: list[str],
+        scores: dict[str, float] | None = None,
     ) -> float:
         if not chunks:
             return 0.0
@@ -388,7 +600,23 @@ class InsurancePolicyRetriever:
         if any(term in joined for term in ["appeal", "denial", "reconsideration"]):
             score += 0.05
 
-        return min(score, 0.95)
+        # Discount when best hybrid score is weak — overconfident buckets mislead the LLM.
+        if scores:
+            best = max(scores.values(), default=0.0)
+            if best < 0.30:
+                score *= 0.70
+            elif best < 0.50:
+                score *= 0.85
+
+        # Penalise when most chunks are generic/structural sections.
+        noisy_count = sum(
+            1 for chunk in chunks
+            if any(ns in chunk.section.lower() for ns in _NOISY_SECTIONS)
+        )
+        if chunks and noisy_count > len(chunks) // 2:
+            score *= 0.80
+
+        return min(score, 0.90)  # hard cap at 0.90 — reserve 0.90+ for very strong evidence
 
     def _build_notes(
         self,

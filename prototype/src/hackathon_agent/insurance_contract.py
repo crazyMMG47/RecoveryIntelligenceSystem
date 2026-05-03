@@ -18,6 +18,20 @@ from .schemas import (
 
 ALLOWED_APPEAL_RISK_CODES = {
     "attendance_interruptions_may_reduce_approval_strength",
+    "weak_prior_rehab_documentation",
+    "incomplete_objective_measurements",
+    "missing_physician_justification",
+}
+
+# Near-miss aliases the LLM occasionally generates → nearest valid code.
+APPEAL_RISK_CODE_ALIASES: dict[str, str] = {
+    "weak_functional_deficit_documentation": "incomplete_objective_measurements",
+    "weak_documentation": "incomplete_objective_measurements",
+    "missing_documentation": "incomplete_objective_measurements",
+    "poor_adherence": "attendance_interruptions_may_reduce_approval_strength",
+    "interrupted_attendance": "attendance_interruptions_may_reduce_approval_strength",
+    "missing_physician_note": "missing_physician_justification",
+    "prior_rehab_gap": "weak_prior_rehab_documentation",
 }
 
 REQUIREMENT_NEXT_STEP_MAP = {
@@ -63,9 +77,11 @@ def validate_insurance_output(
         errors.append(f"next_steps contains unsupported values: {invalid_next_steps}.")
 
     for risk_item in result.appeal_risk_factors:
-        if risk_item.code not in ALLOWED_APPEAL_RISK_CODES:
+        resolved_code = APPEAL_RISK_CODE_ALIASES.get(risk_item.code, risk_item.code)
+        if resolved_code not in ALLOWED_APPEAL_RISK_CODES:
             errors.append(
-                f"appeal_risk_factors.code '{risk_item.code}' is not allowed."
+                f"appeal_risk_factors.code '{risk_item.code}' is not allowed. "
+                f"Use one of: {sorted(ALLOWED_APPEAL_RISK_CODES)}."
             )
 
     for rule in result.coverage_rules:
@@ -108,7 +124,9 @@ def validate_insurance_output(
         if unresolved_requirements:
             errors.append(
                 "coverage_position is likely_covered but unresolved requirements remain: "
-                f"{unresolved_requirements}."
+                f"{unresolved_requirements}. "
+                "Use coverage_position = 'conditionally_covered_pending_documentation' "
+                "when policy supports coverage but required documentation is still missing."
             )
 
     unresolved_requirements = [

@@ -1,6 +1,5 @@
 from .clinical_llm_agent import ClinicalLLMAgent
 from .demo_data import DEMO_CASE
-from .insurance_benefits_agent import InsuranceBenefitsAgent
 from .insurance_llm_agent import InsuranceLLMAgent
 from .insurance_retriever import EvidenceBucket, InsurancePolicyRetriever, RetrievedPolicyChunk
 from .llm import PromptMessage, StructuredLLM, UnconfiguredStructuredLLM
@@ -12,22 +11,18 @@ from .schemas import (
     ClinicalAgentInput,
     ClinicalDecision,
     ClinicalAgentOutput,
-    BenefitCoverageStatus,
     ConfidenceLevel,
     ConflictItem,
     CoverageDecision,
     ExternalAgentResponse,
     ExternalAnswerSection,
     InsuranceAgentInput,
-    InsuranceBenefitsInput,
-    InsuranceBenefitsOutput,
     InsuranceDecision,
     InsuranceAgentOutput,
     OrchestratorInput,
     OrchestratorOutput,
     EvidenceItem,
     HandoffPacket,
-    PlanSource,
     PolicyRuleMatch,
     QuestionItem,
     RecommendationDisposition,
@@ -42,7 +37,6 @@ __all__ = [
     "CaseData",
     "CaseResolution",
     "CarePath",
-    "BenefitCoverageStatus",
     "ClinicalAgentInput",
     "ClinicalLLMAgent",
     "ClinicalDecision",
@@ -57,9 +51,6 @@ __all__ = [
     "ExternalAnswerSection",
     "HandoffPacket",
     "InsuranceAgentInput",
-    "InsuranceBenefitsAgent",
-    "InsuranceBenefitsInput",
-    "InsuranceBenefitsOutput",
     "InsuranceDecision",
     "InsuranceLLMAgent",
     "InsuranceAgentOutput",
@@ -68,7 +59,6 @@ __all__ = [
     "OrchestratorInput",
     "OrchestratorOutput",
     "PolicyRuleMatch",
-    "PlanSource",
     "PromptMessage",
     "QuestionItem",
     "RecommendationDisposition",
