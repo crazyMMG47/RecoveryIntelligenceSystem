@@ -156,6 +156,64 @@ _CONTENT_POSITIVE: dict[str, list[str]] = {
     ],
 }
 
+_PT_REHAB_ANCHORS = [
+    "physical therapy",
+    "physiotherapy",
+    "rehabilitation",
+    "outpatient therapy",
+    "occupational and physical therapy",
+]
+
+_COVERAGE_ANCHORS = [
+    "coverage",
+    "covered",
+    "benefit",
+    "authorization",
+    "preauthorization",
+    "prior authorization",
+    "visit",
+    "visits",
+    "limit",
+    "limits",
+]
+
+_MEDICAL_NECESSITY_ANCHORS = [
+    "medical necessity",
+    "medically necessary",
+    "musculoskeletal",
+    "neuromuscular",
+    "functional",
+    "function",
+    "movement dysfunction",
+    "improve function",
+]
+
+_DOCUMENTATION_ANCHORS = [
+    "written treatment plan",
+    "plan of care",
+    "quantitative outcome measures",
+    "objective",
+    "standardized tests",
+    "measurable assessment",
+    "frequency",
+    "duration",
+    "goals",
+    "documentation",
+]
+
+_STOP_OR_ESCALATE_TRIGGERS = [
+    "adherence",
+    "attendance",
+    "appeal",
+    "denial",
+    "denied",
+    "interrupted",
+    "noncoverage",
+    "non-covered",
+    "reconsideration",
+    "retroactive",
+]
+
 
 class PolicySnippetCorpus:
     def __init__(self, snippets_path: str | Path = DEFAULT_SNIPPETS_PATH) -> None:
@@ -215,16 +273,20 @@ class InsurancePolicyRetriever:
 
         for bucket_name, definition in _BUCKET_DEFINITIONS.items():
             query = f"{base_query} {definition['suffix']}"
-            ranked = self._rank_chunks(
-                query=query,
-                chunks=routed.chunks,
-                bucket_boosts=list(definition["boosts"]),
-                related_buckets=set(definition["related_buckets"]),
-                candidate_urls=routed.candidate_urls,
-                domain=routed.domain,
-            )
+            ranked: list[RetrievedPolicyChunk] = []
+            if bucket_name != "stop_or_escalate" or self._should_include_stop_or_escalate(base_query):
+                ranked = self._rank_chunks(
+                    bucket_name=bucket_name,
+                    query=query,
+                    chunks=routed.chunks,
+                    bucket_boosts=list(definition["boosts"]),
+                    related_buckets=set(definition["related_buckets"]),
+                    candidate_urls=routed.candidate_urls,
+                    domain=routed.domain,
+                )
             selected = self._select_diverse(ranked, top_k=self.top_k_per_bucket)
             confidence = self._confidence(
+                bucket_name=bucket_name,
                 chunks=selected,
                 candidate_urls=routed.candidate_urls,
             )
@@ -294,6 +356,7 @@ class InsurancePolicyRetriever:
     def _rank_chunks(
         self,
         *,
+        bucket_name: str,
         query: str,
         chunks: list[RetrievedPolicyChunk],
         bucket_boosts: list[str],
@@ -306,6 +369,13 @@ class InsurancePolicyRetriever:
 
         for chunk in chunks:
             blob = f"{chunk.title} {chunk.section} {chunk.text}".lower()
+            if not self._chunk_matches_bucket(
+                bucket_name=bucket_name,
+                blob=blob,
+                domain=domain,
+            ):
+                continue
+
             score = 0.0
 
             for token in query_tokens:
@@ -346,6 +416,37 @@ class InsurancePolicyRetriever:
         scored.sort(key=lambda item: item[0], reverse=True)
         return [chunk for _, chunk in scored]
 
+    def _chunk_matches_bucket(
+        self,
+        *,
+        bucket_name: str,
+        blob: str,
+        domain: str,
+    ) -> bool:
+        if domain != "pt_rehab":
+            return True
+
+        has_pt_anchor = self._has_any(blob, _PT_REHAB_ANCHORS)
+
+        if bucket_name == "coverage_rules":
+            return has_pt_anchor and self._has_any(blob, _COVERAGE_ANCHORS)
+        if bucket_name == "medical_necessity":
+            if (
+                "specifically excluded under many benefit plans" in blob
+                or "considered not medically necessary" in blob
+            ):
+                return False
+            return has_pt_anchor and self._has_any(blob, _MEDICAL_NECESSITY_ANCHORS)
+        if bucket_name == "documentation_requirements":
+            return (has_pt_anchor or "physical therapy established plan" in blob) and self._has_any(
+                blob,
+                _DOCUMENTATION_ANCHORS,
+            )
+        if bucket_name == "stop_or_escalate":
+            return self._has_any(blob, _STOP_OR_ESCALATE_TRIGGERS)
+
+        return True
+
     def _select_diverse(
         self,
         ranked: list[RetrievedPolicyChunk],
@@ -369,26 +470,40 @@ class InsurancePolicyRetriever:
     def _confidence(
         self,
         *,
+        bucket_name: str,
         chunks: list[RetrievedPolicyChunk],
         candidate_urls: list[str],
     ) -> float:
         if not chunks:
             return 0.0
 
-        score = min(0.60, len(chunks) * 0.20)
+        joined = " ".join(
+            f"{chunk.title} {chunk.section} {chunk.text}".lower()
+            for chunk in chunks
+        )
+        score = 0.25 + min(0.30, len(chunks) * 0.10)
         unique_urls = len({chunk.url for chunk in chunks})
         if unique_urls >= 2:
-            score += 0.15
+            score += 0.10
         if any(chunk.url in candidate_urls for chunk in chunks):
-            score += 0.10
-
-        joined = " ".join(chunk.text.lower() for chunk in chunks)
-        if any(term in joined for term in ["must", "required", "authorization", "documentation"]):
-            score += 0.10
-        if any(term in joined for term in ["appeal", "denial", "reconsideration"]):
             score += 0.05
 
-        return min(score, 0.95)
+        if bucket_name == "coverage_rules" and self._has_any(joined, _COVERAGE_ANCHORS):
+            score += 0.15
+        if bucket_name == "medical_necessity" and self._has_any(joined, _MEDICAL_NECESSITY_ANCHORS):
+            score += 0.20
+        if bucket_name == "documentation_requirements" and self._has_any(joined, _DOCUMENTATION_ANCHORS):
+            score += 0.20
+        if bucket_name == "stop_or_escalate" and self._has_any(joined, _STOP_OR_ESCALATE_TRIGGERS):
+            score += 0.10
+
+        cap = 0.85
+        if unique_urls == 1:
+            cap = 0.75
+        if bucket_name == "stop_or_escalate":
+            cap = 0.70
+
+        return min(score, cap)
 
     def _build_notes(
         self,
@@ -409,3 +524,9 @@ class InsurancePolicyRetriever:
     def _tokenize(self, text: str) -> list[str]:
         tokens = re.findall(r"[a-z0-9_]+", text.lower())
         return [token for token in tokens if len(token) > 2]
+
+    def _has_any(self, text: str, terms: list[str]) -> bool:
+        return any(term in text for term in terms)
+
+    def _should_include_stop_or_escalate(self, base_query: str) -> bool:
+        return self._has_any(base_query, _STOP_OR_ESCALATE_TRIGGERS)

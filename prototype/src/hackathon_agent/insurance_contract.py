@@ -3,6 +3,7 @@ from __future__ import annotations
 from .insurance_prompt import (
     ALLOWED_COVERAGE_RULE_IDS,
     ALLOWED_DECISION_DRIVERS,
+    ALLOWED_APPEAL_RISK_CODES,
     ALLOWED_NEXT_STEPS,
     ALLOWED_REQUIREMENT_CODES,
 )
@@ -15,10 +16,6 @@ from .schemas import (
     WorkflowOwner,
 )
 
-
-ALLOWED_APPEAL_RISK_CODES = {
-    "attendance_interruptions_may_reduce_approval_strength",
-}
 
 REQUIREMENT_NEXT_STEP_MAP = {
     "physician_justification_note": "attach_physician_justification_note",

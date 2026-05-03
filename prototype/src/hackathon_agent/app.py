@@ -43,14 +43,12 @@ def authenticated_extended_card(request: Request) -> dict:
 
 @app.post("/a2a")
 def a2a_rpc(payload: dict, request: Request) -> dict:
-    _ = request
-    return a2a_adapter.handle_json_rpc(payload)
+    return a2a_adapter.handle_json_rpc(payload, request)
 
 
 @app.post("/")
 def root_rpc(payload: dict, request: Request) -> dict:
-    _ = request
-    return a2a_adapter.handle_json_rpc(payload)
+    return a2a_adapter.handle_json_rpc(payload, request)
 
 
 @app.post("/run-case", response_model=ExternalAgentResponse)
