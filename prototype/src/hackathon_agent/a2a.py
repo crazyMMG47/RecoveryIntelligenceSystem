@@ -1,6 +1,9 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
+from datetime import UTC, datetime
+import json
+import logging
 from typing import Any
 from uuid import uuid4
 
@@ -9,6 +12,9 @@ from fastapi import HTTPException, Request
 from .demo_data import DEMO_CASE
 from .orchestrator import Orchestrator
 from .schemas import CaseData, ExternalAgentResponse
+
+
+logger = logging.getLogger(__name__)
 
 
 @dataclass
@@ -26,6 +32,7 @@ class A2AAdapter:
         base_url = str(request.base_url).rstrip("/")
         a2a_url = f"{base_url}/a2a"
         return {
+            "protocolVersion": "0.3.0",
             "name": "hackathon_recovery_intelligence_agent",
             "description": (
                 "External orchestrator agent for recovery planning. It analyzes the current "
@@ -33,17 +40,26 @@ class A2AAdapter:
                 "benefit rules, then returns a structured packet for Prompt Opinion to summarize."
             ),
             "url": a2a_url,
+            "preferredTransport": "JSONRPC",
+            "additionalInterfaces": [
+                {
+                    "url": a2a_url,
+                    "transport": "JSONRPC",
+                }
+            ],
+            # Legacy clients may still inspect this pre-0.3 field.
             "supportedInterfaces": [
                 {
                     "url": a2a_url,
                     "protocolBinding": "JSONRPC",
-                    "protocolVersion": "1.0",
+                    "protocolVersion": "0.3.0",
                 }
             ],
             "version": "0.1.0",
             "capabilities": {
                 "streaming": False,
                 "pushNotifications": False,
+                "stateTransitionHistory": False,
             },
             "defaultInputModes": ["text/plain"],
             "defaultOutputModes": ["text/plain", "application/json"],
@@ -71,12 +87,12 @@ class A2AAdapter:
 
     def build_authenticated_extended_card(self, request: Request) -> dict[str, Any]:
         card = self.build_agent_card(request)
-        card["additionalInterfaces"] = {
+        card["metadata"] = {
             "debugEndpoint": f"{str(request.base_url).rstrip('/')}/run-case-debug",
         }
         return card
 
-    def handle_json_rpc(self, payload: dict[str, Any]) -> dict[str, Any]:
+    def handle_json_rpc(self, payload: dict[str, Any], request: Request | None = None) -> dict[str, Any]:
         jsonrpc = payload.get("jsonrpc")
         request_id = payload.get("id")
         method = payload.get("method")
@@ -86,10 +102,33 @@ class A2AAdapter:
             return self._error_response(request_id, code=-32600, message="Invalid JSON-RPC version.")
 
         try:
-            if method == "message/send":
-                return self._message_send(request_id, params)
-            if method == "tasks/get":
-                return self._tasks_get(request_id, params)
+            logger.info("A2A request method=%s params_keys=%s", method, sorted(params.keys()))
+            if method in {"message/send", "tasks/send", "SendMessage", "SendA2AMessage"}:
+                response = self._message_send(
+                    request_id,
+                    params,
+                    proto_style=method in {"SendMessage", "SendA2AMessage"},
+                )
+                logger.info("A2A response method=%s summary=%s", method, self._response_summary(response))
+                return response
+            if method == "agent/getAuthenticatedExtendedCard":
+                if request is None:
+                    return self._error_response(
+                        request_id,
+                        code=-32603,
+                        message="Request context is required for agent card generation.",
+                    )
+                response = {
+                    "jsonrpc": "2.0",
+                    "id": request_id,
+                    "result": self.build_authenticated_extended_card(request),
+                }
+                logger.info("A2A response method=%s summary=%s", method, self._response_summary(response))
+                return response
+            if method in {"tasks/get", "GetTask"}:
+                response = self._tasks_get(request_id, params)
+                logger.info("A2A response method=%s summary=%s", method, self._response_summary(response))
+                return response
             if method == "tasks/cancel":
                 return self._error_response(
                     request_id,
@@ -98,43 +137,99 @@ class A2AAdapter:
                 )
             return self._error_response(request_id, code=-32601, message=f"Method not found: {method}")
         except HTTPException as exc:
-            return self._error_response(request_id, code=-32000, message=exc.detail)
+            response = self._error_response(request_id, code=-32000, message=exc.detail)
+            logger.exception("A2A HTTPException method=%s", method)
+            return response
         except Exception as exc:
-            return self._error_response(request_id, code=-32000, message=str(exc))
+            response = self._error_response(request_id, code=-32000, message=str(exc))
+            logger.exception("A2A exception method=%s", method)
+            return response
 
-    def _message_send(self, request_id: Any, params: dict[str, Any]) -> dict[str, Any]:
-        message = params.get("message", {})
+    def _message_send(
+        self,
+        request_id: Any,
+        params: dict[str, Any],
+        *,
+        proto_style: bool = False,
+    ) -> dict[str, Any]:
+        message = self._extract_message(params)
         text = self._extract_text(message)
         if not text:
-            raise HTTPException(status_code=400, detail="A2A message/send requires a text message.")
+            raise HTTPException(
+                status_code=400,
+                detail=(
+                    "A2A send requires a text message. "
+                    f"params_keys={sorted(params.keys())}"
+                ),
+            )
 
         case = self._extract_case(params) or DEMO_CASE
         response = self.orchestrator.run(user_question=text, case=case)
-        task = self._build_task(message=message, response=response)
+        task = self._build_task(message=message, response=response, proto_style=proto_style)
         self._tasks[task["id"]] = StoredTask(response=response, task=task)
+        result = {"task": task} if proto_style else task
 
         return {
             "jsonrpc": "2.0",
             "id": request_id,
-            "result": task,
+            "result": result,
         }
 
     def _tasks_get(self, request_id: Any, params: dict[str, Any]) -> dict[str, Any]:
-        task_id = params.get("id")
+        task_id = params.get("id") or params.get("taskId")
         if not task_id or task_id not in self._tasks:
             return self._error_response(request_id, code=-32001, message="Task not found.")
+
+        task = self._tasks[task_id].task
+        is_proto_style = task.get("status", {}).get("state") == "TASK_STATE_COMPLETED"
+        result = {"task": task} if is_proto_style else task
 
         return {
             "jsonrpc": "2.0",
             "id": request_id,
-            "result": self._tasks[task_id].task,
+            "result": result,
         }
 
     def _extract_text(self, message: dict[str, Any]) -> str:
         for part in message.get("parts", []):
+            if part.get("text"):
+                return str(part["text"]).strip()
             if part.get("kind") == "text" and part.get("text"):
                 return str(part["text"]).strip()
+            if part.get("type") == "text" and part.get("text"):
+                return str(part["text"]).strip()
+            if part.get("kind") == "text" and part.get("content"):
+                return str(part["content"]).strip()
         return ""
+
+    def _extract_message(self, params: dict[str, Any]) -> dict[str, Any]:
+        message = params.get("message")
+        if isinstance(message, dict):
+            return message
+
+        content = params.get("content")
+        if isinstance(content, list):
+            parts = []
+            for item in content:
+                if isinstance(item, dict) and item.get("type") == "text" and item.get("text"):
+                    parts.append({"kind": "text", "text": item["text"]})
+                elif isinstance(item, dict) and item.get("kind") == "text" and item.get("text"):
+                    parts.append({"kind": "text", "text": item["text"]})
+            return {
+                "role": "user",
+                "parts": parts,
+                "messageId": str(params.get("messageId") or uuid4()),
+            }
+
+        text = params.get("text") or params.get("input")
+        if text:
+            return {
+                "role": "user",
+                "parts": [{"kind": "text", "text": str(text)}],
+                "messageId": str(params.get("messageId") or uuid4()),
+            }
+
+        return {}
 
     def _extract_case(self, params: dict[str, Any]) -> CaseData | None:
         metadata = params.get("metadata", {})
@@ -143,15 +238,30 @@ class A2AAdapter:
             return None
         return CaseData.model_validate(raw_case)
 
-    def _build_task(self, *, message: dict[str, Any], response: ExternalAgentResponse) -> dict[str, Any]:
-        task_id = str(uuid4())
-        context_id = str(uuid4())
+    def _build_task(
+        self,
+        *,
+        message: dict[str, Any],
+        response: ExternalAgentResponse,
+        proto_style: bool = False,
+    ) -> dict[str, Any]:
+        task_id = str(message.get("taskId") or uuid4())
+        context_id = str(message.get("contextId") or uuid4())
         artifact_id = str(uuid4())
         user_message_id = str(message.get("messageId") or uuid4())
         agent_message_id = str(uuid4())
+        timestamp = datetime.now(UTC).isoformat()
+        user_parts = self._normalize_parts(message.get("parts", []), proto_style=proto_style)
+        status_parts = self._text_parts(response.short_answer, proto_style=proto_style)
+        artifact_parts = self._text_parts(
+            self._format_response_for_prompt_opinion(response),
+            proto_style=proto_style,
+        )
+        user_role = "ROLE_USER" if proto_style else "user"
+        agent_role = "ROLE_AGENT" if proto_style else "agent"
         user_message = {
-            "role": "user",
-            "parts": message.get("parts", []),
+            "role": user_role,
+            "parts": user_parts,
             "messageId": user_message_id,
             "taskId": task_id,
             "contextId": context_id,
@@ -159,13 +269,8 @@ class A2AAdapter:
             "metadata": {},
         }
         agent_message = {
-            "role": "agent",
-            "parts": [
-                {
-                    "kind": "text",
-                    "text": response.short_answer,
-                }
-            ],
+            "role": agent_role,
+            "parts": status_parts,
             "messageId": agent_message_id,
             "taskId": task_id,
             "contextId": context_id,
@@ -175,10 +280,10 @@ class A2AAdapter:
         return {
             "id": task_id,
             "contextId": context_id,
-            "kind": "task",
             "status": {
-                "state": "completed",
+                "state": "TASK_STATE_COMPLETED" if proto_style else "completed",
                 "message": agent_message,
+                "timestamp": timestamp,
             },
             "history": [user_message, agent_message],
             "artifacts": [
@@ -186,24 +291,63 @@ class A2AAdapter:
                     "artifactId": artifact_id,
                     "name": "external_agent_response",
                     "description": "Structured external-agent packet for Prompt Opinion.",
-                    "parts": [
-                        {
-                            "kind": "text",
-                            "text": response.short_answer,
-                        },
-                        {
-                            "kind": "data",
-                            "data": response.model_dump(mode="json"),
-                        },
-                    ],
+                    "parts": artifact_parts,
                 }
             ],
             "metadata": {
                 "case_id": response.case_id,
                 "readiness": response.readiness.value,
                 "requires_human_review": response.requires_human_review,
+                "external_agent_response": response.model_dump(mode="json"),
             },
+            **({} if proto_style else {"kind": "task"}),
         }
+
+    def _normalize_parts(self, parts: list[dict[str, Any]], *, proto_style: bool) -> list[dict[str, Any]]:
+        normalized = []
+        for part in parts:
+            text = part.get("text") or part.get("content")
+            if not text:
+                continue
+            normalized.extend(self._text_parts(str(text), proto_style=proto_style))
+        return normalized
+
+    def _text_parts(self, text: str, *, proto_style: bool) -> list[dict[str, str]]:
+        if proto_style:
+            return [{"text": text}]
+        return [{"kind": "text", "text": text}]
+
+    def _format_response_for_prompt_opinion(self, response: ExternalAgentResponse) -> str:
+        lines = [
+            f"Case ID: {response.case_id}",
+            f"User question: {response.user_question}",
+            f"Readiness: {response.readiness.value}",
+            f"Requires human review: {response.requires_human_review}",
+            "",
+            "Use the sections below to answer the user's original question. Do not add facts that are not in this packet.",
+        ]
+        for section in response.sections:
+            lines.extend(
+                [
+                    "",
+                    f"Section: {section.topic}",
+                    f"Confidence: {section.confidence.value}",
+                    f"Answer: {section.answer}",
+                ]
+            )
+            if section.supporting_points:
+                lines.append("Supporting points:")
+                lines.extend(f"- {point}" for point in section.supporting_points)
+        if response.blocking_items:
+            lines.extend(["", "Blocking or missing items:"])
+            lines.extend(f"- {item}" for item in response.blocking_items)
+        if response.recommended_next_steps:
+            lines.extend(["", "Recommended next steps:"])
+            lines.extend(f"- {step}" for step in response.recommended_next_steps)
+        if response.benefits_at_a_glance:
+            lines.extend(["", "Benefits at a glance:"])
+            lines.extend(f"- {item}" for item in response.benefits_at_a_glance)
+        return "\n".join(lines)
 
     def _error_response(self, request_id: Any, *, code: int, message: str) -> dict[str, Any]:
         return {
@@ -214,3 +358,33 @@ class A2AAdapter:
                 "message": message,
             },
         }
+
+    def _compact_log(self, value: Any) -> str:
+        text = json.dumps(value, ensure_ascii=True, default=str)
+        if len(text) <= 1200:
+            return text
+        return text[:1200] + "...<truncated>"
+
+    def _response_summary(self, response: dict[str, Any]) -> str:
+        if "error" in response:
+            return self._compact_log(response["error"])
+        result = response.get("result", {})
+        if not isinstance(result, dict):
+            return self._compact_log(result)
+        task = result.get("task") if isinstance(result.get("task"), dict) else result
+        if task.get("kind") == "task" or "status" in task:
+            return self._compact_log(
+                {
+                    "has_task_wrapper": "task" in result,
+                    "kind": task.get("kind"),
+                    "status": task.get("status", {}).get("state"),
+                    "artifact_count": len(task.get("artifacts", [])),
+                    "metadata_keys": sorted(task.get("metadata", {}).keys()),
+                }
+            )
+        return self._compact_log(
+            {
+                "kind": result.get("kind"),
+                "keys": sorted(result.keys()),
+            }
+        )

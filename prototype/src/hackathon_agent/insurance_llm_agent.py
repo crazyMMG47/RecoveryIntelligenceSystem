@@ -1,11 +1,7 @@
 from __future__ import annotations
 
-from .insurance_contract import (
-    ALLOWED_APPEAL_RISK_CODES,
-    APPEAL_RISK_CODE_ALIASES,
-    validate_insurance_output,
-)
-from .insurance_prompt import ALLOWED_NEXT_STEPS, build_insurance_messages
+from .insurance_contract import APPEAL_RISK_CODE_ALIASES, validate_insurance_output
+from .insurance_prompt import ALLOWED_APPEAL_RISK_CODES, ALLOWED_NEXT_STEPS, build_insurance_messages
 from .insurance_retriever import InsurancePolicyRetriever
 from .llm import PromptMessage, StructuredLLM
 from .schemas import (
@@ -147,6 +143,8 @@ class InsuranceLLMAgent:
                             "Return a corrected InsuranceAgentOutput only.\n"
                             "Allowed next_steps values are exactly:\n"
                             + "\n".join(f"- {step}" for step in ALLOWED_NEXT_STEPS)
+                            + "\nAllowed appeal_risk_factors.code values are exactly:\n"
+                            + "\n".join(f"- {code}" for code in ALLOWED_APPEAL_RISK_CODES)
                             + "\n"
                             + "\n".join(f"- {error}" for error in errors)
                             + extra_instruction

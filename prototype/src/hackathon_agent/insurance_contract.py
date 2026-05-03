@@ -3,6 +3,7 @@ from __future__ import annotations
 from .insurance_prompt import (
     ALLOWED_COVERAGE_RULE_IDS,
     ALLOWED_DECISION_DRIVERS,
+    ALLOWED_APPEAL_RISK_CODES,
     ALLOWED_NEXT_STEPS,
     ALLOWED_REQUIREMENT_CODES,
 )
@@ -16,13 +17,6 @@ from .schemas import (
 )
 
 
-ALLOWED_APPEAL_RISK_CODES = {
-    "attendance_interruptions_may_reduce_approval_strength",
-    "weak_prior_rehab_documentation",
-    "incomplete_objective_measurements",
-    "missing_physician_justification",
-}
-
 # Near-miss aliases the LLM occasionally generates → nearest valid code.
 APPEAL_RISK_CODE_ALIASES: dict[str, str] = {
     "weak_functional_deficit_documentation": "incomplete_objective_measurements",
@@ -33,6 +27,7 @@ APPEAL_RISK_CODE_ALIASES: dict[str, str] = {
     "missing_physician_note": "missing_physician_justification",
     "prior_rehab_gap": "weak_prior_rehab_documentation",
 }
+
 
 REQUIREMENT_NEXT_STEP_MAP = {
     "physician_justification_note": "attach_physician_justification_note",

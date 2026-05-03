@@ -33,6 +33,10 @@ ALLOWED_DECISION_DRIVERS = [
     "missing_required_documentation",
 ]
 
+ALLOWED_APPEAL_RISK_CODES = [
+    "attendance_interruptions_may_reduce_approval_strength",
+]
+
 ALLOWED_COVERAGE_RULE_IDS = [
     "physician_justification_required",
     "objective_deficit_required",
@@ -96,6 +100,9 @@ Allowed next_steps values:
 Allowed decision.decision_drivers values:
 {allowed_decision_drivers}
 
+Allowed appeal_risk_factors.code values:
+{allowed_appeal_risk_codes}
+
 Allowed coverage_rules.rule_id values:
 {allowed_coverage_rule_ids}
 
@@ -127,6 +134,7 @@ Use these exact next-step mappings:
 
 Forbidden near-miss values:
 - Do not output add_context_for_interrupted_attendance
+- Do not use decision.decision_drivers values as appeal_risk_factors.code values
 """.strip()
 
 
