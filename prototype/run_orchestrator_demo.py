@@ -1,7 +1,8 @@
 from __future__ import annotations
 
 import json
-
+from dotenv import load_dotenv                                                                          
+load_dotenv() 
 from src.hackathon_agent.demo_data import DEMO_CASE
 from src.hackathon_agent.orchestrator import Orchestrator
 

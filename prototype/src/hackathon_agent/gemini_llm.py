@@ -1,5 +1,6 @@
 from __future__ import annotations
-
+from dotenv import load_dotenv                                                                          
+load_dotenv() 
 import os
 from typing import TypeVar
 
@@ -69,3 +70,34 @@ class GeminiStructuredLLM(StructuredLLM):
                 f"Validation error: {exc}\n"
                 f"Response preview:\n{preview}"
             ) from exc
+
+    def generate_text(
+        self,
+        *,
+        messages: list[PromptMessage],
+    ) -> str:
+        """Generate free-form text (not structured JSON)."""
+        system_messages = [message.content for message in messages if message.role == "system"]
+        non_system_messages = [message for message in messages if message.role != "system"]
+
+        if not non_system_messages:
+            raise RuntimeError("At least one non-system message is required.")
+
+        response = self.client.models.generate_content(
+            model=self.model,
+            contents=[
+                types.Content(
+                    role="user" if message.role != "model" else "model",
+                    parts=[types.Part.from_text(text=message.content)],
+                )
+                for message in non_system_messages
+            ],
+            config=types.GenerateContentConfig(
+                system_instruction="\n\n".join(system_messages) if system_messages else None,
+            ),
+        )
+
+        if not response.text:
+            raise RuntimeError("Gemini returned an empty response.")
+
+        return response.text

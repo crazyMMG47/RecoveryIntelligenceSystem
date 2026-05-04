@@ -67,8 +67,9 @@ class WorkflowOwner(str, Enum):
 
 class Readiness(str, Enum):
     READY = "ready"
-    BLOCKED = "blocked"
+    PENDING_DOCUMENTATION = "pending_documentation"
     NEED_MORE_INFO = "need_more_info"
+    BLOCKED = "blocked"
 
 
 class EvidenceItem(StrictModel):

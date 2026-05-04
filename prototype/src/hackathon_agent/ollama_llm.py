@@ -80,3 +80,44 @@ class OllamaStructuredLLM(StructuredLLM):
                 f"Validation error: {exc}\n"
                 f"Response preview:\n{preview}"
             ) from exc
+
+    def generate_text(
+        self,
+        *,
+        messages: list[PromptMessage],
+    ) -> str:
+        """Generate free-form text (not structured JSON)."""
+        chat_messages = [
+            {"role": msg.role if msg.role != "model" else "assistant", "content": msg.content}
+            for msg in messages
+        ]
+
+        payload = {
+            "model": self.model,
+            "messages": chat_messages,
+            "stream": False,
+            "options": {
+                "temperature": 0.3,
+                "num_ctx": 8192,
+            },
+        }
+
+        try:
+            response = requests.post(
+                f"{self.base_url}/api/chat",
+                json=payload,
+                timeout=self.timeout,
+            )
+            response.raise_for_status()
+        except requests.RequestException as exc:
+            raise RuntimeError(
+                f"Ollama request failed. Is `ollama serve` running at {self.base_url}?\n{exc}"
+            ) from exc
+
+        data = response.json()
+        raw = data.get("message", {}).get("content", "")
+
+        if not raw:
+            raise RuntimeError(f"Ollama returned an empty response. Full payload: {data}")
+
+        return raw

@@ -23,6 +23,12 @@ class StructuredLLM(Protocol):
         response_model: type[T],
     ) -> T: ...
 
+    def generate_text(
+        self,
+        *,
+        messages: list[PromptMessage],
+    ) -> str: ...
+
 
 class UnconfiguredStructuredLLM:
     def generate_structured(
