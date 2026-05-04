@@ -1,5 +1,8 @@
 from __future__ import annotations
 
+from dotenv import load_dotenv
+load_dotenv()
+
 import json
 
 from src.hackathon_agent.ollama_llm import OllamaStructuredLLM

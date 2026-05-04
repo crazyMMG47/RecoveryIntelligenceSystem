@@ -1,0 +1,55 @@
+Input records: 552
+Cleaned records: 552
+PT-focused records: 101
+
+== domain ==
+pharmacy: 418
+pt_rehab: 47
+general_authorization: 35
+general_documentation: 13
+appeals: 13
+radiology: 12
+dme: 7
+other: 7
+
+== bucket ==
+medical_necessity: 143
+documentation_requirements: 133
+other: 109
+stop_or_escalate: 102
+coverage_rules: 65
+
+== domain_bucket ==
+('pharmacy', 'medical_necessity'): 107
+('pharmacy', 'documentation_requirements'): 102
+('pharmacy', 'other'): 96
+('pharmacy', 'stop_or_escalate'): 73
+('pharmacy', 'coverage_rules'): 40
+('pt_rehab', 'medical_necessity'): 27
+('general_authorization', 'coverage_rules'): 15
+('general_documentation', 'documentation_requirements'): 13
+('appeals', 'stop_or_escalate'): 13
+('pt_rehab', 'documentation_requirements'): 10
+('general_authorization', 'stop_or_escalate'): 8
+('general_authorization', 'other'): 7
+('radiology', 'medical_necessity'): 7
+('general_authorization', 'documentation_requirements'): 5
+('other', 'other'): 5
+('pt_rehab', 'coverage_rules'): 5
+('pt_rehab', 'stop_or_escalate'): 5
+('dme', 'coverage_rules'): 2
+('radiology', 'coverage_rules'): 2
+('dme', 'medical_necessity'): 2
+('radiology', 'documentation_requirements'): 2
+('dme', 'stop_or_escalate'): 1
+('radiology', 'stop_or_escalate'): 1
+('other', 'stop_or_escalate'): 1
+('other', 'coverage_rules'): 1
+('dme', 'other'): 1
+('dme', 'documentation_requirements'): 1
+
+== priority ==
+exclude_for_pt: 444
+low: 61
+high: 35
+medium: 12

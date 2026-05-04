@@ -19,8 +19,10 @@ ROOT = Path(__file__).resolve().parents[2]
 DEFAULT_SNIPPETS_PATH = ROOT / "data" / "policy_snippets" / "snippets.jsonl"
 
 # Hybrid scoring weights: cosine similarity + normalised keyword score
-_HYBRID_COSINE_WEIGHT = 0.6
-_HYBRID_KEYWORD_WEIGHT = 0.4
+# Heavily weight keywords to prioritize domain-specific boosts over generic embeddings
+# 0.2 cosine allows embeddings to break ties, but 0.8 keyword ensures our boosts dominate
+_HYBRID_COSINE_WEIGHT = 0.2
+_HYBRID_KEYWORD_WEIGHT = 0.8
 
 # Keyword score threshold below which a chunk is discarded regardless of cosine similarity.
 # The noise penalty for bad URLs is -3.0, so -2.0 safely catches those while
@@ -126,7 +128,7 @@ _BUCKET_DEFINITIONS: dict[str, dict[str, object]] = {
     "coverage_rules": {
         "suffix": (
             "coverage benefit outpatient rehab physical therapy authorization "
-            "utilization review criteria visit limits"
+            "utilization review criteria visit limits copay deductible visits per year"
         ),
         "boosts": [
             "coverage",
@@ -136,13 +138,21 @@ _BUCKET_DEFINITIONS: dict[str, dict[str, object]] = {
             "visit",
             "limit",
             "preauthorization",
+            "physical therapy",
+            "rehabilitation",
+            "outpatient",
+            "copay",
+            "copayment",
+            "deductible",
+            "visits per year",
         ],
         "related_buckets": {"coverage_rules", "authorization"},
     },
     "medical_necessity": {
         "suffix": (
             "medical necessity continuation objective progress measurable "
-            "functional deficits supervised physical therapy rehabilitation"
+            "functional deficits supervised physical therapy rehabilitation "
+            "quadriceps strength deficit acl neuromuscular control"
         ),
         "boosts": [
             "medical necessity",
@@ -152,13 +162,21 @@ _BUCKET_DEFINITIONS: dict[str, dict[str, object]] = {
             "continuation of therapy",
             "physical therapy",
             "rehabilitation",
+            "quadriceps",
+            "strength deficit",
+            "acl",
+            "neuromuscular",
+            "objective strength",
+            "functional deficit",
+            "acl rehabilitation",
         ],
-        "related_buckets": {"medical_necessity", "condition_guideline"},
+        "related_buckets": {"medical_necessity", "condition_guideline", "documentation_requirements"},
     },
     "documentation_requirements": {
         "suffix": (
             "documentation physician justification therapy plan frequency "
-            "duration reassessment plan of care"
+            "duration reassessment plan of care objective strength quadriceps "
+            "neuromuscular functional measurements"
         ),
         "boosts": [
             "physician justification",
@@ -168,13 +186,19 @@ _BUCKET_DEFINITIONS: dict[str, dict[str, object]] = {
             "documentation",
             "plan of care",
             "measurable assessment",
+            "objective strength",
+            "objective measurements",
+            "quadriceps",
+            "neuromuscular",
+            "functional movement",
+            "structured therapy plan",
         ],
         "related_buckets": {"documentation_requirements", "authorization"},
     },
     "stop_or_escalate": {
         "suffix": (
             "adherence history interrupted attendance denial appeal escalation "
-            "reconsideration approval risk"
+            "reconsideration approval risk incomplete rehabilitation no progress"
         ),
         "boosts": [
             "adherence",
@@ -183,6 +207,12 @@ _BUCKET_DEFINITIONS: dict[str, dict[str, object]] = {
             "appeal",
             "expedited appeal",
             "reconsideration",
+            "incomplete rehabilitation",
+            "incomplete rehab",
+            "no progress",
+            "plateau",
+            "escalation",
+            "escalate",
         ],
         "related_buckets": {"stop_or_escalate", "appeals", "authorization"},
     },
@@ -266,6 +296,18 @@ _MEDICAL_NECESSITY_ANCHORS = [
     "function",
     "movement dysfunction",
     "improve function",
+    "quadriceps weakness",
+    "strength deficit",
+    "acl protocol",
+    "acl rehabilitation",
+    "measurable improvement",
+    "objective measurements",
+    "acl",
+    "protocol",
+    "return to sport",
+    "return-to-sport",
+    "strength testing",
+    "hop test",
 ]
 
 _DOCUMENTATION_ANCHORS = [
@@ -279,6 +321,12 @@ _DOCUMENTATION_ANCHORS = [
     "duration",
     "goals",
     "documentation",
+    "objective strength",
+    "objective measurements",
+    "structured therapy plan",
+    "quadriceps",
+    "neuromuscular",
+    "functional movement",
 ]
 
 _STOP_OR_ESCALATE_TRIGGERS = [
@@ -293,6 +341,19 @@ _STOP_OR_ESCALATE_TRIGGERS = [
     "reconsideration",
     "retroactive",
 ]
+
+# PT-specific chunks to prioritize in retrieval
+_PT_CHUNK_WHITELIST = frozenset({
+    "pt_med_nec_001",
+    "pt_med_nec_002",
+    "pt_med_nec_003",
+    "pt_doc_req_001",
+    "pt_doc_req_002",
+    "pt_cov_rules_001",
+    "pt_cov_rules_002",
+    "pt_risk_escalate_001",
+    "pt_risk_incomplete_rehab_001",
+})
 
 
 # ---------------------------------------------------------------------------
@@ -567,6 +628,25 @@ class InsurancePolicyRetriever:
                 if phrase in blob:
                     score += 3.0
 
+            # Additional PT-specific phrase boosts (higher weight than bucket boosts)
+            pt_specific_phrases = [
+                "quadriceps weakness",
+                "strength deficit",
+                "objective strength",
+                "functional deficit",
+                "acl rehabilitation",
+                "structured therapy plan",
+                "incomplete rehabilitation",
+                "neuromuscular control",
+                "acl protocol",
+                "pt authorization",
+                "pt frequency",
+                "pt coverage",
+            ]
+            for phrase in pt_specific_phrases:
+                if phrase in blob:
+                    score += 4.0
+
             if chunk.bucket in related_buckets:
                 score += 4.0
             elif chunk.bucket != "other":
@@ -574,6 +654,43 @@ class InsurancePolicyRetriever:
 
             if chunk.url in candidate_urls:
                 score += 2.5
+
+            # Boost PT-specific chunk titles/sections when in pt_rehab domain
+            if domain == "pt_rehab":
+                # Strong priority for PT-specific chunks
+                if chunk.source_ref in _PT_CHUNK_WHITELIST:
+                    score += 10.0
+
+                # Also boost chunks with PT-specific titles/sections
+                pt_title_keywords = [
+                    "physical therapy",
+                    "pt authorization",
+                    "acl",
+                    "rehabilitation",
+                    "strength",
+                    "objective measurements",
+                    "neuromuscular",
+                ]
+                if any(kw in chunk.title.lower() or kw in chunk.section.lower() for kw in pt_title_keywords):
+                    score += 5.0
+
+            # Penalize generic priorauth chunks when looking for PT-specific content
+            if (
+                domain == "pt_rehab"
+                and bucket_name in ("medical_necessity", "documentation_requirements")
+                and "priorauth" in chunk.url.lower()
+                and not any(
+                    phrase in blob
+                    for phrase in [
+                        "physical therapy",
+                        "acl",
+                        "quadriceps",
+                        "objective strength",
+                        "neuromuscular",
+                    ]
+                )
+            ):
+                score -= 3.0
 
             if domain == "pt_rehab" and any(
                 phrase in blob
@@ -584,9 +701,14 @@ class InsurancePolicyRetriever:
                     "medical necessity",
                     "acl",
                     "knee",
+                    "quadriceps",
+                    "strength",
+                    "neuromuscular",
+                    "objective measurements",
+                    "functional deficit",
                 ]
             ):
-                score += 1.0
+                score += 3.0
 
             if any(noise in chunk.url.lower() for noise in ["mri-knee", "radiology"]):
                 score -= 3.0
@@ -647,6 +769,8 @@ class InsurancePolicyRetriever:
                 or "considered not medically necessary" in blob
             ):
                 return False
+            # For PT domain, also accept condition_guideline chunks (e.g. ACL protocols)
+            # that have PT anchors and medical necessity keywords
             return has_pt_anchor and self._has_any(blob, _MEDICAL_NECESSITY_ANCHORS)
         if bucket_name == "documentation_requirements":
             return (has_pt_anchor or "physical therapy established plan" in blob) and self._has_any(
@@ -655,6 +779,10 @@ class InsurancePolicyRetriever:
             )
         if bucket_name == "stop_or_escalate":
             return self._has_any(blob, _STOP_OR_ESCALATE_TRIGGERS)
+
+        # Boost condition_guideline bucket for PT domain (includes ACL rehab protocols)
+        if bucket_name == "condition_guideline" and domain == "pt_rehab":
+            return has_pt_anchor
 
         return True
 

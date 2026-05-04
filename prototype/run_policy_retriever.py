@@ -1,5 +1,8 @@
 from __future__ import annotations
 
+from dotenv import load_dotenv                                                                          
+load_dotenv() 
+  
 from src.hackathon_agent.clinical_llm_agent import ClinicalLLMAgent
 from src.hackathon_agent.demo_data import DEMO_CASE
 from src.hackathon_agent.gemini_llm import GeminiStructuredLLM
