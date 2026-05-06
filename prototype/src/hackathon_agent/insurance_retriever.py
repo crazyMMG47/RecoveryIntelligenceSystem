@@ -64,9 +64,17 @@ class EmbeddingModel:
         except ImportError as exc:
             raise RuntimeError(
                 "sentence-transformers is required for embedding retrieval. "
-                "Run: pip install sentence-transformers"
+                "Install with: pip install -r requirements.txt\n"
+                "Or: pip install sentence-transformers"
             ) from exc
-        self._model = SentenceTransformer(self.MODEL_NAME)
+        try:
+            self._model = SentenceTransformer(self.MODEL_NAME)
+        except Exception as exc:
+            raise RuntimeError(
+                f"Failed to load embedding model '{self.MODEL_NAME}'. "
+                f"Error: {exc}\n"
+                "Ensure you have internet connectivity and disk space for model download."
+            ) from exc
 
     @classmethod
     def get_default(cls) -> EmbeddingModel:
