@@ -1,0 +1,144 @@
+================================================================================
+         INTERACTIVE CONFLICT EXPLORER — VISUAL OVERVIEW
+================================================================================
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│ RecoveryIQ — Conflict Explorer                         [Run Demo Case] 🚀   │
+│ Visual demo showing how agents reason independently and resolve conflicts   │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+────────────────────────────────────────────────────────────────────────────────
+                      TWO-COLUMN AGENT COMPARISON
+────────────────────────────────────────────────────────────────────────────────
+
+┌─ 🏥 CLINICAL AGENT ─────────────────┬─ 💰 INSURANCE AGENT ──────────────────┐
+│ (Blue)                              │ (Purple)                              │
+├─────────────────────────────────────┼───────────────────────────────────────┤
+│ Recommendation: ADDITIONAL_PT       │ Coverage: CONDITIONALLY_COVERED       │
+│ HIGH confidence                     │ HIGH confidence                       │
+│                                     │                                       │
+│ Why?                                │ Decision Drivers:                     │
+│ ✓ Post_revision_rehab_incomplete    │ ✓ Physician_justification             │
+│ ✓ Documented_quadriceps_weakness    │ ✓ Objective_functional_deficit        │
+│                                     │ ✓ Therapy_plan                       │
+│ Evidence (Claims):                  │                                       │
+│ ─────────────────────────────────── │ Coverage Rules:                       │
+│ "Quadriceps weakness on exam"       │ ───────────────────────────────────── │
+│ [STRONG] 📄 clinical_notes[3]        │ "Physician justification required"    │
+│ supports: supervised_pt             │ ✅ SATISFIED                          │
+│                                     │                                       │
+│ "No acute tear on imaging"          │ "Objective deficit required"          │
+│ [STRONG] 📄 imaging[0]               │ ❌ UNSATISFIED (missing measurements) │
+│ supports: supervised_pt             │                                       │
+│                                     │ "Therapy plan required"               │
+│ "ACL laxity present"                │ ✅ SATISFIED                          │
+│ [STRONG] 📄 imaging[1]               │                                       │
+│ supports: supervised_pt             │ Insurance Requirements:               │
+│                                     │ ───────────────────────────────────── │
+│ Requirements:                       │ ✓ Objective_functional_measurements   │
+│ ✓ Objective_deficit_measurement     │ ✓ Structured_therapy_plan             │
+│ ✓ Structured_pt_plan_definition     │                                       │
+│                                     │ Appeal Risk Factors:                  │
+│ Risk Factors:                       │ ───────────────────────────────────── │
+│ • Fear_of_reinjury (STRONG)         │ • Incomplete_objective_measurements   │
+│ • Early_cartilage_degeneration      │                                       │
+└─────────────────────────────────────┴───────────────────────────────────────┘
+
+────────────────────────────────────────────────────────────────────────────────
+                         CONFLICT RESOLUTION
+────────────────────────────────────────────────────────────────────────────────
+
+┌─ ⚡ CONFLICT RESOLUTION ─────────────────────────────────────────────────────┐
+│                                                                              │
+│ Conflict 1: CLINICAL_INSURANCE_MISMATCH [🔴 BLOCKING]                       │
+│ Between: Clinical ↔ Insurance                                               │
+│ Reason: Clinical recommends additional PT, insurance approval is conditional│
+│         on documentation strength. Conflict: need strong physician          │
+│         justification to overcome authorization limits.                     │
+│                                                                              │
+│ ├─ Case Readiness: 🟡 PENDING_DOCUMENTATION                               │
+│ └─ Human Review Required: YES 👤                                            │
+│                                                                              │
+│ ℹ️ Escalation: Blocking conflict exists. Case requires documentation       │
+│    submission to move forward.                                              │
+│                                                                              │
+└──────────────────────────────────────────────────────────────────────────────┘
+
+────────────────────────────────────────────────────────────────────────────────
+                    ORCHESTRATOR REASONING & NEXT STEPS
+────────────────────────────────────────────────────────────────────────────────
+
+┌─ 🤖 ORCHESTRATOR REASONING ─────────────────────────────────────────────────┐
+│                                                                              │
+│ Recommended Workflow:                                                        │
+│                                                                              │
+│ ① [CLINICAL]  Collect physician justification for continued supervised PT   │
+│    ✓ Done when: Letter from physician explaining clinical rationale        │
+│                                                                              │
+│ ② [INSURANCE] Attach physician justification note to authorization         │
+│    ✓ Done when: Document uploaded to insurance system                      │
+│    → Depends on: step_1                                                    │
+│                                                                              │
+│ ③ [INSURANCE] Request objective strength measurements if not already on     │
+│    file                                                                     │
+│    ✓ Done when: Measurements submitted to insurance                        │
+│    → Depends on: step_1                                                    │
+│                                                                              │
+│ ④ [HUMAN] Review final case readiness and document status                  │
+│    ✓ Done when: Care coordinator reviews documentation and determines      │
+│                  if case is ready for final authorization                   │
+│    → Depends on: step_2, step_3                                            │
+│                                                                              │
+│ Blocking Requirements:                                                      │
+│ • Objective_functional_measurements [❌ UNSATISFIED]                        │
+│ • Structured_therapy_plan [✅ SATISFIED]                                    │
+│ • Physician_justification_note [❌ UNSATISFIED]                             │
+│                                                                              │
+│ Open Questions:                                                             │
+│ [objective_strength] Do we have objective strength testing results?         │
+│ [rehab_documentation] What was the scope and duration of prior rehab?       │
+│                                                                              │
+└──────────────────────────────────────────────────────────────────────────────┘
+
+════════════════════════════════════════════════════════════════════════════════
+
+KEY FEATURES:
+
+  ✅ Agents think INDEPENDENTLY
+     - Separate inputs, separate analysis, separate outputs
+     - Clinical focuses on patient condition; Insurance focuses on coverage
+
+  ✅ Evidence is TRACEABLE
+     - Click any source reference (📄 clinical_notes[0]) to see the actual text
+     - No hallucinations; all claims are sourced from case data
+
+  ✅ Conflicts are DETECTED
+     - Orchestrator identifies when agents disagree
+     - Shows whether conflicts are BLOCKING or informational
+
+  ✅ Resolution is STRUCTURED
+     - Not guessing; rule-based resolution with clear next steps
+     - Numbered workflow steps with dependencies and success criteria
+
+  ✅ Reasoning is TRANSPARENT
+     - See why each agent made its decision
+     - See what documentation is missing
+     - See what the next action should be
+
+════════════════════════════════════════════════════════════════════════════════
+
+HOW TO ACCESS:
+
+  1. Start the service:
+     $ cd prototype
+     $ export GEMINI_API_KEY="your-key"
+     $ uvicorn src.hackathon_agent.app:app --reload
+
+  2. Open in browser:
+     http://localhost:8000/explore
+
+  3. Click [Run Demo Case] and wait ~60 seconds for the pipeline to complete
+
+  4. Explore the visual representation of agent reasoning and conflict resolution
+
+════════════════════════════════════════════════════════════════════════════════
