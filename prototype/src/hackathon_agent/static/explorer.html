@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RecoveryIQ — Conflict Explorer</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.3/dist/cdn.min.js"></script>
+</head>
+<body class="bg-gray-50 min-h-screen font-sans text-gray-800" x-data="explorer()" x-init="init()">
+
+  <!-- ── Header ── -->
+  <header class="bg-white shadow-sm border-b border-gray-200 px-6 py-4">
+    <div class="flex items-start justify-between">
+      <div>
+        <h1 class="text-2xl font-bold text-gray-900">RecoveryIQ — Conflict Explorer</h1>
+        <p class="text-sm text-gray-600 mt-2 max-w-3xl">Visual demo showing how Clinical and Insurance agents reason independently with evidence, and how the Orchestrator resolves conflicts between them.</p>
+      </div>
+    </div>
+    <div class="flex items-center gap-3 mt-4">
+      <span x-show="loading" class="text-sm text-blue-600 animate-pulse font-medium">
+        ⏳ Running agents through full pipeline (this takes ~60 seconds)...
+      </span>
+      <span x-show="error" x-text="error" class="text-sm text-red-600 font-medium"></span>
+      <button @click="fetchDebugData()"
+              :disabled="loading"
+              class="bg-blue-600 text-white px-6 py-2 rounded-lg text-sm font-medium
+                     hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition">
+        🚀 Run Demo Case
+      </button>
+    </div>
+  </header>
+
+  <!-- ── Main content (hidden until data loaded) ── -->
+  <main x-show="data" class="max-w-7xl mx-auto px-4 py-8 space-y-8">
+
+    <!-- ── Section 1: User Question ── -->
+    <div class="bg-blue-50 border border-blue-200 rounded-lg p-4">
+      <p class="text-sm text-blue-900">
+        <strong>User Question:</strong>
+        <span x-text="userQuestion"></span>
+      </p>
+    </div>
+
+    <!-- ── Section 2: Two-column Agent Panel ── -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+
+      <!-- Clinical Agent Card (LEFT) -->
+      <div class="bg-white rounded-xl shadow-md p-6 space-y-5 border-t-4 border-blue-500">
+        <div class="flex items-center justify-between">
+          <h2 class="font-bold text-lg text-blue-700">🏥 Clinical Agent</h2>
+          <span :class="confidenceClass(data.clinical_output.confidence)"
+                class="text-xs font-semibold px-3 py-1 rounded-full">
+            <span x-text="data.clinical_output.confidence.toUpperCase()"></span> confidence
+          </span>
+        </div>
+
+        <!-- Decision -->
+        <div class="space-y-2">
+          <div class="text-xs text-gray-500 uppercase tracking-wide font-semibold">Recommendation</div>
+          <span class="inline-block font-semibold text-blue-900 text-sm bg-blue-50 px-3 py-1 rounded border border-blue-200"
+                x-text="humanize(data.clinical_output.decision.recommended_path)"></span>
+          <div class="text-xs text-gray-600 mt-1"
+               x-text="humanize(data.clinical_output.decision.recommendation_disposition)"></div>
+        </div>
+
+        <!-- Reason codes as chips -->
+        <template x-if="data.clinical_output.decision.recommendation_reason_codes.length > 0">
+          <div>
+            <div class="text-xs text-gray-500 uppercase tracking-wide font-semibold mb-2">Why?</div>
+            <div class="flex flex-wrap gap-1.5">
+              <template x-for="code in data.clinical_output.decision.recommendation_reason_codes">
+                <span class="text-xs bg-gray-100 text-gray-700 px-2.5 py-1 rounded-full" x-text="humanize(code)"></span>
+              </template>
+            </div>
+          </div>
+        </template>
+
+        <!-- Evidence list -->
+        <div>
+          <div class="text-xs text-gray-500 uppercase tracking-wide font-semibold mb-3">Evidence (Claims)</div>
+          <div class="space-y-2.5">
+            <template x-for="ev in data.clinical_output.evidence">
+              <div class="border border-gray-200 rounded-lg p-3.5 text-sm hover:border-blue-300 hover:shadow-sm transition">
+                <div class="flex items-start justify-between gap-3">
+                  <span x-text="ev.statement" class="text-gray-800 leading-relaxed flex-1"></span>
+                  <span :class="strengthClass(ev.strength)"
+                        class="text-xs px-2 py-0.5 rounded-full whitespace-nowrap flex-shrink-0 font-medium"
+                        x-text="ev.strength.toUpperCase()"></span>
+                </div>
+                <div class="mt-2 flex flex-wrap items-center gap-2 text-xs text-gray-600">
+                  <button @click="openSourceDrawer(ev.source_ref)"
+                          class="text-blue-600 hover:text-blue-800 hover:underline font-medium"
+                          x-text="'📄 ' + ev.source_ref"></button>
+                  <span class="italic" x-text="'→ supports: ' + ev.supports"></span>
+                </div>
+              </div>
+            </template>
+          </div>
+        </div>
+
+        <!-- Requirements -->
+        <template x-if="data.clinical_output.requirements.length > 0">
+          <div>
+            <div class="text-xs text-gray-500 uppercase tracking-wide font-semibold mb-2">Clinical Requirements</div>
+            <div class="space-y-1.5">
+              <template x-for="req in data.clinical_output.requirements">
+                <div class="flex items-center justify-between text-sm gap-2">
+                  <span x-text="req.description" class="text-gray-700 flex-1"></span>
+                  <span :class="requirementStatusClass(req.status)"
+                        class="text-xs px-2.5 py-0.5 rounded-full whitespace-nowrap flex-shrink-0 font-medium"
+                        x-text="req.status.toUpperCase()"></span>
+                </div>
+              </template>
+            </div>
+          </div>
+        </template>
+
+        <!-- Risk items -->
+        <template x-if="data.clinical_output.risk_items.length > 0">
+          <div>
+            <div class="text-xs text-gray-500 uppercase tracking-wide font-semibold mb-2">Risk Factors</div>
+            <div class="space-y-1.5">
+              <template x-for="risk in data.clinical_output.risk_items">
+                <div class="flex items-center justify-between text-sm gap-2">
+                  <span x-text="risk.description" class="text-gray-700 flex-1"></span>
+                  <span :class="strengthClass(risk.severity)"
+                        class="text-xs px-2.5 py-0.5 rounded-full whitespace-nowrap flex-shrink-0 font-medium"
+                        x-text="risk.severity.toUpperCase()"></span>
+                </div>
+              </template>
+            </div>
+          </div>
+        </template>
+      </div>
+
+      <!-- Insurance Agent Card (RIGHT) -->
+      <div class="bg-white rounded-xl shadow-md p-6 space-y-5 border-t-4 border-purple-500">
+        <!-- Degraded mode warning -->
+        <template x-if="data.insurance_output.validation_errors && data.insurance_output.validation_errors.length > 0">
+          <div class="bg-yellow-50 border border-yellow-300 rounded p-3 text-xs text-yellow-800">
+            <strong>⚠️ Degraded Mode:</strong> Insurance agent returned fallback output.
+          </div>
+        </template>
+
+        <div class="flex items-center justify-between">
+          <h2 class="font-bold text-lg text-purple-700">💰 Insurance Agent</h2>
+          <span :class="confidenceClass(data.insurance_output.confidence)"
+                class="text-xs font-semibold px-3 py-1 rounded-full">
+            <span x-text="data.insurance_output.confidence.toUpperCase()"></span> confidence
+          </span>
+        </div>
+
+        <!-- Coverage decision -->
+        <div class="space-y-2">
+          <div class="text-xs text-gray-500 uppercase tracking-wide font-semibold">Coverage Position</div>
+          <span :class="coverageClass(data.insurance_output.decision.coverage_position)"
+                class="inline-block font-semibold text-sm px-3 py-1 rounded border"
+                x-text="humanize(data.insurance_output.decision.coverage_position)"></span>
+          <template x-if="data.insurance_output.decision.review_needed">
+            <div class="text-xs text-orange-700 font-medium bg-orange-50 px-2 py-1 rounded inline-block">🔍 Review Needed</div>
+          </template>
+        </div>
+
+        <!-- Decision drivers as chips -->
+        <template x-if="data.insurance_output.decision.decision_drivers.length > 0">
+          <div>
+            <div class="text-xs text-gray-500 uppercase tracking-wide font-semibold mb-2">Decision Drivers</div>
+            <div class="flex flex-wrap gap-1.5">
+              <template x-for="driver in data.insurance_output.decision.decision_drivers">
+                <span class="text-xs bg-gray-100 text-gray-700 px-2.5 py-1 rounded-full" x-text="humanize(driver)"></span>
+              </template>
+            </div>
+          </div>
+        </template>
+
+        <!-- Coverage rules -->
+        <template x-if="data.insurance_output.coverage_rules.length > 0">
+          <div>
+            <div class="text-xs text-gray-500 uppercase tracking-wide font-semibold mb-3">Coverage Rules</div>
+            <div class="space-y-2.5">
+              <template x-for="rule in data.insurance_output.coverage_rules">
+                <div class="border border-gray-200 rounded-lg p-3.5 text-sm hover:shadow-sm transition">
+                  <div class="flex items-start gap-2 mb-1.5">
+                    <span class="text-lg flex-shrink-0 mt-0.5"
+                          x-text="rule.satisfied_by.length > 0 ? '✅' : rule.unsatisfied_reason ? '❌' : '❓'"></span>
+                    <div class="flex-1">
+                      <p class="text-gray-800 leading-relaxed" x-text="rule.rule_text"></p>
+                      <p class="text-xs text-gray-500 italic mt-1" x-text="rule.effect"></p>
+                    </div>
+                  </div>
+                  <template x-if="rule.unsatisfied_reason">
+                    <p class="text-xs text-red-700 bg-red-50 px-2 py-1 rounded mt-2" x-text="rule.unsatisfied_reason"></p>
+                  </template>
+                </div>
+              </template>
+            </div>
+          </div>
+        </template>
+
+        <!-- Requirements -->
+        <template x-if="data.insurance_output.requirements.length > 0">
+          <div>
+            <div class="text-xs text-gray-500 uppercase tracking-wide font-semibold mb-2">Insurance Requirements</div>
+            <div class="space-y-1.5">
+              <template x-for="req in data.insurance_output.requirements">
+                <div class="flex items-center justify-between text-sm gap-2">
+                  <span x-text="req.description" class="text-gray-700 flex-1"></span>
+                  <span :class="requirementStatusClass(req.status)"
+                        class="text-xs px-2.5 py-0.5 rounded-full whitespace-nowrap flex-shrink-0 font-medium"
+                        x-text="req.status.toUpperCase()"></span>
+                </div>
+              </template>
+            </div>
+          </div>
+        </template>
+
+        <!-- Appeal risk factors -->
+        <template x-if="data.insurance_output.appeal_risk_factors.length > 0">
+          <div>
+            <div class="text-xs text-gray-500 uppercase tracking-wide font-semibold mb-2">Appeal Risk Factors</div>
+            <div class="space-y-1.5">
+              <template x-for="risk in data.insurance_output.appeal_risk_factors">
+                <div class="flex items-center justify-between text-sm gap-2">
+                  <span x-text="risk.description" class="text-gray-700 flex-1"></span>
+                  <span :class="strengthClass(risk.severity)"
+                        class="text-xs px-2.5 py-0.5 rounded-full whitespace-nowrap flex-shrink-0 font-medium"
+                        x-text="risk.severity.toUpperCase()"></span>
+                </div>
+              </template>
+            </div>
+          </div>
+        </template>
+      </div>
+    </div>
+
+    <!-- ── Section 3: Conflict Resolution Panel ── -->
+    <div class="bg-white rounded-xl shadow-md p-6 space-y-5 border-l-4 border-red-500">
+      <h2 class="font-bold text-lg text-gray-900">⚡ Conflict Resolution</h2>
+
+      <!-- Conflict items -->
+      <template x-if="data.orchestrator_output.conflict_items.length > 0">
+        <div class="space-y-3">
+          <template x-for="conflict in data.orchestrator_output.conflict_items">
+            <div :class="conflict.blocking
+                   ? 'border border-red-400 bg-red-50'
+                   : 'border border-yellow-300 bg-yellow-50'"
+                 class="rounded-lg p-4">
+              <div class="flex items-center gap-2 mb-2">
+                <span class="font-semibold text-sm text-gray-800" x-text="humanize(conflict.conflict_type)"></span>
+                <template x-if="conflict.blocking">
+                  <span class="text-xs bg-red-600 text-white px-2.5 py-0.5 rounded-full font-bold">BLOCKING</span>
+                </template>
+                <span class="text-xs text-gray-600 ml-auto"
+                      x-text="conflict.between.map(b => b.charAt(0).toUpperCase() + b.slice(1)).join(' ↔ ')"></span>
+              </div>
+              <p class="text-sm text-gray-800 leading-relaxed" x-text="conflict.reason"></p>
+            </div>
+          </template>
+        </div>
+      </template>
+
+      <!-- Readiness verdict -->
+      <div class="flex items-center gap-4 pt-2 border-t border-gray-200">
+        <div>
+          <div class="text-xs text-gray-500 uppercase tracking-wide font-semibold mb-1">Case Readiness</div>
+          <span :class="readinessClass(data.orchestrator_output.case_resolution.readiness)"
+                class="inline-block text-sm font-bold px-4 py-2 rounded-lg"
+                x-text="humanize(data.orchestrator_output.case_resolution.readiness)"></span>
+        </div>
+        <template x-if="data.orchestrator_output.case_resolution.requires_human_review">
+          <span class="bg-orange-100 text-orange-800 text-xs font-semibold px-3 py-1.5 rounded-full">
+            👤 Human Review Required
+          </span>
+        </template>
+      </div>
+
+      <!-- Escalation reason -->
+      <template x-if="data.orchestrator_output.escalation_reason">
+        <p class="text-sm italic text-gray-700 bg-orange-50 px-3 py-2 rounded border border-orange-200"
+           x-text="'ℹ️ ' + data.orchestrator_output.escalation_reason"></p>
+      </template>
+    </div>
+
+    <!-- ── Section 4: Orchestrator Reasoning Panel ── -->
+    <div class="bg-white rounded-xl shadow-md p-6 space-y-6 border-l-4 border-green-500">
+      <h2 class="font-bold text-lg text-gray-900">🤖 Orchestrator Reasoning</h2>
+
+      <!-- Workflow steps -->
+      <template x-if="data.orchestrator_output.recommended_workflow.length > 0">
+        <div>
+          <div class="text-xs text-gray-500 uppercase tracking-wide font-semibold mb-4">Recommended Workflow</div>
+          <ol class="space-y-3">
+            <template x-for="(step, idx) in data.orchestrator_output.recommended_workflow">
+              <li class="flex gap-4">
+                <span class="w-8 h-8 rounded-full bg-green-500 text-white text-sm flex items-center
+                             justify-center font-bold flex-shrink-0" x-text="idx+1"></span>
+                <div class="flex-1 bg-gray-50 rounded-lg p-3.5 border border-gray-200">
+                  <div class="flex items-center gap-2 mb-1.5 flex-wrap">
+                    <span :class="ownerClass(step.owner)"
+                          class="text-xs px-2.5 py-0.5 rounded-full font-semibold"
+                          x-text="step.owner.toUpperCase()"></span>
+                    <span class="text-xs text-gray-400 font-mono" x-text="'[' + step.step_id + ']'"></span>
+                  </div>
+                  <p class="text-sm text-gray-800 font-medium mb-1" x-text="step.action"></p>
+                  <p class="text-xs text-gray-600 italic" x-text="'✓ Done when: ' + step.done_definition"></p>
+                  <template x-if="step.depends_on.length > 0">
+                    <p class="text-xs text-gray-500 mt-1.5"
+                       x-text="'→ Depends on: ' + step.depends_on.join(', ')"></p>
+                  </template>
+                </div>
+              </li>
+            </template>
+          </ol>
+        </div>
+      </template>
+
+      <!-- Blocking requirements -->
+      <template x-if="data.orchestrator_output.blocking_requirements.length > 0">
+        <div class="border-t border-gray-200 pt-4">
+          <div class="text-xs text-gray-500 uppercase tracking-wide font-semibold mb-2.5">Blocking Requirements</div>
+          <div class="space-y-1.5">
+            <template x-for="req in data.orchestrator_output.blocking_requirements">
+              <div class="flex items-center justify-between text-sm gap-2 p-2 bg-red-50 rounded border border-red-100">
+                <span x-text="req.description" class="text-gray-700 flex-1"></span>
+                <span :class="requirementStatusClass(req.status)"
+                      class="text-xs px-2.5 py-0.5 rounded-full whitespace-nowrap flex-shrink-0 font-medium"
+                      x-text="req.status.toUpperCase()"></span>
+              </div>
+            </template>
+          </div>
+        </div>
+      </template>
+
+      <!-- Open questions -->
+      <template x-if="data.orchestrator_output.open_questions.length > 0">
+        <div class="border-t border-gray-200 pt-4">
+          <div class="text-xs text-gray-500 uppercase tracking-wide font-semibold mb-2.5">Open Questions</div>
+          <ul class="space-y-2">
+            <template x-for="q in data.orchestrator_output.open_questions">
+              <li class="text-sm text-gray-700 p-2 bg-blue-50 rounded border border-blue-100">
+                <span class="text-xs font-mono text-blue-600 font-semibold mr-2" x-text="'[' + q.code + ']'"></span>
+                <span x-text="q.question"></span>
+              </li>
+            </template>
+          </ul>
+        </div>
+      </template>
+    </div>
+
+  </main>
+
+  <!-- ── Evidence Source Drawer ── -->
+  <div x-show="drawerOpen"
+       x-transition
+       @click.self="drawerOpen = false"
+       class="fixed inset-0 bg-black/40 flex items-end justify-center z-50">
+    <div class="bg-white w-full max-w-2xl rounded-t-2xl p-6 shadow-2xl max-h-96 overflow-y-auto">
+      <div class="flex items-center justify-between mb-4 border-b border-gray-200 pb-4">
+        <div>
+          <p class="text-xs text-gray-500 uppercase tracking-wide font-semibold">Source Reference</p>
+          <span class="font-mono text-sm text-gray-700 font-semibold mt-1" x-text="drawerTitle"></span>
+        </div>
+        <button @click="drawerOpen = false" class="text-gray-400 hover:text-gray-600 text-2xl font-light">&times;</button>
+      </div>
+      <p class="text-sm text-gray-800 leading-relaxed whitespace-pre-wrap" x-text="drawerText"></p>
+    </div>
+  </div>
+
+  <script>
+    function explorer() {
+      return {
+        // ---- state ----
+        loading: false,
+        error: null,
+        data: null,
+        drawerOpen: false,
+        drawerTitle: '',
+        drawerText: '',
+        userQuestion: 'Is Daniel likely eligible for additional 2x/week PT under his Kaiser plan, what documentation would strengthen approval, and what should the next care plan be?',
+
+        // ---- lifecycle ----
+        init() {
+          // No auto-run; user clicks the button
+        },
+
+        // ---- primary data fetch ----
+        async fetchDebugData() {
+          this.loading = true;
+          this.error = null;
+          this.data = null;
+
+          try {
+            // Step 1: get the demo case from /demo-case
+            const caseResp = await fetch('/demo-case');
+            if (!caseResp.ok) {
+              this.error = `Failed to fetch demo case: ${caseResp.status}`;
+              this.loading = false;
+              return;
+            }
+            const caseData = await caseResp.json();
+
+            // Step 2: POST to /run-case-debug
+            const body = {
+              user_question: this.userQuestion,
+              case: caseData
+            };
+            const debugResp = await fetch('/run-case-debug', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(body)
+            });
+            if (!debugResp.ok) {
+              this.error = `Server error: ${debugResp.status}`;
+              this.loading = false;
+              return;
+            }
+            this.data = await debugResp.json();
+            this.loading = false;
+          } catch (exc) {
+            this.error = `Error: ${exc.message}`;
+            this.loading = false;
+          }
+        },
+
+        // ---- source ref resolution for the drawer ----
+        openSourceDrawer(sourceRef) {
+          const ci = this.data.clinical_input;
+          if (sourceRef === 'patient_summary') {
+            this.drawerTitle = 'patient_summary';
+            this.drawerText = ci.patient_summary;
+          } else {
+            const match = sourceRef.match(/^(\w+)\[(\d+)\]$/);
+            if (match) {
+              const field = match[1];
+              const idx = parseInt(match[2]);
+              this.drawerTitle = sourceRef;
+              this.drawerText = (ci[field] || [])[idx] || '(not found)';
+            }
+          }
+          this.drawerOpen = true;
+        },
+
+        // ---- display helpers ----
+        confidenceClass(level) {
+          return {
+            high:   'bg-green-100 text-green-800',
+            medium: 'bg-yellow-100 text-yellow-800',
+            low:    'bg-red-100 text-red-800',
+          }[level] || 'bg-gray-100 text-gray-700';
+        },
+
+        strengthClass(strength) {
+          return {
+            strong:   'bg-blue-100 text-blue-800',
+            moderate: 'bg-indigo-100 text-indigo-800',
+            weak:     'bg-gray-100 text-gray-500',
+          }[strength] || 'bg-gray-100 text-gray-500';
+        },
+
+        readinessClass(readiness) {
+          return {
+            ready:                         'bg-green-500 text-white',
+            pending_documentation:         'bg-yellow-400 text-yellow-900',
+            need_more_info:                'bg-orange-400 text-white',
+            blocked:                       'bg-red-600 text-white',
+          }[readiness] || 'bg-gray-400 text-white';
+        },
+
+        coverageClass(position) {
+          return {
+            likely_covered:                              'bg-green-100 text-green-800',
+            conditionally_covered_pending_documentation: 'bg-yellow-100 text-yellow-800',
+            likely_denied:                               'bg-red-100 text-red-800',
+            unclear:                                     'bg-gray-100 text-gray-700',
+          }[position] || 'bg-gray-100 text-gray-700';
+        },
+
+        ownerClass(owner) {
+          return {
+            clinical:   'bg-blue-100 text-blue-800',
+            insurance:  'bg-purple-100 text-purple-800',
+            orchestrator: 'bg-gray-100 text-gray-700',
+            human:      'bg-orange-100 text-orange-800',
+          }[owner] || 'bg-gray-100 text-gray-700';
+        },
+
+        requirementStatusClass(status) {
+          return {
+            satisfied:   'bg-green-100 text-green-700',
+            unsatisfied: 'bg-red-100 text-red-700',
+            unknown:     'bg-gray-100 text-gray-500',
+          }[status] || 'bg-gray-100 text-gray-500';
+        },
+
+        humanize(code) {
+          return (code || '')
+            .replace(/_/g, ' ')
+            .replace(/\b\w/g, c => c.toUpperCase());
+        },
+      };
+    }
+  </script>
+</body>
+</html>

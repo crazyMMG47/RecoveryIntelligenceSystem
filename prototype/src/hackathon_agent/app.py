@@ -1,4 +1,7 @@
+from pathlib import Path
+
 from fastapi import FastAPI, Request
+from fastapi.responses import FileResponse
 
 from .a2a import A2AAdapter
 from .demo_data import DEMO_CASE
@@ -59,3 +62,9 @@ def run_case(request: RunCaseRequest) -> ExternalAgentResponse:
 @app.post("/run-case-debug", response_model=RunCaseDebugResponse)
 def run_case_debug(request: RunCaseRequest) -> RunCaseDebugResponse:
     return orchestrator.run_debug(user_question=request.user_question, case=request.case)
+
+
+@app.get("/explore", response_class=FileResponse)
+def explore() -> FileResponse:
+    html_path = Path(__file__).parent / "static" / "explorer.html"
+    return FileResponse(html_path, media_type="text/html")
