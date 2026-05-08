@@ -12,4 +12,4 @@ venv/
 *.npy
 snippets_embeddings_hash.txt
 .cache/
-.huggingface/
+.huggingface/prototype/data/policy_snippets/*.npy
