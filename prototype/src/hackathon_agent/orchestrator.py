@@ -500,6 +500,16 @@ class Orchestrator:
 
         supporting_refs = self._supporting_evidence_refs(orchestrator_input)
 
+        # Build supporting points with bounds checking
+        injury_history_points = [pt for pt in case.clinical_notes[:2]] + case.pt_notes[:3]
+        injury_history_refs = [f"clinical_notes[{i}]" for i in range(min(2, len(case.clinical_notes)))] + \
+                              [f"pt_notes[{i}]" for i in range(min(3, len(case.pt_notes)))]
+
+        clinical_status_points = [pt for pt in case.clinical_notes[2:5]] + case.pt_notes[3:4] + case.imaging
+        clinical_status_refs = [f"clinical_notes[{i}]" for i in range(2, min(5, len(case.clinical_notes)))] + \
+                               (["pt_notes[3]"] if len(case.pt_notes) > 3 else []) + \
+                               [f"imaging[{i}]" for i in range(len(case.imaging))]
+
         sections = [
             ExternalAnswerSection(
                 topic="case_context",
@@ -518,18 +528,8 @@ class Orchestrator:
                     "progression."
                 ),
                 confidence=self._topic_confidence(clinical_output.confidence.value),
-                supporting_points=[
-                    case.clinical_notes[0],
-                    case.clinical_notes[1],
-                    *case.pt_notes[:3],
-                ],
-                supporting_evidence_refs=[
-                    "clinical_notes[0]",
-                    "clinical_notes[1]",
-                    "pt_notes[0]",
-                    "pt_notes[1]",
-                    "pt_notes[2]",
-                ],
+                supporting_points=injury_history_points,
+                supporting_evidence_refs=injury_history_refs,
             ),
             ExternalAnswerSection(
                 topic="current_clinical_status",
@@ -540,22 +540,8 @@ class Orchestrator:
                     "degeneration, and no acute tear or displaced hardware complication."
                 ),
                 confidence=self._topic_confidence(clinical_output.confidence.value),
-                supporting_points=[
-                    case.clinical_notes[2],
-                    case.clinical_notes[3],
-                    case.clinical_notes[4],
-                    case.pt_notes[3],
-                    *case.imaging,
-                ],
-                supporting_evidence_refs=[
-                    "clinical_notes[2]",
-                    "clinical_notes[3]",
-                    "clinical_notes[4]",
-                    "pt_notes[3]",
-                    "imaging[0]",
-                    "imaging[1]",
-                    "imaging[2]",
-                ],
+                supporting_points=clinical_status_points,
+                supporting_evidence_refs=clinical_status_refs,
             ),
             ExternalAnswerSection(
                 topic="insurance_authorization",
