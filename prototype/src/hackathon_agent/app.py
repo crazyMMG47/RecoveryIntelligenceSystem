@@ -1,6 +1,7 @@
 from pathlib import Path
 import json
 import logging
+from uuid import uuid4
 
 from fastapi import FastAPI, Request
 from fastapi.responses import FileResponse
@@ -15,6 +16,9 @@ logger = logging.getLogger(__name__)
 app = FastAPI(title="Hackathon Agent API", version="0.1.0")
 orchestrator = Orchestrator.from_env()
 a2a_adapter = A2AAdapter(orchestrator)
+
+# Feature flag for minimal response mode (for Prompt Opinion compatibility testing)
+USE_MINIMAL_A2A_RESPONSE = True
 
 
 @app.get("/health")
@@ -97,9 +101,19 @@ async def a2a_rpc(request: Request) -> dict:
             payload.get("jsonrpc"),
             len(body),
         )
-        logger.debug("A2A POST /a2a - full request: %s", json.dumps(payload, default=str)[:1000])
+        logger.debug("A2A POST /a2a - full request: %s", json.dumps(payload, default=str)[:1500])
 
-        # Call the adapter
+        # TEMPORARY: Use minimal response for Prompt Opinion compatibility testing
+        if USE_MINIMAL_A2A_RESPONSE:
+            response = _build_minimal_a2a_response(request_id)
+            logger.info(
+                "A2A POST /a2a (MINIMAL MODE) - response_id=%s",
+                response.get("id"),
+            )
+            logger.debug("A2A POST /a2a - minimal response: %s", json.dumps(response, default=str)[:1500])
+            return response
+
+        # PRODUCTION: Call the full adapter
         response = a2a_adapter.handle_json_rpc(payload, request)
 
         # Log the response
@@ -108,7 +122,7 @@ async def a2a_rpc(request: Request) -> dict:
             response.get("id"),
             "error" in response,
         )
-        logger.debug("A2A POST /a2a - full response: %s", json.dumps(response, default=str)[:1000])
+        logger.debug("A2A POST /a2a - full response: %s", json.dumps(response, default=str)[:1500])
 
         return response
     except Exception as e:
@@ -121,6 +135,46 @@ async def a2a_rpc(request: Request) -> dict:
                 "message": f"Internal error: {str(e)}",
             },
         }
+
+
+def _build_minimal_a2a_response(request_id: str) -> dict:
+    """Build a minimal A2A response for Prompt Opinion compatibility testing.
+
+    This excludes fields that may cause deserialization issues:
+    - history
+    - artifacts
+    - metadata
+    - timestamp
+    """
+    task_id = str(uuid4())
+    context_id = str(uuid4())
+    message_id = str(uuid4())
+
+    return {
+        "jsonrpc": "2.0",
+        "id": request_id,
+        "result": {
+            "id": task_id,
+            "contextId": context_id,
+            "kind": "task",
+            "status": {
+                "state": "completed",
+                "message": {
+                    "kind": "message",
+                    "role": "agent",
+                    "messageId": message_id,
+                    "taskId": task_id,
+                    "contextId": context_id,
+                    "parts": [
+                        {
+                            "kind": "text",
+                            "text": "Hello from Recovery Intelligence System. This is a minimal response for compatibility testing.",
+                        }
+                    ],
+                },
+            },
+        },
+    }
 
 
 @app.post("/")
