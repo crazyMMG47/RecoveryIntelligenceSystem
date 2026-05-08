@@ -61,9 +61,41 @@ def authenticated_extended_card(request: Request) -> dict:
 
 
 @app.get("/a2a")
-def a2a_metadata(request: Request) -> dict:
-    """A2A endpoint metadata discovery (called by Prompt Opinion for validation)."""
-    return a2a_adapter.build_agent_card(request)
+def a2a_validation(request: Request) -> dict:
+    """A2A endpoint validation (called by Prompt Opinion to verify JSON-RPC support).
+
+    Returns a minimal JSON-RPC response to satisfy Prompt Opinion's deserializer.
+    Actual invocations use POST /a2a with JSON-RPC request body.
+    """
+    task_id = str(uuid4())
+    context_id = str(uuid4())
+    message_id = str(uuid4())
+
+    return {
+        "jsonrpc": "2.0",
+        "id": None,
+        "result": {
+            "id": task_id,
+            "contextId": context_id,
+            "kind": "task",
+            "status": {
+                "state": "completed",
+                "message": {
+                    "kind": "message",
+                    "role": "agent",
+                    "messageId": message_id,
+                    "taskId": task_id,
+                    "contextId": context_id,
+                    "parts": [
+                        {
+                            "kind": "text",
+                            "text": "Recovery Intelligence A2A endpoint is reachable. Use POST /a2a for JSON-RPC message/send invocation.",
+                        }
+                    ],
+                },
+            },
+        },
+    }
 
 
 @app.post("/a2a")
