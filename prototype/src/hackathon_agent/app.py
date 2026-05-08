@@ -1,6 +1,7 @@
 from pathlib import Path
 import json
 import logging
+import os
 from uuid import uuid4
 
 from fastapi import FastAPI, Request
@@ -15,7 +16,15 @@ logger = logging.getLogger(__name__)
 
 app = FastAPI(title="Hackathon Agent API", version="0.1.0")
 orchestrator = Orchestrator.from_env()
-a2a_adapter = A2AAdapter(orchestrator)
+
+# Public base URL for agent card URLs (must be HTTPS)
+# Hugging Face Space may report internal upstream as http://, but public URL is always https://
+PUBLIC_BASE_URL = os.getenv(
+    "PUBLIC_BASE_URL",
+    "https://mooimooi4frog-recovery-iq.hf.space"
+).rstrip("/")
+
+a2a_adapter = A2AAdapter(orchestrator, public_base_url=PUBLIC_BASE_URL)
 
 # Feature flag for minimal response mode (for Prompt Opinion compatibility testing)
 USE_MINIMAL_A2A_RESPONSE = True

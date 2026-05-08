@@ -24,12 +24,19 @@ class StoredTask:
 
 
 class A2AAdapter:
-    def __init__(self, orchestrator: Orchestrator) -> None:
+    def __init__(self, orchestrator: Orchestrator, public_base_url: str | None = None) -> None:
         self.orchestrator = orchestrator
         self._tasks: dict[str, StoredTask] = {}
+        self.public_base_url = public_base_url
 
     def build_agent_card(self, request: Request) -> dict[str, Any]:
-        base_url = str(request.base_url).rstrip("/")
+        # Use public base URL if provided (for Hugging Face Spaces and production)
+        # Otherwise fall back to request-inferred URL (for localhost/ngrok testing)
+        if self.public_base_url:
+            base_url = self.public_base_url
+        else:
+            base_url = str(request.base_url).rstrip("/")
+
         a2a_url = f"{base_url}/a2a"
         return {
             "protocolVersion": "0.3.0",
