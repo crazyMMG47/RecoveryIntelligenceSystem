@@ -62,9 +62,10 @@ def authenticated_extended_card(request: Request) -> dict:
 
 @app.get("/a2a")
 def a2a_validation(request: Request) -> dict:
-    """A2A endpoint validation (called by Prompt Opinion to verify JSON-RPC support).
+    """A2A endpoint validation (called by Prompt Opinion to verify endpoint readiness).
 
-    Returns a minimal JSON-RPC response to satisfy Prompt Opinion's deserializer.
+    Returns a minimal task object for validation. Prompt Opinion uses this to confirm
+    the endpoint is reachable and returns valid task structures.
     Actual invocations use POST /a2a with JSON-RPC request body.
     """
     task_id = str(uuid4())
@@ -72,27 +73,23 @@ def a2a_validation(request: Request) -> dict:
     message_id = str(uuid4())
 
     return {
-        "jsonrpc": "2.0",
-        "id": None,
-        "result": {
-            "id": task_id,
-            "contextId": context_id,
-            "kind": "task",
-            "status": {
-                "state": "completed",
-                "message": {
-                    "kind": "message",
-                    "role": "agent",
-                    "messageId": message_id,
-                    "taskId": task_id,
-                    "contextId": context_id,
-                    "parts": [
-                        {
-                            "kind": "text",
-                            "text": "Recovery Intelligence A2A endpoint is reachable. Use POST /a2a for JSON-RPC message/send invocation.",
-                        }
-                    ],
-                },
+        "id": task_id,
+        "contextId": context_id,
+        "kind": "task",
+        "status": {
+            "state": "completed",
+            "message": {
+                "kind": "message",
+                "role": "agent",
+                "messageId": message_id,
+                "taskId": task_id,
+                "contextId": context_id,
+                "parts": [
+                    {
+                        "kind": "text",
+                        "text": "Recovery Intelligence A2A endpoint is reachable. Use POST /a2a for JSON-RPC message/send invocation.",
+                    }
+                ],
             },
         },
     }
