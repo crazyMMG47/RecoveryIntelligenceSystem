@@ -1,4 +1,6 @@
 from pathlib import Path
+import json
+import logging
 
 from fastapi import FastAPI, Request
 from fastapi.responses import FileResponse
@@ -8,6 +10,7 @@ from .demo_data import DEMO_CASE
 from .orchestrator import Orchestrator
 from .schemas import ExternalAgentResponse, RunCaseDebugResponse, RunCaseRequest
 
+logger = logging.getLogger(__name__)
 
 app = FastAPI(title="Hackathon Agent API", version="0.1.0")
 orchestrator = Orchestrator.from_env()
@@ -51,13 +54,79 @@ def a2a_metadata(request: Request) -> dict:
 
 
 @app.post("/a2a")
-def a2a_rpc(payload: dict, request: Request) -> dict:
-    return a2a_adapter.handle_json_rpc(payload, request)
+async def a2a_rpc(request: Request) -> dict:
+    """A2A JSON-RPC 2.0 endpoint for Prompt Opinion.
+
+    Accepts a JSON-RPC 2.0 request body and returns a JSON-RPC 2.0 response.
+    """
+    try:
+        # Read the raw request body
+        body = await request.body()
+        if not body:
+            logger.warning("A2A POST received empty body")
+            return {
+                "jsonrpc": "2.0",
+                "id": None,
+                "error": {
+                    "code": -32700,
+                    "message": "Parse error: empty body",
+                },
+            }
+
+        # Parse JSON
+        try:
+            payload = json.loads(body)
+        except json.JSONDecodeError as e:
+            logger.error("A2A POST received invalid JSON: %s", str(e))
+            return {
+                "jsonrpc": "2.0",
+                "id": None,
+                "error": {
+                    "code": -32700,
+                    "message": f"Parse error: invalid JSON: {str(e)}",
+                },
+            }
+
+        # Log the incoming request
+        request_id = payload.get("id")
+        method = payload.get("method")
+        logger.info(
+            "A2A POST /a2a - request_id=%s method=%s jsonrpc=%s body_len=%d",
+            request_id,
+            method,
+            payload.get("jsonrpc"),
+            len(body),
+        )
+        logger.debug("A2A POST /a2a - full request: %s", json.dumps(payload, default=str)[:1000])
+
+        # Call the adapter
+        response = a2a_adapter.handle_json_rpc(payload, request)
+
+        # Log the response
+        logger.info(
+            "A2A POST /a2a - response_id=%s has_error=%s",
+            response.get("id"),
+            "error" in response,
+        )
+        logger.debug("A2A POST /a2a - full response: %s", json.dumps(response, default=str)[:1000])
+
+        return response
+    except Exception as e:
+        logger.exception("A2A POST /a2a - unhandled exception")
+        return {
+            "jsonrpc": "2.0",
+            "id": None,
+            "error": {
+                "code": -32603,
+                "message": f"Internal error: {str(e)}",
+            },
+        }
 
 
 @app.post("/")
-def root_rpc(payload: dict, request: Request) -> dict:
-    return a2a_adapter.handle_json_rpc(payload, request)
+async def root_rpc(request: Request) -> dict:
+    """Root POST endpoint (alias for /a2a for compatibility)."""
+    return await a2a_rpc(request)
 
 
 @app.post("/run-case", response_model=ExternalAgentResponse)
