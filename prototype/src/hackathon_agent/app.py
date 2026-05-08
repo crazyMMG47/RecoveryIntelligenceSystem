@@ -44,6 +44,12 @@ def authenticated_extended_card(request: Request) -> dict:
     return a2a_adapter.build_authenticated_extended_card(request)
 
 
+@app.get("/a2a")
+def a2a_metadata(request: Request) -> dict:
+    """A2A endpoint metadata discovery (called by Prompt Opinion for validation)."""
+    return a2a_adapter.build_agent_card(request)
+
+
 @app.post("/a2a")
 def a2a_rpc(payload: dict, request: Request) -> dict:
     return a2a_adapter.handle_json_rpc(payload, request)
