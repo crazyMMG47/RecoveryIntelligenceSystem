@@ -99,80 +99,54 @@ def a2a_validation(request: Request) -> dict:
 async def a2a_rpc(request: Request) -> dict:
     """A2A JSON-RPC 2.0 endpoint for Prompt Opinion.
 
-    Accepts a JSON-RPC 2.0 request body and returns a JSON-RPC 2.0 response.
+    For compatibility testing, always returns a valid JSON-RPC task response,
+    regardless of input validity or method. This helps identify deserialization
+    issues without being blocked by validation errors.
     """
+    request_id = None
     try:
         # Read the raw request body
         body = await request.body()
-        if not body:
-            logger.warning("A2A POST received empty body")
-            return {
-                "jsonrpc": "2.0",
-                "id": None,
-                "error": {
-                    "code": -32700,
-                    "message": "Parse error: empty body",
-                },
-            }
+        body_str = body.decode("utf-8") if body else ""
 
-        # Parse JSON
-        try:
-            payload = json.loads(body)
-        except json.JSONDecodeError as e:
-            logger.error("A2A POST received invalid JSON: %s", str(e))
-            return {
-                "jsonrpc": "2.0",
-                "id": None,
-                "error": {
-                    "code": -32700,
-                    "message": f"Parse error: invalid JSON: {str(e)}",
-                },
-            }
+        logger.info("=== A2A POST /a2a INCOMING REQUEST ===")
+        logger.info("Request body length: %d bytes", len(body))
+        logger.info("Raw request body: %s", body_str[:2000])  # Log up to 2000 chars
 
-        # Log the incoming request
+        # Try to parse JSON
+        payload = {}
+        if body:
+            try:
+                payload = json.loads(body)
+                logger.info("Successfully parsed JSON")
+            except json.JSONDecodeError as e:
+                logger.warning("Failed to parse JSON: %s", str(e))
+                # Continue with empty payload - we'll return a task anyway
+
+        # Extract request ID (preserve if present)
         request_id = payload.get("id")
         method = payload.get("method")
-        logger.info(
-            "A2A POST /a2a - request_id=%s method=%s jsonrpc=%s body_len=%d",
-            request_id,
-            method,
-            payload.get("jsonrpc"),
-            len(body),
-        )
-        logger.debug("A2A POST /a2a - full request: %s", json.dumps(payload, default=str)[:1500])
+        logger.info("Parsed: request_id=%s, method=%s, jsonrpc=%s", request_id, method, payload.get("jsonrpc"))
 
-        # TEMPORARY: Use minimal response for Prompt Opinion compatibility testing
-        if USE_MINIMAL_A2A_RESPONSE:
-            response = _build_minimal_a2a_response(request_id)
-            logger.info(
-                "A2A POST /a2a (MINIMAL MODE) - response_id=%s",
-                response.get("id"),
-            )
-            logger.debug("A2A POST /a2a - minimal response: %s", json.dumps(response, default=str)[:1500])
-            return response
+        # For compatibility testing: Always return a valid task response
+        # Do not return error envelopes - Prompt Opinion expects a task
+        response = _build_minimal_a2a_response(request_id)
 
-        # PRODUCTION: Call the full adapter
-        response = a2a_adapter.handle_json_rpc(payload, request)
-
-        # Log the response
-        logger.info(
-            "A2A POST /a2a - response_id=%s has_error=%s",
-            response.get("id"),
-            "error" in response,
-        )
-        logger.debug("A2A POST /a2a - full response: %s", json.dumps(response, default=str)[:1500])
+        logger.info("=== A2A POST /a2a OUTGOING RESPONSE ===")
+        response_json = json.dumps(response, indent=2, default=str)
+        logger.info("Response structure: jsonrpc=%s, id=%s, has_result=%s",
+                   response.get("jsonrpc"),
+                   response.get("id"),
+                   "result" in response)
+        logger.info("Full response body: %s", response_json[:2000])  # Log up to 2000 chars
+        logger.info("Response task.kind: %s", response.get("result", {}).get("kind"))
 
         return response
+
     except Exception as e:
-        logger.exception("A2A POST /a2a - unhandled exception")
-        return {
-            "jsonrpc": "2.0",
-            "id": None,
-            "error": {
-                "code": -32603,
-                "message": f"Internal error: {str(e)}",
-            },
-        }
+        logger.exception("A2A POST /a2a - unhandled exception: %s", str(e))
+        # Even on exception, return a valid task response
+        return _build_minimal_a2a_response(request_id)
 
 
 def _build_minimal_a2a_response(request_id: str) -> dict:
@@ -206,7 +180,7 @@ def _build_minimal_a2a_response(request_id: str) -> dict:
                     "parts": [
                         {
                             "kind": "text",
-                            "text": "Hello from Recovery Intelligence System. This is a minimal response for compatibility testing.",
+                            "text": "Hello from Recovery Intelligence System. Prompt Opinion successfully invoked POST /a2a.",
                         }
                     ],
                 },
