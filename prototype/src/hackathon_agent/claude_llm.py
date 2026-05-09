@@ -25,7 +25,7 @@ class ClaudeStructuredLLM(StructuredLLM):
             raise RuntimeError("ANTHROPIC_API_KEY is not set.")
 
         self.client = Anthropic(api_key=resolved_api_key)
-        self.model = model or os.getenv("CLAUDE_MODEL", "claude-opus-4-1-20250805")
+        self.model = model or os.getenv("CLAUDE_MODEL", "claude-3-5-haiku-20241022")
 
     def generate_structured(
         self,
