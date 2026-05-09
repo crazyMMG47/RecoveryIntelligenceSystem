@@ -76,13 +76,13 @@ Respond ONLY with the JSON object, no additional text."""
         response_text = response.content[0].text
 
         # Extract JSON from response (handle cases where Claude wraps it in markdown)
-        if response_text.startswith("```json"):
-            response_text = response_text[7:]
-        if response_text.startswith("```"):
-            response_text = response_text[3:]
-        if response_text.endswith("```"):
-            response_text = response_text[:-3]
         response_text = response_text.strip()
+        if response_text.startswith("```json"):
+            response_text = response_text[7:].strip()
+        elif response_text.startswith("```"):
+            response_text = response_text[3:].strip()
+        if response_text.endswith("```"):
+            response_text = response_text[:-3].strip()
 
         try:
             return response_model.model_validate_json(response_text)
