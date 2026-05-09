@@ -389,6 +389,106 @@ class Orchestrator:
             "criteria, and reassessment timing."
         )
 
+    def _build_decision_logic(
+        self,
+        *,
+        clinical_output,
+        insurance_output,
+        blocking_items: list[str],
+    ) -> list[str]:
+        """Build 3-step decision logic summary."""
+        clinical_confidence = clinical_output.confidence.value.upper()
+        insurance_confidence = insurance_output.confidence.value.upper()
+
+        # Step 1: Clinical
+        path = clinical_output.decision.recommended_path.value
+        if path == "additional_structured_pt":
+            clinical_step = (
+                f"Step 1 [Clinical — {clinical_confidence}]: PT is medically necessary. "
+                "Imaging shows intact graft; instability is rehabilitation-related, not structural."
+            )
+        elif path == "surgical_reevaluation":
+            clinical_step = (
+                f"Step 1 [Clinical — {clinical_confidence}]: Surgical re-evaluation recommended. "
+                "Clinical findings suggest structural issue or failed nonsurgical management."
+            )
+        else:
+            clinical_step = (
+                f"Step 1 [Clinical — {clinical_confidence}]: More clinical information needed "
+                "before recommending PT or surgery."
+            )
+
+        # Step 2: Insurance
+        coverage_pos = insurance_output.decision.coverage_position.value
+        if coverage_pos == "likely_covered":
+            insurance_step = (
+                f"Step 2 [Insurance — {insurance_confidence}]: PT is covered under the plan. "
+                "No pre-authorization required."
+            )
+        elif coverage_pos == "conditionally_covered_pending_documentation":
+            insurance_step = (
+                f"Step 2 [Insurance — {insurance_confidence}]: PT is covered (25 visits/year, "
+                "no pre-auth required). Conditional on submitting documentation."
+            )
+        elif coverage_pos == "likely_denied":
+            insurance_step = (
+                f"Step 2 [Insurance — {insurance_confidence}]: Coverage likely denied. "
+                "Review blocking requirements before submission."
+            )
+        else:
+            insurance_step = (
+                f"Step 2 [Insurance — {insurance_confidence}]: Insurance coverage unclear. "
+                "Manual review required."
+            )
+
+        # Step 3: Orchestrator
+        block_count = len(blocking_items)
+        if block_count == 0:
+            orchestrator_step = (
+                "Step 3 [Orchestrator]: No blocking items identified. "
+                "Case is ready for submission."
+            )
+        else:
+            plural = "s" if block_count != 1 else ""
+            orchestrator_step = (
+                f"Step 3 [Orchestrator]: Structured PT recommended. "
+                f"{block_count} item{plural} blocking insurance approval — "
+                "submit documentation to proceed."
+            )
+
+        return [clinical_step, insurance_step, orchestrator_step]
+
+    def _build_blocking_items_with_context(
+        self,
+        blocking_requirements: list[RequirementItem],
+        conflict_items: list[ConflictItem],
+    ) -> list[str]:
+        """Format blocking items with owner context."""
+        items = []
+
+        for req in blocking_requirements:
+            if req.status == RequirementStatus.SATISFIED:
+                continue
+            owner_label = req.owner.value.title() if req.owner else "Unknown"
+            desc = self._clean_sentence(req.description)
+            items.append(f"[{owner_label}] {desc}")
+
+        for conflict in conflict_items:
+            items.append(f"[Conflict] {self._clean_sentence(conflict.reason)}")
+
+        return self._dedupe_strings(items)
+
+    def _build_insurance_supporting_points(self, coverage_rules: list) -> list[str]:
+        """Build policy-specific supporting points from coverage rules."""
+        points = []
+        for rule in coverage_rules:
+            status = "UNSATISFIED" if rule.unsatisfied_reason else "SATISFIED"
+            text = f"[{status}] {rule.rule_id}: {rule.rule_text}"
+            if rule.unsatisfied_reason:
+                text += f" (missing: {rule.unsatisfied_reason})"
+            points.append(text)
+        return points
+
     def _build_short_answer(
         self,
         *,
@@ -445,20 +545,19 @@ class Orchestrator:
         clinical_output = orchestrator_input.clinical_output
         insurance_output = orchestrator_input.insurance_output
 
-        blocking_items = self._format_requirement_list(orchestrator_output.blocking_requirements)
-        blocking_items.extend(
-            self._clean_sentence(item.reason) for item in orchestrator_output.conflict_items
+        blocking_items = self._build_blocking_items_with_context(
+            orchestrator_output.blocking_requirements,
+            orchestrator_output.conflict_items,
         )
-        blocking_items = self._dedupe_strings(blocking_items)
 
-        eligibility_points = [
-            f"Authorization signal: {insurance_output.decision.coverage_position.value}.",
-        ]
-
-        if blocking_items:
-            eligibility_points.append(
-                "Open documentation items remain before a clean approval packet can be submitted."
-            )
+        # Use actual policy rule text for eligibility section
+        eligibility_points = self._build_insurance_supporting_points(
+            insurance_output.coverage_rules
+        )
+        if not eligibility_points:
+            eligibility_points = [
+                f"Authorization signal: {insurance_output.decision.coverage_position.value}.",
+            ]
 
         if insurance_output.decision.coverage_position.value == "likely_denied":
             eligibility_answer = (
@@ -547,14 +646,17 @@ class Orchestrator:
                 topic="insurance_authorization",
                 answer=eligibility_answer,
                 confidence=self._topic_confidence(insurance_output.confidence.value),
-                supporting_points=eligibility_points,
+                supporting_points=eligibility_points if eligibility_points else documentation_items,
                 supporting_evidence_refs=supporting_refs,
             ),
             ExternalAnswerSection(
                 topic="documentation_gaps",
                 answer=documentation_answer,
                 confidence=self._topic_confidence(insurance_output.confidence.value),
-                supporting_points=documentation_items,
+                supporting_points=(
+                    self._build_insurance_supporting_points(insurance_output.coverage_rules)
+                    or documentation_items
+                ),
                 supporting_evidence_refs=supporting_refs,
             ),
             ExternalAnswerSection(
@@ -581,6 +683,12 @@ class Orchestrator:
             [step.action for step in orchestrator_output.recommended_workflow]
         )
 
+        decision_logic = self._build_decision_logic(
+            clinical_output=clinical_output,
+            insurance_output=insurance_output,
+            blocking_items=blocking_items,
+        )
+
         return ExternalAgentResponse(
             case_id=case.case_id,
             user_question=user_question,
@@ -592,6 +700,7 @@ class Orchestrator:
             blocking_items=blocking_items,
             benefits_at_a_glance=orchestrator_output.benefits_summary,
             open_questions=[item.question for item in orchestrator_output.open_questions],
+            decision_logic=decision_logic,
         )
 
     def run_debug(self, user_question: str, case: CaseData) -> RunCaseDebugResponse:

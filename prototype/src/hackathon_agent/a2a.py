@@ -346,29 +346,47 @@ class A2AAdapter:
             f"Readiness: {response.readiness.value}",
             f"Requires human review: {response.requires_human_review}",
             "",
-            "Use the sections below to answer the user's original question. Do not add facts that are not in this packet.",
         ]
+
+        # Add decision logic at the top
+        if response.decision_logic:
+            lines.append("DECISION LOGIC:")
+            lines.extend(response.decision_logic)
+            lines.append("")
+
+        lines.append("Use the sections below to answer the user's original question. Do not add facts that are not in this packet.")
+
         for section in response.sections:
             lines.extend(
                 [
                     "",
-                    f"Section: {section.topic}",
-                    f"Confidence: {section.confidence.value}",
+                    f"Section: {section.topic} (Confidence: {section.confidence.value})",
                     f"Answer: {section.answer}",
                 ]
             )
             if section.supporting_points:
                 lines.append("Supporting points:")
-                lines.extend(f"- {point}" for point in section.supporting_points)
+                lines.extend(f"  - {point}" for point in section.supporting_points)
+            if section.supporting_evidence_refs:
+                lines.append("Evidence references:")
+                lines.extend(f"  - {ref}" for ref in section.supporting_evidence_refs)
+
         if response.blocking_items:
             lines.extend(["", "Blocking or missing items:"])
             lines.extend(f"- {item}" for item in response.blocking_items)
+
         if response.recommended_next_steps:
             lines.extend(["", "Recommended next steps:"])
             lines.extend(f"- {step}" for step in response.recommended_next_steps)
+
         if response.benefits_at_a_glance:
             lines.extend(["", "Benefits at a glance:"])
             lines.extend(f"- {item}" for item in response.benefits_at_a_glance)
+
+        if response.open_questions:
+            lines.extend(["", "Open questions for clarification:"])
+            lines.extend(f"- {question}" for question in response.open_questions)
+
         return "\n".join(lines)
 
     def _error_response(self, request_id: Any, *, code: int, message: str) -> dict[str, Any]:

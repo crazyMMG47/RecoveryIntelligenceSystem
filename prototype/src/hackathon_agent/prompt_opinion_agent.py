@@ -39,24 +39,33 @@ class PromptOpinionAgent:
 
     def _build_system_prompt(self) -> str:
         return """You are a clinical documentation specialist translating structured case analysis
-into clear, actionable summaries for care coordination.
+into clear, actionable summaries for care coordinators.
 
 Your task:
 1. Translate structured fields into natural language suitable for healthcare professionals
-2. Present findings clearly and objectively
+2. Present findings clearly, objectively, and with explicit confidence levels
 3. Use ONLY information provided in the structured data
 4. DO NOT invent, assume, or add information beyond what is given
-5. Organize sections logically for care coordination
+5. Make dependency chains and decision reasoning explicit
+6. Directly answer the original question with specificity
 
 Format the output as a markdown document with:
-- Executive summary (1-2 sentences)
-- Clinical findings section
-- Coverage assessment section
-- Documentation gaps section
-- Recommended next steps
-- Risk factors or blocking items (if any)
+- Direct answer to the original question (e.g., "Is Daniel eligible for 2x/week PT?" → clear YES/NO/CONDITIONAL)
+- Decision logic & confidence levels (explain which agents made which decisions and why)
+- Clinical assessment section (include source findings)
+- Insurance assessment section (include policy requirements and what's missing)
+- Documentation gaps section (be specific: what's needed, why, and what it unblocks)
+- Recommended next steps (ordered by dependency, not priority)
+- Blocking items or risks (if any)
 
-Tone: Professional, objective, actionable."""
+IMPORTANT GUIDANCE:
+- Surface confidence levels WITH reasoning (HIGH because X sources agree; MEDIUM because conditional on Y)
+- Show dependency chains: "Item A must be completed before insurance approval because rule Z requires it"
+- For conditional coverage, explain the exact condition (e.g., "25 visits/calendar year, not weekly frequency")
+- Distinguish between what's clinically clear vs. what requires patient action
+- Use specifics: "2x/week for 12 weeks = 24 visits" not vague "PT coverage"
+
+Tone: Professional, objective, actionable, transparent about reasoning."""
 
     def _build_user_prompt(self, response: ExternalAgentResponse) -> str:
         """Build structured data into prompt for LLM."""
@@ -66,6 +75,7 @@ Tone: Professional, objective, actionable."""
         next_steps_text = self._format_next_steps(response.recommended_next_steps)
         benefits_text = self._format_benefits(response.benefits_at_a_glance)
         open_questions_text = self._format_open_questions(response.open_questions)
+        decision_logic_text = self._format_next_steps(response.decision_logic) if response.decision_logic else "None provided"
 
         prompt = f"""Please generate a clinical summary from the following structured case analysis:
 
@@ -76,6 +86,9 @@ Tone: Professional, objective, actionable."""
 
 **Short Answer:**
 {response.short_answer}
+
+**Decision Logic (how agents reached this conclusion):**
+{decision_logic_text}
 
 **Detailed Sections:**
 {sections_text}
@@ -92,7 +105,9 @@ Tone: Professional, objective, actionable."""
 **Open Questions for Clarification:**
 {open_questions_text if open_questions_text else "None"}
 
-Generate a comprehensive clinical summary that synthesizes this information into actionable guidance."""
+Generate a comprehensive clinical summary that synthesizes this information into actionable guidance.
+Start with a direct answer to the original question. Include confidence levels and the reasoning behind them.
+Make explicit any dependencies or conditions (e.g., "approval depends on X because policy rule Y requires it")."""
 
         return prompt
 

@@ -219,6 +219,7 @@ class ExternalAgentResponse(StrictModel):
     blocking_items: list[str] = Field(default_factory=list)
     benefits_at_a_glance: list[str] = Field(default_factory=list)
     open_questions: list[str] = Field(default_factory=list)
+    decision_logic: list[str] = Field(default_factory=list)
 
 
 class CaseData(StrictModel):
