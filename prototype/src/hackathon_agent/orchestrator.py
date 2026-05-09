@@ -1,5 +1,5 @@
 from .clinical_llm_agent import ClinicalLLMAgent
-from .gemini_llm import GeminiStructuredLLM
+from .claude_llm import ClaudeStructuredLLM
 from .insurance_llm_agent import InsuranceLLMAgent
 from .insurance_retriever import InsurancePolicyRetriever
 from .prompt_opinion_agent import PromptOpinionAgent
@@ -53,7 +53,7 @@ class Orchestrator:
 
     @classmethod
     def from_env(cls) -> "Orchestrator":
-        llm = GeminiStructuredLLM()
+        llm = ClaudeStructuredLLM()
         return cls(
             clinical_agent=ClinicalLLMAgent(llm),
             insurance_agent=InsuranceLLMAgent(
