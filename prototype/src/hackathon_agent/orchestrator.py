@@ -1,9 +1,14 @@
+import logging
+import time
+
 from .clinical_llm_agent import ClinicalLLMAgent
 from .claude_llm import ClaudeStructuredLLM
 from .insurance_llm_agent import InsuranceLLMAgent
 from .insurance_retriever import InsurancePolicyRetriever
 from .prompt_opinion_agent import PromptOpinionAgent
 from .llm import StructuredLLM
+
+logger = logging.getLogger(__name__)
 from .schemas import (
     CarePath,
     CaseData,
@@ -704,21 +709,35 @@ class Orchestrator:
         )
 
     def run_debug(self, user_question: str, case: CaseData) -> RunCaseDebugResponse:
+        t_start = time.time()
+
         clinical_input = self.build_clinical_input(user_question, case)
+        t0 = time.time()
         clinical_output = self.clinical_agent.run(clinical_input)
+        clinical_time = time.time() - t0
+        logger.info(f"⏱️  Clinical agent: {clinical_time:.2f}s")
 
         insurance_input = self.build_insurance_input(
             user_question=user_question,
             clinical_output=clinical_output,
         )
+        t1 = time.time()
         insurance_output = self.insurance_agent.run(insurance_input)
+        insurance_time = time.time() - t1
+        logger.info(f"⏱️  Insurance agent: {insurance_time:.2f}s")
 
         orchestrator_input = OrchestratorInput(
             user_question=user_question,
             clinical_output=clinical_output,
             insurance_output=insurance_output,
         )
+        t2 = time.time()
         orchestrator_output = self.build_final_output(orchestrator_input)
+        orchestrator_time = time.time() - t2
+        logger.info(f"⏱️  Orchestrator: {orchestrator_time:.2f}s")
+
+        total_time = time.time() - t_start
+        logger.info(f"⏱️  TOTAL: {total_time:.2f}s (clinical={clinical_time:.2f}s, insurance={insurance_time:.2f}s, orchestrator={orchestrator_time:.2f}s)")
 
         return RunCaseDebugResponse(
             clinical_input=clinical_input,
