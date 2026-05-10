@@ -115,8 +115,8 @@ class EvidenceBucket:
     chunks: list[RetrievedPolicyChunk]
     confidence: float
     notes: list[str]
-    # Maps source_ref → combined hybrid score for each selected chunk.
-    # Useful for debugging retrieval quality in run_policy_retriever.py.
+    # Maps source_ref to combined hybrid score for each selected chunk.
+    # Useful for debugging retrieval quality.
     scores: dict[str, float] = field(default_factory=dict)
 
 

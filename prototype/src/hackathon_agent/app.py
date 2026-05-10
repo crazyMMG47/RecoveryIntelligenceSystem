@@ -21,8 +21,8 @@ orchestrator = Orchestrator.from_env()
 # Hugging Face Space may report internal upstream as http://, but public URL is always https://
 PUBLIC_BASE_URL = os.getenv(
     "PUBLIC_BASE_URL",
-    "https://mooimooi4frog-recovery-iq.hf.space"
-).rstrip("/")
+    "",
+).rstrip("/") or None
 
 a2a_adapter = A2AAdapter(orchestrator, public_base_url=PUBLIC_BASE_URL)
 
