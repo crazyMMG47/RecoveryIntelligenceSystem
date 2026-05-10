@@ -59,6 +59,7 @@ Format the output as a markdown document with:
 - Blocking items or risks (if any)
 
 IMPORTANT GUIDANCE:
+- Start directly with the answer content; do not include a report title block, Date field, or date line.
 - Surface confidence levels WITH reasoning (HIGH because X sources agree; MEDIUM because conditional on Y)
 - Show dependency chains: "Item A must be completed before insurance approval because rule Z requires it"
 - For conditional coverage, explain the exact condition (e.g., "25 visits/calendar year, not weekly frequency")
@@ -74,7 +75,6 @@ Tone: Professional, objective, actionable, transparent about reasoning."""
         blocking_items_text = self._format_blocking_items(response.blocking_items)
         next_steps_text = self._format_next_steps(response.recommended_next_steps)
         benefits_text = self._format_benefits(response.benefits_at_a_glance)
-        open_questions_text = self._format_open_questions(response.open_questions)
         decision_logic_text = self._format_next_steps(response.decision_logic) if response.decision_logic else "None provided"
 
         prompt = f"""Please generate a clinical summary from the following structured case analysis:
@@ -101,9 +101,6 @@ Tone: Professional, objective, actionable, transparent about reasoning."""
 
 **Recommended Next Steps:**
 {next_steps_text}
-
-**Open Questions for Clarification:**
-{open_questions_text if open_questions_text else "None"}
 
 Generate a comprehensive clinical summary that synthesizes this information into actionable guidance.
 Start with a direct answer to the original question. Include confidence levels and the reasoning behind them.
@@ -140,9 +137,3 @@ Supporting Points:
         if not benefits:
             return "No specific plan benefits documented"
         return "\n".join(f"  - {benefit}" for benefit in benefits)
-
-    def _format_open_questions(self, questions: list[str]) -> str:
-        """Format open questions."""
-        if not questions:
-            return "None"
-        return "\n".join(f"  - {question}" for question in questions)
