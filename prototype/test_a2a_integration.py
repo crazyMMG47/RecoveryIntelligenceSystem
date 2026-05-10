@@ -85,20 +85,10 @@ def test_a2a_json_rpc_with_opinion() -> None:
     task = response["result"].get("task") or response["result"]
     assert task["id"]
     assert task["status"]["state"] == "completed"
-    assert len(task["artifacts"]) == 1
-
-    artifact_names = [a["name"] for a in task["artifacts"]]
-    assert "external_agent_response" in artifact_names
-    assert "plain_language_opinion" not in artifact_names
+    assert "artifacts" not in task
     assert "external_agent_response" not in task["metadata"]
 
-    artifact = task["artifacts"][0]
-    artifact_text = artifact["parts"][0]["text"]
-    artifact_packet = json.loads(artifact_text)
-    assert artifact_packet["packet_type"] == "prompt_opinion_external_agent_response"
-    assert "open_questions" not in artifact_packet
-
-    print("\n✓ A2A response contains one structured artifact")
+    print("\n✓ A2A response does not include artifacts")
     print("✓ Plain-language opinion is returned only in status.message")
 
 

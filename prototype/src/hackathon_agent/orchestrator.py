@@ -404,6 +404,10 @@ class Orchestrator:
         """Build 3-step decision logic summary."""
         clinical_confidence = clinical_output.confidence.value.upper()
         insurance_confidence = insurance_output.confidence.value.upper()
+        orchestrator_confidence = self._min_confidence(
+            clinical_output.confidence.value,
+            insurance_output.confidence.value,
+        ).upper()
 
         # Step 1: Clinical
         path = clinical_output.decision.recommended_path.value
@@ -450,13 +454,13 @@ class Orchestrator:
         block_count = len(blocking_items)
         if block_count == 0:
             orchestrator_step = (
-                "Step 3 [Orchestrator]: No blocking items identified. "
+                f"Step 3 [Orchestrator — {orchestrator_confidence}]: No blocking items identified. "
                 "Case is ready for submission."
             )
         else:
             plural = "s" if block_count != 1 else ""
             orchestrator_step = (
-                f"Step 3 [Orchestrator]: Structured PT recommended. "
+                f"Step 3 [Orchestrator — {orchestrator_confidence}]: Structured PT recommended. "
                 f"{block_count} item{plural} blocking insurance approval — "
                 "submit documentation to proceed."
             )

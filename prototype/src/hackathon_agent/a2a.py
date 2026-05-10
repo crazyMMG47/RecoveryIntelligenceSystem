@@ -256,17 +256,11 @@ class A2AAdapter:
     ) -> dict[str, Any]:
         task_id = str(message.get("taskId") or uuid4())
         context_id = str(message.get("contextId") or uuid4())
-        artifact_id = str(uuid4())
         user_message_id = str(message.get("messageId") or uuid4())
         agent_message_id = str(uuid4())
         timestamp = datetime.now(UTC).isoformat()
         user_parts = self._normalize_parts(message.get("parts", []), proto_style=proto_style)
         status_parts = self._text_parts(opinion or response.short_answer, proto_style=proto_style)
-        prompt_opinion_packet = self._build_prompt_opinion_packet(response)
-        artifact_parts = self._text_parts(
-            self._format_response_for_prompt_opinion(prompt_opinion_packet),
-            proto_style=proto_style,
-        )
         user_role = "ROLE_USER" if proto_style else "user"
         agent_role = "ROLE_AGENT" if proto_style else "agent"
         user_message = {
@@ -296,14 +290,6 @@ class A2AAdapter:
                 "timestamp": timestamp,
             },
             "history": [user_message, agent_message],
-            "artifacts": [
-                {
-                    "artifactId": artifact_id,
-                    "name": "external_agent_response",
-                    "description": "Structured external-agent packet for Prompt Opinion.",
-                    "parts": artifact_parts,
-                }
-            ],
             "metadata": {
                 "case_id": response.case_id,
                 "readiness": response.readiness.value,
@@ -325,33 +311,6 @@ class A2AAdapter:
         if proto_style:
             return [{"text": text}]
         return [{"kind": "text", "text": text}]
-
-    def _build_prompt_opinion_packet(self, response: ExternalAgentResponse) -> dict[str, Any]:
-        return {
-            "packet_type": "prompt_opinion_external_agent_response",
-            "instruction": "Answer the user's original question using only this packet.",
-            "case_id": response.case_id,
-            "user_question": response.user_question,
-            "readiness": response.readiness.value,
-            "requires_human_review": response.requires_human_review,
-            "short_answer": response.short_answer,
-            "decision_logic": response.decision_logic,
-            "sections": [
-                {
-                    "topic": section.topic,
-                    "confidence": section.confidence.value,
-                    "answer": section.answer,
-                    "evidence_refs": section.supporting_evidence_refs,
-                }
-                for section in response.sections
-            ],
-            "blocking_items": response.blocking_items,
-            "recommended_next_steps": response.recommended_next_steps,
-            "benefits_at_a_glance": response.benefits_at_a_glance,
-        }
-
-    def _format_response_for_prompt_opinion(self, packet: dict[str, Any]) -> str:
-        return json.dumps(packet, ensure_ascii=False, separators=(",", ":"))
 
     def _error_response(self, request_id: Any, *, code: int, message: str) -> dict[str, Any]:
         return {

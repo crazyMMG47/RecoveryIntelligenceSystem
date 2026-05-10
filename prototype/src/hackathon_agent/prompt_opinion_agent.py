@@ -60,6 +60,7 @@ Format the output as a markdown document with:
 
 IMPORTANT GUIDANCE:
 - Start directly with the answer content; do not include a report title block, Date field, or date line.
+- Do not use emojis, checkmarks, crosses, or colored status icons. Use plain text labels such as SATISFIED, UNSATISFIED, BLOCKING, or REVIEW NEEDED.
 - Surface confidence levels WITH reasoning (HIGH because X sources agree; MEDIUM because conditional on Y)
 - Show dependency chains: "Item A must be completed before insurance approval because rule Z requires it"
 - For conditional coverage, explain the exact condition (e.g., "25 visits/calendar year, not weekly frequency")
